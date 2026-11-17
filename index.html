@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PADL - Platform for Asynchronous Digital Learning</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23FFB100'/%3E%3Cpath d='M32 10v28H16z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+<style>
+:root{--navy:#0B2149;--blue:#1865F2;--amber:#FFB100;--bg:#F7F8FA;--line:#DADCE0;--ink:#21242C;--mute:#5B6068;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Roboto,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;min-height:100vh;display:flex;flex-direction:column;}
+a{color:inherit;text-decoration:none;}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
+
+/* nav */
+.nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;}
+.nav-in{max-width:1180px;margin:0 auto;padding:12px 28px;display:flex;align-items:center;gap:30px;}
+.brand{display:flex;align-items:center;gap:11px;}
+.brand svg{width:42px;height:42px;}
+.brand b{font-size:24px;font-weight:900;color:var(--navy);letter-spacing:.5px;}
+.brand small{font-size:12.5px;color:var(--mute);border-left:1px solid var(--line);padding-left:11px;line-height:1.2;}
+.links{display:flex;gap:6px;margin-left:12px;}
+.links a{font-size:16px;font-weight:500;padding:8px 14px;border-radius:6px;border-bottom:3px solid transparent;border-radius:0;}
+.links a:hover{color:var(--blue);}
+.links a[aria-current="page"]{color:var(--blue);border-bottom-color:var(--blue);}
+
+/* views */
+.view{display:none;flex:1;}
+.view.on{display:block;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+/* home */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center;padding:64px 0 48px;}
+.pill{display:inline-block;background:#DCE8FC;color:var(--blue);font-size:14px;font-weight:500;padding:6px 16px;border-radius:99px;margin-bottom:24px;}
+h1{font-size:clamp(40px,6vw,72px);font-weight:900;line-height:1.02;letter-spacing:-2px;color:var(--navy);}
+h1 mark{background:var(--amber);color:var(--navy);padding:0 12px;border-radius:8px;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+.lede{font-size:19px;color:#454A52;margin:26px 0 30px;max-width:56ch;}
+.btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn{font-weight:700;font-size:16px;padding:15px 28px;border-radius:99px;display:inline-block;}
+.btn.p{background:var(--blue);color:#fff;}
+.btn.p:hover{background:#0F4FCB;}
+.btn.s{background:var(--amber);color:var(--navy);}
+.btn.s:hover{background:#E69F00;}
+.credit{border-left:3px solid var(--amber);padding-left:18px;margin-top:40px;}
+.credit b{display:block;font-size:19px;color:var(--navy);line-height:1.4;}
+.credit span{font-size:14.5px;color:var(--mute);}
+.glance{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px 32px 10px;position:relative;box-shadow:0 10px 30px rgba(11,33,73,.08);}
+.glance .tag{position:absolute;top:-18px;right:-10px;background:var(--amber);color:var(--navy);font-weight:700;font-size:14px;padding:6px 16px;border-radius:99px;transform:rotate(4deg);}
+.glance small{color:var(--mute);font-size:14px;}
+.glance .big{font-size:64px;font-weight:900;color:var(--navy);line-height:1.1;letter-spacing:-2px;margin-top:6px;}
+.glance p{color:#454A52;margin-bottom:22px;}
+.row{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:15px 0;font-size:15.5px;}
+.row b{font-size:21px;color:var(--navy);}
+
+/* courses */
+.page-h{padding:44px 0 6px;}
+h2{font-size:34px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.sub{color:var(--mute);max-width:62ch;margin-bottom:28px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px;padding-bottom:60px;}
+.card{display:flex;flex-direction:column;background:#fff;border:2px solid #E3E5E8;border-radius:12px;overflow:hidden;}
+.art{height:118px;position:relative;padding:16px 20px;color:#fff;overflow:hidden;}
+.art small{font-weight:700;font-size:13px;letter-spacing:1px;display:block;}
+.art::before,.art::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.18);}
+.art::before{width:170px;height:170px;right:-40px;top:-70px;}
+.art::after{width:100px;height:100px;left:42%;bottom:-52px;}
+.c1{background:#1865F2;}.c2{background:#D6336C;}.c3{background:#0F9D58;}.c4{background:#8B5CF6;}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.body h3{font-size:19px;line-height:1.3;color:var(--navy);}
+.body p{font-size:14.5px;color:var(--mute);}
+.status{margin-top:auto;padding-top:8px;font-size:14px;font-weight:700;}
+a.card:hover{border-color:var(--blue);}
+a.card:hover h3{text-decoration:underline;}
+a.card .status{color:var(--blue);}
+.card.soon{filter:grayscale(1);opacity:.55;cursor:default;}
+.card.soon .status{color:var(--mute);font-weight:500;}
+
+/* about */
+.about{max-width:760px;padding:44px 0 70px;}
+.about p{font-size:17.5px;line-height:1.75;margin-bottom:18px;color:#2C3038;}
+.about h3{font-size:24px;color:var(--navy);margin:34px 0 10px;}
+.quote{border-left:4px solid var(--amber);background:#fff;padding:16px 22px;font-size:21px;font-weight:700;color:var(--navy);line-height:1.4;margin:26px 0;border-radius:0 8px 8px 0;}
+.sign{margin-top:30px;font-weight:700;color:var(--navy);}
+.sign span{display:block;font-weight:400;color:var(--mute);font-size:15px;}
+
+footer{background:#fff;border-top:1px solid var(--line);}
+footer .wrap{padding:20px 28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--mute);}
+footer b{color:var(--navy);}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:44px;padding-top:40px;}
+  .brand small{display:none;}
+  .nav-in{padding:10px 16px;gap:10px;}
+  .wrap{padding:0 18px;}
+  h1{letter-spacing:-1px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#home" aria-label="PADL home">
+      <svg viewBox="0 0 64 64" role="img" aria-label="PADL logo: a sailboat on rough seas">
+        <circle cx="32" cy="32" r="32" fill="#0B2149"/>
+        <path d="M31 10v28H15z" fill="#fff"/>
+        <path d="M35 18v20h13z" fill="#FFB100"/>
+        <path d="M14 40h36l-6 7H20z" fill="#fff"/>
+        <path d="M10 53q5.5-6 11 0t11 0 11 0 11 0" stroke="#FFB100" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      </svg>
+      <b>PADL</b><small>Platform for<br>Asynchronous Digital Learning</small>
+    </a>
+    <div class="links">
+      <a href="#courses" data-nav="courses">Courses</a>
+      <a href="#about" data-nav="about">About</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div class="view on" id="v-home">
+  <div class="wrap hero">
+    <div>
+      <h1>Your classroom, now in <mark>your hands.</mark></h1>
+      <p class="lede">PADL brings structured courses, readings and practice questions into one place. Study when it suits you, repeat what you find hard, and take charge of your own learning.</p>
+      <div class="btns"><a class="btn p" href="#courses">Find your course &rarr;</a><a class="btn s" href="#about">About PADL</a></div>
+      <div class="credit"><b>Course material built for SSN students, to learn at your own pace</b></div>
+    </div>
+    <div class="glance">
+      <span class="tag">2026-2027</span>
+      <small>PADL at a glance</small>
+      <div class="big">4 courses</div>
+      <p>planned for the 2026-2027 academic year</p>
+      <div class="row"><span>Open now</span><b>1</b></div>
+      <div class="row"><span>Opening this academic year</span><b>3</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- COURSES -->
+<div class="view" id="v-courses">
+  <div class="wrap">
+    <div class="page-h">
+      <h2>Courses</h2>
+      <p class="sub">Choose a course and learn at your own pace, any time of day. New courses open through the academic year.</p>
+    </div>
+    <div class="grid">
+      <a class="card" href="advanced_professional_english_revised.html">
+        <div class="art c1"><small>Open now</small></div>
+        <div class="body"><h3>Advanced Professional Communication</h3><p>5 units with readings, free-response and multiple-choice practice.</p><div class="status">Open course &rarr;</div></div>
+      </a>
+      <div class="card soon" aria-disabled="true">
+        <div class="art c2"></div>
+        <div class="body"><h3>Design Thinking in Healthcare</h3><div class="status">Available in 2026-2027 Academic Year</div></div>
+      </div>
+      <div class="card soon" aria-disabled="true">
+        <div class="art c3"></div>
+        <div class="body"><h3>Introduction to Linear Algebra</h3><div class="status">Available in 2026-2027 Academic Year</div></div>
+      </div>
+      <div class="card soon" aria-disabled="true">
+        <div class="art c4"></div>
+        <div class="body"><h3>Introduction to Linear &amp; Non-Linear Integral Equations</h3><div class="status">Available in 2026-2027 Academic Year</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="view" id="v-about">
+  <div class="wrap">
+    <div class="page-h"><h2>About PADL</h2></div>
+    <div class="about">
+      <p>I started PADL because of a feeling I could not shake. Looking at how universities around the world teach, I saw lectures recorded, libraries digitised, and notes, books and practice problems available to students at any hour. Then I looked at SSN, and I felt we were missing out. Our library had not been digitised, and a great deal of knowledge was still tied to a shelf, a timetable and a room.</p>
+      <p>I did not want to wait for someone else to close that gap, so I decided to start closing it myself. PADL is my attempt to bring SSN level with the global higher-education market, with course material that lives online and is ready whenever a student is.</p>
+      <div class="quote">Students should be the head of their own learning.</div>
+      <h3>Why asynchronous</h3>
+      <p>"Asynchronous" is the heart of the idea. There is no fixed class hour. You can read a lesson on the bus, attempt the practice questions at midnight, and come back to a hard idea as many times as you need. The pace, the order and the effort are yours to decide.</p>
+      <h3>Where the inspiration came from</h3>
+      <p>Two platforms shaped how I think about this. Khan Academy showed me how clear, short lessons paired with practice can make an idea click. NPTEL showed me that rigorous, university-grade teaching can be open to every engineering student in India. PADL borrows from both and tailors the experience to SSN: examples from our own classrooms, labs and campus life, and courses built around what our students need next.</p>
+    </div>
+  </div>
+</div>
+
+<footer><div class="wrap"><span><b>PADL</b> - Platform for Asynchronous Digital Learning</span><span>Built by V. A. Sivamurugan</span></div></footer>
+
+<script>
+(function(){
+  var views=['home','courses','about'];
+  function show(){
+    var h=(location.hash||'#home').slice(1);
+    if(views.indexOf(h)<0)h='home';
+    views.forEach(function(v){document.getElementById('v-'+v).classList.toggle('on',v===h);});
+    document.querySelectorAll('[data-nav]').forEach(function(a){
+      if(a.dataset.nav===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+    });
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show);
+  show();
+})();
+</script>
+</body>
+</html>
