@@ -331,7 +331,6 @@ figure.dg.blank .lbl{visibility:hidden;}
 .mario-link:hover{filter:brightness(1.08);}
 @media (max-width:640px){.mario-box{grid-template-columns:1fr;}.mario-stage{min-height:250px;}.mario-stage .qblock{left:auto;right:30px;}.mario-vs{grid-template-columns:1fr;}.rdoc{padding:20px 16px;}}
 @media (prefers-reduced-motion:reduce){.mario-stage .cloud{animation:none;}}
-
 /* ===== Khan-style course page ===== */
 .start-screen{display:block;background:#fff;font-family:Lato,Roboto,sans-serif;color:#21242C;}
 .kh{display:flex;min-height:100%;}
@@ -505,6 +504,20 @@ a.rd-item.kh-dl:hover{background:#F4F7FD;}
 .rd-bar #rdNext{max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:auto;}
 .rd-mtop select{flex:1;min-width:0;font-family:inherit;font-size:14px;font-weight:700;border:1px solid #C9CCD1;border-radius:6px;padding:8px;background:#fff;color:#21242C;}
 .rd-body td:nth-child(3),.rd-body td:nth-child(4){font-weight:400;white-space:normal;}
+
+  /* Belbin grid question */
+  #gridArea{margin-top:6px;}
+  .grid-hint{font-size:13px;color:#777;margin-bottom:14px;}
+  .grid-wrap{overflow-x:auto;}
+  table.gridq{width:100%;border-collapse:separate;border-spacing:8px;table-layout:fixed;min-width:520px;}
+  table.gridq td{padding:0;vertical-align:top;}
+  table.gridq input{width:100%;font-size:15px;padding:11px 12px;border:1px solid var(--border-color);border-radius:8px;font-family:'Roboto',sans-serif;color:var(--text-main);background:#fff;}
+  table.gridq tr.hd input{font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:var(--bg-light);text-align:center;border-width:2px;border-color:#0B2149;}
+  table.gridq input:focus{outline:2px solid var(--brand-blue);outline-offset:1px;}
+  table.gridq input.ok{background:#EAF7EA;border-color:var(--success-color);color:var(--success-color);}
+  table.gridq input.bad{background:#FDEAEA;border-color:var(--error-color);color:var(--error-color);}
+  table.gridq input:disabled{opacity:1;-webkit-text-fill-color:currentColor;}
+  .grid-key{font-size:13.5px;color:#444;margin-top:2px;}
 </style>
 </head>
 <body>
@@ -538,6 +551,8 @@ a.rd-item.kh-dl:hover{background:#F4F7FD;}
     <div class="question-hint" id="qHint">Type one answer per line, in any order. Then check your answers.</div>
     <textarea id="answerBox" placeholder="Type each answer on its own line..."></textarea>
   </div>
+
+  <div id="gridArea" style="display:none"></div>
 
   <div class="mcq-options" id="mcqOptions"></div>
   <div class="mcq-feedback" id="mcqFeedback"></div>
@@ -716,7 +731,8 @@ const M2_FRQ = [
   { text:"What are the 3 commonly used discussion techniques?", answers:["Fishbowl Discussion","Socratic Questioning","Dialectical Reasoning"] },
   { text:"What are the 3 \"Cs\" of cross cultural communication?", answers:["Curiosity","Clarity","Consideration"] },
   { text:"What is the crisis framework CALM?", answers:["Communicate","Acknowledge","Listen","Manage"] },
-  { text:"What is the crisis framework STEADY?", answers:["Stabilize","Tell (Communicate)","Empathize","Address (Concerns)","Decide","Yield (Results)"] }
+  { text:"What is the crisis framework STEADY?", answers:["Stabilize","Tell (Communicate)","Empathize","Address (Concerns)","Decide","Yield (Results)"] },
+  { text:"What are the three stages of Dialectical Reasoning?", answers:["Thesis","Antithesis","Synthesis"] }
 ];
 
 
@@ -764,6 +780,72 @@ function fig(svg,cap,draw){
 const DISA=fig(chain(['D','I','S','A'],['Data','Insight','Story','Action'],['Facts, numbers|and evidence','What the data|means: "so what?"','Narrative that|makes it memorable','Clear next step|or decision'],'Data to Insight to Story to Action'),
  'Never stop at the data. Each box answers a bigger question than the one before it.',
  'four rectangles in a row, arrows between them, one capital letter in each box (D, I, S, A), then write one question under each: What happened? Why does it matter? Who is it about? What do we do?');
+
+
+/* ---- Unit 3 figures: storyboard, cognitive load, data visualization ---- */
+const STORY=fig(chain(['1','2','3','4','5'],['Hook','Define','Examples','Recap','Practice'],['Why this topic|matters to you','Key term and|formula','Solved, easy|to hard','Summary box|of key points','Exercises to|try yourself'],'A textbook chapter as a five-part storyboard'),
+ 'A chapter has a beginning (hook), a middle (define, examples) and an end (recap, practice). A deck needs the same order.',
+ 'five rectangles in a row with arrows between them, a number in each box, then write the name of the part under each: Hook, Define, Examples, Recap, Practice.');
+function cogSvg(){
+  let o='<svg viewBox="0 0 700 316" xmlns="http://www.w3.org/2000/svg" font-family="Roboto,Arial,sans-serif" role="img" aria-label="Two textbook pages: one overloaded with a dense block of text, one chunked into a heading, a formula box, a diagram and a worked example">';
+  o+='<text class="lbl" x="175" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#C62828">Overloaded page</text>';
+  o+='<text class="lbl" x="525" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#1E8E3E">Chunked page</text>';
+  o+='<rect x="30" y="30" width="290" height="250" fill="#fff" stroke="#111" stroke-width="2"/><rect x="380" y="30" width="290" height="250" fill="#fff" stroke="#111" stroke-width="2"/>';
+  for(let i=0;i<20;i++){const w=i%7===6?150:250;o+='<line x1="45" y1="'+(46+i*11.2)+'" x2="'+(45+w)+'" y2="'+(46+i*11.2)+'" stroke="#777" stroke-width="3.4"/>';}
+  o+='<text class="lbl" x="175" y="300" text-anchor="middle" font-size="11.5" fill="#444">One long block: definition, formula, units,</text><text class="lbl" x="175" y="313" text-anchor="middle" font-size="11.5" fill="#444">derivation and exceptions together</text>';
+  o+='<line x1="395" y1="50" x2="540" y2="50" stroke="#111" stroke-width="5"/><text class="lbl" x="655" y="54" text-anchor="end" font-size="10" fill="#111">Heading</text>';
+  o+='<line x1="395" y1="68" x2="600" y2="68" stroke="#777" stroke-width="3"/>';
+  o+='<rect x="395" y="82" width="110" height="34" fill="#E8F7EC" stroke="#1E8E3E" stroke-width="2"/><text x="450" y="104" text-anchor="middle" font-size="15" font-weight="700" fill="#111">V = I × R</text><text class="lbl" x="655" y="103" text-anchor="end" font-size="10" fill="#111">One key idea</text>';
+  o+='<g fill="none" stroke="#111" stroke-width="1.8"><rect x="400" y="136" width="100" height="56"/><path d="M425 136 v-0 M450 192 h-10 m10 0 h10" stroke="none"/></g>';
+  o+='<g stroke="#111" stroke-width="1.8" fill="none"><line x1="415" y1="136" x2="415" y2="146"/><line x1="408" y1="146" x2="422" y2="146"/><line x1="411" y1="151" x2="419" y2="151"/><line x1="415" y1="151" x2="415" y2="192"/><polyline points="450,136 450,146 456,150 444,156 456,162 444,168 450,172 450,192"/></g>';
+  o+='<text x="415" y="206" text-anchor="middle" font-size="9" fill="#111">6 V</text><text x="450" y="206" text-anchor="middle" font-size="9" fill="#111">2 Ω</text><text class="lbl" x="655" y="168" text-anchor="end" font-size="10" fill="#111">One diagram</text>';
+  o+='<rect x="395" y="222" width="260" height="48" fill="#F1F6FF" stroke="#1865F2" stroke-width="2"/><text x="405" y="240" font-size="10.5" fill="#111">Example: 6 V across 2 Ω</text><text x="405" y="256" font-size="10.5" fill="#111">I = V ÷ R = 3 A</text><text class="lbl" x="645" y="262" text-anchor="end" font-size="10" fill="#111">Worked example</text>';
+  o+='<text class="lbl" x="525" y="300" text-anchor="middle" font-size="11.5" fill="#444">One idea, one picture, one example,</text><text class="lbl" x="525" y="313" text-anchor="middle" font-size="11.5" fill="#444">each in its own labelled space</text>';
+  return o+'</svg>';
+}
+const COG=fig(cogSvg(),'Same content, two layouts. In the chunked page, no effort is wasted on finding where the idea starts.',
+ 'two tall rectangles side by side. Fill the left with 18 or more tight lines of text. Fill the right with a heading, a boxed formula, a small circuit, and a two-line worked example.');
+function lineSvg(){
+  const pts=[[2010,19.4,'2010-11'],[2012,21.5,'2012-13'],[2014,23.7,'2014-15'],[2019,27.1,'2019-20'],[2021,28.4,'2021-22'],[2022,29.5,'2022-23'],[2023,30.0,'2023-24']];
+  const X=y=>70+(y-2010)/13*590,Y=v=>230-(v-15)/20*190;
+  let o='<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" font-family="Roboto,Arial,sans-serif" role="img" aria-label="Line chart of India higher education gross enrolment ratio rising from 19.4 percent in 2010-11 to 30.0 percent in 2023-24">';
+  o+='<text x="350" y="20" text-anchor="middle" font-size="14" font-weight="700" fill="#111">Higher education GER rose from 19.4% to 30.0% in 13 years</text>';
+  o+='<line x1="70" y1="230" x2="670" y2="230" stroke="#111" stroke-width="1.5"/><line x1="70" y1="40" x2="70" y2="230" stroke="#111" stroke-width="1.5"/>';
+  [20,25,30].forEach(v=>{o+='<line x1="66" y1="'+Y(v)+'" x2="70" y2="'+Y(v)+'" stroke="#111"/><text class="lbl" x="62" y="'+(Y(v)+4)+'" text-anchor="end" font-size="11" fill="#111">'+v+'</text>';});
+  o+='<text class="lbl" x="14" y="135" font-size="11" fill="#444" transform="rotate(-90 14 135)" text-anchor="middle">GER, % of 18-23 age group</text>';
+  o+='<polyline fill="none" stroke="#005EA6" stroke-width="3" points="'+pts.map(p=>X(p[0])+','+Y(p[1])).join(' ')+'"/>';
+  pts.forEach((p,i)=>{o+='<circle cx="'+X(p[0])+'" cy="'+Y(p[1])+'" r="4.5" fill="#005EA6" stroke="#fff" stroke-width="1.5"/><text class="lbl" x="'+X(p[0])+'" y="'+(Y(p[1])-11)+'" text-anchor="middle" font-size="11" font-weight="700" fill="#111">'+p[1].toFixed(1)+'</text><text class="lbl" x="'+X(p[0])+'" y="248" text-anchor="middle" font-size="10" fill="#444">'+p[2]+'</text>';});
+  o+='<text class="lbl" x="350" y="276" text-anchor="middle" font-size="11" fill="#444">Years are spaced by the calendar, so the 2014-15 to 2019-20 gap is drawn as a long gap.</text>';
+  return o+'</svg>';
+}
+const LINEFIG=fig(lineSvg(),'Source: All India Survey on Higher Education (AISHE), Ministry of Education; figures for 2010-11 to 2021-22 as reported in earlier AISHE releases, 2022-23 and 2023-24 from the 2022-23 and 2023-24 reports released in 2026.',
+ 'two axes, years along the bottom and GER from 15 to 35 up the side. Plot seven dots, join them with one line, and write the first and last values above their dots.');
+function barSvg(){
+  const D=[['Fraud, cheating and online scams',73987],['All other motives',18182],['Sexual exploitation',3190],['Extortion',2488],['Causing disrepute',2231],['Personal revenge',1850]];
+  const S=400/73987;
+  let o='<svg viewBox="0 0 700 270" xmlns="http://www.w3.org/2000/svg" font-family="Roboto,Arial,sans-serif" role="img" aria-label="Horizontal bar chart of cybercrime cases in India in 2024 by motive, with fraud far ahead of all others">';
+  o+='<text x="350" y="20" text-anchor="middle" font-size="14" font-weight="700" fill="#111">Online fraud was behind about 73% of cybercrime cases in 2024</text>';
+  o+='<line x1="230" y1="34" x2="230" y2="250" stroke="#111" stroke-width="1.5"/>';
+  D.forEach((d,i)=>{const y=44+i*34,w=d[1]*S;o+='<text class="lbl" x="222" y="'+(y+17)+'" text-anchor="end" font-size="12" fill="#111">'+d[0]+'</text><rect x="230" y="'+y+'" width="'+w.toFixed(1)+'" height="24" fill="'+(i===0?'#C62828':'#9AA3AE')+'"/><text class="lbl" x="'+(236+w).toFixed(1)+'" y="'+(y+17)+'" font-size="12" font-weight="700" fill="#111">'+d[1].toLocaleString('en-IN')+'</text>';});
+  return o+'</svg>';
+}
+const BARFIG=fig(barSvg(),'Source: NCRB, Crime in India 2024 (1,01,928 cybercrime cases in all). The four named motives after fraud are from the NCRB motive table; &ldquo;all other motives&rdquo; is the remainder.',
+ 'a vertical line on the left and six horizontal bars starting from it, longest at the top. Write the number at the end of each bar and colour only the longest bar.');
+function pieSvg(){
+  const P=[[185,'Rural household',47.04],[515,'Urban household',39.68]],cy=150,r=82;
+  let o='<svg viewBox="0 0 700 290" xmlns="http://www.w3.org/2000/svg" font-family="Roboto,Arial,sans-serif" role="img" aria-label="Two pie charts of how a rural and an urban household split monthly spending between food and non-food, 47 percent food in rural and 40 percent in urban">';
+  o+='<text x="350" y="20" text-anchor="middle" font-size="14" font-weight="700" fill="#111">Food takes 47% of a rural budget and 40% of an urban one</text>';
+  P.forEach(p=>{const cx=p[0],f=p[2]/100,a=-Math.PI/2+f*2*Math.PI,x0=cx,y0=cy-r,x1=cx+r*Math.cos(a),y1=cy+r*Math.sin(a);
+    o+='<text class="lbl" x="'+cx+'" y="52" text-anchor="middle" font-size="12.5" font-weight="700" fill="#111">'+p[1]+'</text>';
+    o+='<path d="M'+cx+' '+cy+' L'+x0+' '+y0+' A'+r+' '+r+' 0 '+(f>.5?1:0)+' 1 '+x1.toFixed(1)+' '+y1.toFixed(1)+' Z" fill="#005EA6" stroke="#fff" stroke-width="2"/>';
+    o+='<path d="M'+cx+' '+cy+' L'+x1.toFixed(1)+' '+y1.toFixed(1)+' A'+r+' '+r+' 0 '+(f>.5?0:1)+' 1 '+x0+' '+y0+' Z" fill="#D9DDE2" stroke="#fff" stroke-width="2"/>';
+    const m=-Math.PI/2+f*Math.PI,m2=-Math.PI/2+f*2*Math.PI+(1-f)*Math.PI;
+    o+='<text class="lbl" x="'+(cx+r*.55*Math.cos(m)).toFixed(1)+'" y="'+(cy+r*.55*Math.sin(m)-2).toFixed(1)+'" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Food<tspan x="'+(cx+r*.55*Math.cos(m)).toFixed(1)+'" dy="14">'+p[2].toFixed(1)+'%</tspan></text>';
+    o+='<text class="lbl" x="'+(cx+r*.55*Math.cos(m2)).toFixed(1)+'" y="'+(cy+r*.55*Math.sin(m2)-2).toFixed(1)+'" text-anchor="middle" font-size="12" font-weight="700" fill="#111">Non-food<tspan x="'+(cx+r*.55*Math.cos(m2)).toFixed(1)+'" dy="14">'+(100-p[2]).toFixed(1)+'%</tspan></text>';});
+  return o+'</svg>';
+}
+const PIEFIG=fig(pieSvg(),'Source: Household Consumption Expenditure Survey 2023-24, MoSPI (share of monthly per capita consumption expenditure, MPCE). The two slices in each pie add up to 100%.',
+ 'a circle, cut into two slices from the 12 o&rsquo;clock line. Make the food slice a little under half in the rural pie and a little under two-fifths in the urban pie, and write each percentage inside its slice.');
 
 
 function pslide(i,head,role,inner){const x=(i%5)*154,y=Math.floor(i/5)*134;
@@ -921,8 +1003,22 @@ ${SWOT}
 <h3 class="sec">Three fallacies to know</h3>
 <div class="kwt-wrap"><table class="kwt"><tr><th>Fallacy</th><th>Key words to use in your response</th><th>Quick example</th></tr>
 <tr><td>Sunk-cost fallacy</td><td>continuing because of <b>past investment</b> that cannot be recovered</td><td>"I paid for the course, so I must finish it" even though it is useless</td></tr>
-<tr><td>Authority fallacy</td><td>true "because an <b>authority said so</b>", not because of evidence</td><td>"A famous actor says this supplement works"</td></tr>
+<tr><td>Authority fallacy</td><td>true "because an <b>authority said so</b>", not because of evidence (extreme case: the <b>Dr. Fox effect</b>, below)</td><td>"A famous actor says this supplement works"</td></tr>
 <tr><td>Causal fallacy</td><td>assuming <b>correlation means causation</b></td><td>ice-cream sales and drownings both rise, so "ice cream causes drowning" (hot weather causes both)</td></tr></table></div>
+<h3 class="sec">The Dr. Fox experiment: when authority has nothing inside</h3>
+<p>The authority fallacy has a famous extreme case. In the early 1970s, three medical educators (<b>Naftulin, Ware and Donnelly</b>) hired a professional actor, <b>Michael Fox</b>, and introduced him to an audience of psychiatrists, psychologists and educators as <b>Dr. Myron L. Fox</b>, an expert on applying mathematics to human behaviour. He had never studied the subject. He was coached to deliver a lecture titled <b>"Mathematical Game Theory as Applied to Physical Education"</b> with warmth, humour, confident gestures and a polished manner, while filling it with <b>double talk</b>: invented jargon, contradictions, non sequiturs and impressive-sounding sentences that meant nothing. He then took questions in the same style.</p>
+<p>The result shocked the researchers. The audience rated the session highly, said it was well organised and stimulating, and <b>nobody realised the content was empty</b>. These were trained professionals, so intelligence and education did not protect them. The finding became known as the <b>Dr. Fox effect</b>: an impressive title plus a confident, fluent delivery can make nonsense feel like insight.</p>
+<h3 class="sec">Why it is the end-stage of the appeal to authority</h3>
+<p>Think of the authority fallacy as a slope. At the top, the authority is at least <b>relevant</b> but over-trusted. Lower down, it is <b>irrelevant</b>. At the bottom, the authority <b>replaces the content entirely</b>, and that is Dr. Fox: the listener supplies the meaning, because a credentialed, confident person must be saying something deep.</p>
+<div class="kwt-wrap"><table class="kwt"><tr><th>Stage</th><th>What the argument leans on</th><th>Example</th></tr>
+<tr><td>1. Over-trusted expert</td><td>a <b>relevant</b> expert, but used instead of checking the evidence</td><td>"A senior engineer said this design is safe, so no review is needed"</td></tr>
+<tr><td>2. Irrelevant authority</td><td>fame or a title <b>outside</b> the topic</td><td>"A famous actor says this supplement works"</td></tr>
+<tr><td>3. Authority as the argument</td><td>the title <b>is</b> the only reason given</td><td>"Dr. Rao says so, end of discussion"</td></tr>
+<tr><td>4. Dr. Fox (end-stage)</td><td>authority plus delivery, with <b>no real content at all</b>: double talk is heard as meaningful</td><td>a confident speaker piles up buzzwords ("synergistic paradigm of scalable holistic alignment") and the room nods</td></tr></table></div>
+<p>The deeper lesson is that listeners often use <b>fluency as a shortcut for truth</b>: smooth, confident, jargon-rich speech feels intelligent. It also works on <b>you</b> when you are the speaker, because a confident delivery can hide thin preparation. That is why this module keeps returning to evidence.</p>
+<div class="why"><b class="t">How to guard against it</b>Ask three questions of any impressive talk or text: <b>(1) What exactly is the claim?</b> <b>(2) What is the evidence?</b> <b>(3) Can I restate it in one plain sentence?</b> If you cannot restate it, the problem may be the speaker, not you. Jargon that cannot be explained in simple words is a warning sign.</div>
+<p><b>A fair caution.</b> The original demonstration was small and informal, not a controlled experiment, and later studies found that an expressive style raises <b>satisfaction ratings</b> much more than it raises <b>actual learning</b>. Treat the story as a vivid warning about how easily delivery can pass for substance, not as proof that audiences are always fooled.</p>
+<details class="qc"><summary>Quick check: a speaker with a grand title uses long, technical-sounding sentences, and the audience praises the talk but nobody can say what it claimed. Which effect?</summary><p>The <b>Dr. Fox effect</b>, the end-stage of the authority fallacy: authority and confident delivery are mistaken for content, so double talk is perceived as meaningful.</p></details>
 <h2>Emotional intelligence (Daniel Goleman)</h2>
 <h3 class="sec">Why we need it</h3>
 <p>Skills and knowledge get you in the door, but <b>emotional intelligence (EI)</b> is the <b>unsung glue</b> that holds relationships together, professional and personal. It is the ability to <b>recognise, understand and manage emotions</b>, your own and other people's. Teams with the same talent but low EI have more misunderstandings, defensiveness and silent resentment.</p>
@@ -1062,13 +1158,59 @@ m2:{t:'Discussion & Cross-Cultural Communication',h:`
 <div class="note"><strong class="t">Situation</strong>You are a junior analyst. A report promised to a major client by Friday will be three days late because the data you received was wrong. The client has already told your manager she is "very disappointed". Draft your message to the client using <b>STEADY</b>.</div>
 <details class="qc"><summary>Show a model answer</summary><p><b>Stabilize:</b> check with your manager first so that one message goes out, calmly and quickly. <b>Tell:</b> say the report will arrive Monday, not Friday, because of an error in the source data. <b>Empathize:</b> "I understand this affects your planning for the board meeting." <b>Address:</b> offer a short call and a preview of the key findings today. <b>Decide:</b> commit to a new date and a second check on the data. <b>Yield:</b> deliver on Monday and send a short note on what was fixed.</p></details>
 <h2>Evidence-based argumentation <span class="tag-new">NEW</span></h2>
-<div class="note new"><strong class="t">Missing from the syllabus: key points</strong>Build every point as <b>Claim, Evidence, Reasoning</b>. State your <b>claim</b>, support it with <b>data, examples or expert sources</b>, then explain <b>why</b> the evidence proves it. Address the <b>counter-argument</b> to sound credible.</div>
-<div class="say">Say it like this: "Remote teams are more productive (claim). A 2-year study found a 13% gain (evidence). Fewer commutes mean more focused hours (reasoning)."</div>
+<div class="note new"><strong class="t">Key points</strong>Build every point as <b>Claim, Evidence, Reasoning (CER)</b>. The <b>claim</b> says what you believe, the <b>evidence</b> is what you can point to, and the <b>reasoning</b> explains <b>why</b> that evidence proves that claim. Then answer the best <b>counter-argument</b> to sound credible.</div>
+<div class="say">Say it like this: "Remote teams are more productive (claim). A two-year study found a 13% gain (evidence). Fewer commutes mean more focused hours, and that is where the gain comes from (reasoning)."</div>
 <h3 class="sec">Why you need data: the story of Guinness World Records</h3>
 <p>Without evidence, an argument is just two people repeating their opinion more loudly. The famous <b>Guinness World Records</b> began with exactly this problem.</p>
 <p>In <b>November 1951</b>, Sir Hugh Beaver, then managing director of the Guinness brewery, went on a <b>shooting trip in County Wexford, Ireland</b>, by the River Slaney. During the day he fired at a <b>European golden plover</b> and missed. Back with his hosts, the question arose: was the golden plover the <b>fastest game bird in Europe</b>? Some in the party said yes; others disagreed. Nobody could settle it, and when he searched the reference books afterwards, he could not find a reliable answer. The dispute simply stayed unresolved.</p>
 <p>Beaver realised that this exact kind of argument must be taking place in pubs and homes everywhere, with no authoritative source to end it. A book of <b>verified, documented facts and records</b> could settle such arguments. He later hired Norris and Ross McWhirter, twin brothers who ran a fact-finding agency in London, to compile it. The first edition appeared in <b>1955</b>, became a Christmas bestseller, and grew into the <b>Guinness Book of Records</b>, one of the best-selling copyrighted books in history.</p>
 <p>The lesson for students: a claim only settles an argument when it can be <b>checked</b>. That is why <b>documentation and citation</b> matter. Naming your source (who measured it, when, and how) lets the audience verify it, gives you credibility, protects you from repeating errors and makes a counter-argument answerable with facts instead of volume. In a GD or an exam, "a 2023 survey by a named organisation found..." beats "everyone knows that..." every time.</p>
+<h3 class="sec">The CER framework in detail</h3>
+<p>CER was popularised in science classrooms to teach students to argue like scientists, and it is a simplified cousin of Stephen Toulmin's model of argument. Its strength is that it makes you <b>separate three things that people usually blur together</b>: what you think, what you know, and why the second supports the first. Most weak arguments fail because one of the three is missing.</p>
+<div class="kwt-wrap"><table class="kwt"><tr><th>Part</th><th>The question it answers</th><th>What strong looks like</th><th>Common mistake</th></tr>
+<tr><td>Claim</td><td>"What exactly do you believe?"</td><td>One clear, <b>debatable</b> sentence with a narrow scope</td><td>stating a fact nobody disputes, or a claim so broad that nothing could prove it</td></tr>
+<tr><td>Evidence</td><td>"How do you know?"</td><td><b>Specific, checkable and relevant</b>: who found it, when, how many, how measured</td><td>"studies show...", "everyone knows...", one anecdote presented as proof</td></tr>
+<tr><td>Reasoning</td><td>"Why does that evidence prove your claim?"</td><td>a <b>link</b> (a cause, a principle or a definition) that connects the evidence to the claim</td><td>repeating the evidence in other words, or skipping this step altogether</td></tr></table></div>
+<h3 class="sec">Part 1: the claim</h3>
+<ul><li><b>Make it arguable.</b> "AI exists in schools" is a fact. "Schools should allow AI only in guided tools" is a claim someone could reasonably dispute.</li><li><b>Narrow it.</b> Broad topics such as "AI in education" or "DEI" contain many different things. A claim about <b>one kind of practice, in one setting</b> is easier to prove and harder to knock down.</li><li><b>Define key words.</b> If your claim says "effective", say <b>effective at what</b>: test scores, hiring numbers, attitudes or something else? Two people can both be right while measuring different things.</li></ul>
+<h3 class="sec">Part 2: the evidence</h3>
+<ul><li><b>Types:</b> data and statistics, results of studies or experiments, expert testimony, documented cases and examples. <b>Data and studies beat anecdotes</b> because they cover many cases, not one.</li><li><b>The four tests:</b> is it <b>relevant</b> to the claim, <b>sufficient</b> (enough of it), <b>credible</b> (a named, trustworthy source) and <b>checkable</b> (could the audience look it up)? This is the lesson of the Guinness story.</li><li><b>Cite it like a pro:</b> "A 2025 field experiment in the journal PNAS with nearly 1,000 students found..." names the <b>source, year, sample and finding</b> in one breath.</li><li><b>Be honest about limits.</b> Say what the study did <b>not</b> cover (one country, one subject, one industry). Admitting limits makes you more believable, not less.</li><li><b>Avoid cherry-picking.</b> Do not quote only the findings that help you. If the research is mixed, say so and explain why you still hold your claim.</li></ul>
+<h3 class="sec">Part 3: the reasoning (the part most people skip)</h3>
+<p>Evidence does not speak for itself. The reasoning is the <b>bridge</b> that says why this particular evidence means this particular claim. It usually takes one of three forms:</p>
+<ul><li><b>A cause or mechanism:</b> "This happened <b>because</b>..." (students who are given answers skip the effort that builds memory).</li><li><b>A principle:</b> "It is generally true that..., so here..." (people resist rules they feel forced into).</li><li><b>A definition or standard:</b> "If success means X, then this result counts as success because...".</li></ul>
+<div class="why"><b class="t">Two quick tests for your reasoning</b><b>The "so what?" test:</b> read your evidence aloud and ask "so what?". Your reasoning is the answer. <b>The "just repeating" test:</b> if your reasoning could be deleted and nothing would be lost because it only restates the evidence, it is not reasoning yet.</div>
+<h3 class="sec">Weak versus strong: one claim, rebuilt</h3>
+<div class="kwt-wrap"><table class="kwt"><tr><th>Part</th><th>Weak version</th><th>Strong version</th></tr>
+<tr><td>Claim</td><td>"AI is bad for students."</td><td>"In maths practice, students should use AI tutors that give hints, not chatbots that give answers."</td></tr>
+<tr><td>Evidence</td><td>"Everyone knows kids copy from it."</td><td>"A 2025 PNAS field experiment with nearly 1,000 high-school students found..."</td></tr>
+<tr><td>Reasoning</td><td>"So AI is bad."</td><td>"Practice only builds skill when the student does the thinking, so a tool that does it for them removes the benefit."</td></tr></table></div>
+<h3 class="sec">Adding the counter-argument: CER plus a rebuttal</h3>
+<p>The most convincing arguments add a fourth move: state the <b>strongest objection</b> in fair words, then respond. A short pattern is: <b>"Some argue... (counter). However... (rebuttal, with evidence or reasoning)."</b> A rebuttal can show the objection is <b>wrong</b>, or that it is <b>right but limited</b>, which is often the more honest answer.</p>
+<h3 class="sec">Worked example 1: AI in K-12 education</h3>
+<p><b>Topic:</b> should school students be allowed to use generative AI? The topic is too big, so first <b>narrow the claim</b>.</p>
+<div class="note new"><strong class="t">Claim</strong>Schools should allow generative AI for maths practice only through tutor-style tools that give hints and ask the student to try, not through open chatbots that hand over answers.</div>
+<div class="note"><strong class="t">Evidence</strong>A 2025 randomised field experiment published in <i>PNAS</i> (Bastani and colleagues) gave nearly 1,000 Turkish high-school maths students access to GPT-4. Students with a standard ChatGPT-style tool scored <b>48% higher</b> on practice problems, but when the tool was taken away they scored about <b>17% lower</b> on the exam than students who never had it. Students with a hint-based "GPT Tutor" scored <b>127% higher</b> on practice, and the exam penalty was largely avoided.</div>
+<div class="note"><strong class="t">Reasoning</strong>Practice exists to build skill, not to produce correct answers. When the AI supplies the answer, the student gets a good practice score <b>without the effort that creates learning</b>, so the score hides the gap until the exam. The hint-based tool keeps the student doing the thinking. The difference between the two outcomes therefore comes from <b>how the tool is designed</b>, not from AI itself.</div>
+<div class="note"><strong class="t">Counter-argument and rebuttal</strong><i>Some argue AI should be banned in schools altogether.</i> However, the harm in the study came from unguarded use, and the guided version largely removed it, so the evidence supports <b>rules about design and use</b> more than a blanket ban. <i>Limits:</i> this is one school, one subject and one country, so the claim is deliberately limited to maths practice.</div>
+<div class="say">Say it like this: "Schools should allow AI in maths practice only as a hint-giving tutor (claim). In a 2025 study of nearly 1,000 students, plain GPT-4 users did 17% worse on the later exam, while tutor users did not (evidence). Practice only builds skill when students do the thinking, and the tutor makes them do it (reasoning)."</div>
+<h3 class="sec">Worked example 2: "Are diversity, equity and inclusion policies effective, or is a different approach needed?"</h3>
+<p>This is a <b>contested topic</b>, and the first skill is to avoid arguing about the whole label. "DEI" covers very different things: mandatory training, mentoring, recruitment, committees, dedicated staff. Researchers often find that <b>some work better than others</b>. A good claim picks one part and defines "effective".</p>
+<p><b>The claim: a different approach is needed</b></p>
+<div class="note new"><strong class="t">Claim</strong>One-time mandatory diversity training is not an effective way to increase diversity in management, so organisations should put their resources into approaches such as mentoring, targeted recruitment and clear ownership of results.</div>
+<div class="note"><strong class="t">Evidence</strong>Sociologists Frank Dobbin and Alexandra Kalev studied about three decades of data from more than 800 US firms (reported in <i>Harvard Business Review</i>, 2016). Roughly five years after mandatory training was introduced, the share of some groups in management, including Black women and Asian-American employees, had not risen and in some cases had fallen. Firms with mentoring programmes and diversity task forces saw increases in representation in management.</div>
+<div class="note"><strong class="t">Reasoning</strong>Compulsory training can make managers feel blamed and resentful, so they resist the message, while mentoring and task forces give managers a <b>voluntary role and regular contact</b> with colleagues they might otherwise overlook. Here "effective" means <b>more people from underrepresented groups reaching management</b>, and on that measure the evidence favours the second kind of programme.</div>
+<div class="note"><strong class="t">Counter-argument and rebuttal</strong><i>Some argue training does work.</i> A meta-analysis of 260 samples (Bezrukova and colleagues, 2016, <i>Psychological Bulletin</i>) found an overall positive effect, largest on <b>knowledge and reactions</b>, smaller on behaviour, and attitude effects faded over time. It also found training works better when combined with other initiatives and run over a longer period. This <b>supports a narrower version of the claim</b>: training alone, once, is not enough. It also shows the two sides measure different outcomes (what people <b>learn</b> versus who gets <b>promoted</b>).</div>
+<div class="why"><b class="t">What this example teaches</b>The claim is <b>narrow</b> (one practice, one outcome) and says what "effective" means: <b>more people from underrepresented groups reaching management</b>. Whichever side you take on a contested topic, name the <b>measure</b>, cite the <b>source and year</b>, admit the <b>limits</b> (these are mostly US corporate studies, so they may not transfer directly to schools or to India) and answer the <b>best objection</b>. On a topic where people hold strong views, this is what separates an argument from a slogan.</div>
+<h3 class="sec">Your turn: build and check a CER</h3>
+<p><b>Template:</b> "<b>I claim</b> that [specific, arguable claim]. <b>The evidence is</b> [source, year, sample, finding]. <b>This shows</b> the claim because [cause, principle or definition]. <b>Some argue</b> [objection], <b>but</b> [rebuttal or limit]."</p>
+<p><b>Practice topics students care about</b> (find at least one real source for each before you write):</p>
+<ul><li>Should colleges ban or restrict phones in class?</li><li>Should students be allowed to use AI tools in assignments and exams?</li><li>Is an internship more valuable than extra coursework for getting a first job?</li></ul>
+<div class="kwt-wrap"><table class="kwt"><tr><th>Self-check</th><th>Ask yourself</th></tr>
+<tr><td>Claim</td><td>Is it debatable, narrow and clear about what "effective", "better" or "harmful" means?</td></tr>
+<tr><td>Evidence</td><td>Could a stranger find my source? Did I give the year, sample and finding, and not just "studies show"?</td></tr>
+<tr><td>Reasoning</td><td>Does it explain <b>why</b>, or does it only repeat the evidence?</td></tr>
+<tr><td>Counter</td><td>Have I stated the strongest objection fairly and answered it?</td></tr></table></div>
+<details class="qc"><summary>Quick check: "A study found students with AI scored 48% higher on practice, so AI helps learning." Which CER part is missing or weak?</summary><p>The <b>reasoning</b> (and the claim's scope). The evidence is about <b>practice scores</b>, not learning. The reasoning must explain why a higher practice score means real learning, and the later exam result (about 17% lower for unguarded use) shows that it may not.</p></details>
 <h2>Tailoring your message to the audience <span class="tag-new">NEW</span></h2>
 <p>A message can be accurate, well structured and still fail, because the <b>examples, references, language and humour</b> belong to a world the audience does not live in. <b>Audience localization</b> means choosing examples, units, currency, idioms and cultural references from your listeners' own experience. It is the discussion-side twin of the audience analysis you will meet in Unit 3: before you speak or write, ask <b>who they are and what already makes sense to them</b>.</p>
 <h3 class="sec">Case study: a textbook problem that misses its audience</h3>
@@ -1108,29 +1250,55 @@ where state <span class="kx">S</span> is a scoring ball (a run or a boundary), s
 <p>Because the stakes are high, the facilitator should stay <b>calm</b>, set the <b>objective</b> and ground rules at the start, keep to <b>facts and evidence</b> rather than rumours, avoid personal attacks, <b>summarise</b> decisions so nothing is misunderstood, and record what was agreed. Slow down for irreversible decisions, and make sure the people most affected have a chance to be heard.</p>
 <div class="kwt-wrap"><table class="kwt"><tr><th>Situation</th><th>Key words to use in your response</th></tr>
 <tr><td>Leading under pressure</td><td>stay <b>calm</b>, set <b>time limits</b>, <b>summarise</b> progress, keep the group on the <b>objective</b></td></tr>
-<tr><td>Dominant speaker</td><td><b>politely redirect</b> ("Let us hear other views")</td></tr>
+<tr><td>Dominant speaker</td><td><b>politely redirect</b> ("Let us hear other views"), or use the <b>feedback sandwich</b></td></tr>
 <tr><td>Silent member</td><td><b>invite</b> them by name with an open question</td></tr>
 <tr><td>Heated debate</td><td><b>steer</b> back to evidence, <b>separate</b> ideas from people, <b>reframe</b> disagreement</td></tr></table></div>
 <h3 class="sec">Handling regular discussion situations with nuance</h3>
 <p><b>The silent member.</b> Silence does not always mean a person has nothing to say. Some are thinking, some are shy, some come from cultures where interrupting is rude, and some are afraid of being wrong. Calling someone by name with a tough question can backfire: being put on the spotlight can make them freeze, feel embarrassed or even withdraw further. A gentler approach is to <b>open a door rather than push</b>. Say "I would like to hear from anyone who has not spoken yet", ask an easy, low-risk question first ("Have you seen this in your own experience?"), or offer a choice such as speaking now or adding thoughts in writing afterwards. If you do name them, keep the tone warm and give an easy exit ("Only if you would like to, Neha, what is your view?"). Success is not forcing speech, but making it <b>safe to speak</b>.</p>
 <p><b>The dominant speaker.</b> This person is often enthusiastic, not rude. Interrupting harshly will cause defensiveness. Acknowledge the contribution first ("Good point, Yogesh"), then redirect ("Let us hear some other views on this"). If needed, introduce a rule such as one point per turn.</p>
+<h3 class="sec">The feedback sandwich: handling a dominant speaker</h3>
+<p>When a gentle nudge is not enough, the <b>feedback sandwich</b> lets you say what needs to change without making the person defensive. The idea is simple: put the <b>real message in the middle</b>, with <b>kind words on both sides</b>, like the filling between two slices of bread. The warm layers keep the person open to hearing the middle one. It has <b>three stages</b>.</p>
+<ol>
+<li><b>Warm-Up (positive).</b> Start with something <b>true and specific</b> about their contribution. <i>&ldquo;Yogesh, your points have given us a lot to work with, and the data you brought was useful.&rdquo;</i></li>
+<li><b>Feedback (constructive).</b> Say the issue plainly, as a <b>behaviour and its effect</b>, not a judgement of the person, and name what you need. <i>&ldquo;I have noticed we have heard mostly from you, so others have had little room. Let us do one point per person for the next round.&rdquo;</i></li>
+<li><b>Soften (positive).</b> Close with <b>appreciation and a role</b> that points their energy somewhere useful. <i>&ldquo;I value your enthusiasm. Could you note the key points on the board while others share?&rdquo;</i></li>
+</ol>
+<p><b>Tips:</b> keep both positives <b>genuine</b>, or the person will sense a trick; keep the middle layer <b>short and specific</b> so it is not buried; and do it <b>in the moment, lightly</b>, in front of the group, or privately in a break if the habit repeats.</p>
 <p><b>The heated debate.</b> Pause and let emotions settle, then <b>separate people from ideas</b> ("Let us focus on the proposal, not the person"). Return to evidence, <b>reframe</b> the disagreement as a shared problem and invite both sides to state what they agree on.</p>
 <p>A GD flows through <b>opening</b> (initiate with a definition or framing), <b>development</b> (build and challenge points), and <b>closing</b> (summarise, do not introduce new points).</p>
 <details class="qc"><summary>Quick check: which technique ends with a "synthesis"?</summary><p><b>Dialectical reasoning</b> (thesis, antithesis, synthesis).</p></details>`},
 m3:{t:'Presentations & Persuasion',h:`
-<div class="obj"><strong>What you will learn</strong><ul><li>The 4 aspects of a good presentation, and why packaging matters</li><li>The 3 aspects of non-verbal communication and their link to EQ</li><li>Aristotle's modes of persuasion, with a worked scenario</li><li>How to present data as a story and without deceiving</li><li>How virtual presentations extend the \"cover\" principle</li><li>How to plan a 10-slide deck on paper, slide by slide</li></ul></div>
-<h2>Creating a good presentation</h2>
-<div class="kwt-wrap"><table class="kwt"><tr><th>Aspect</th><th>Key words to use in your response</th></tr>
-<tr><td>Audience Analysis</td><td>who they are, what they <b>already know</b> and <b>need</b></td></tr>
-<tr><td>Storyboarding</td><td><b>plan the flow</b> of slides: beginning, middle, end</td></tr>
-<tr><td>Visual Appeal</td><td><b>clean design</b>, consistent fonts and colours, relevant images</td></tr>
-<tr><td>Reduced Cognitive Overload</td><td><b>one idea per slide</b>, little text, so the audience can process it</td></tr></table></div>
-<h3 class="sec">Judging a book by its cover</h3>
-<p>We are told not to judge a book by its cover, yet everyone does, and quickly. Psychologists Janine Willis and Alexander Todorov (2006) showed people faces for only <b>one-tenth of a second</b> and found that their snap judgements of traits such as competence and trustworthiness closely matched judgements made with unlimited time. Presentations work the same way. Audiences form a view of your credibility in the first moments, from slide design, readability and delivery, <b>before they have evaluated a single argument</b>. A related study by Daniel Oppenheimer (2006) found that needlessly complex writing makes the writer seem <b>less intelligent</b>, not more.</p>
-<p>The lesson is not that style beats substance. It is that <b>substance has to be reachable</b>. Technically excellent content hidden behind dense slides, tiny fonts and long paragraphs is content the audience never actually receives. Visual formatting and readability are therefore part of the message, not decoration around it.</p>
-<h3 class="sec">Example: textbooks for engineering students in Tamil Nadu</h3>
+<div class="obj"><strong>What you will learn</strong><ul><li>The 4 aspects of a good presentation, seen through a textbook case study</li><li>The 3 aspects of non-verbal communication and their link to EQ</li><li>Aristotle's modes of persuasion, with a worked scenario</li><li>How to present data as a story and without deceiving</li><li>How virtual presentations extend the \"cover\" principle</li><li>How to plan a 10-slide deck on paper, slide by slide</li></ul></div>
+<h2>Creating a Good Presentation</h2>
+<p>Students meet good and bad presentation every day, in the textbooks they study from. A textbook is a long presentation to a known audience, so it shows all four aspects of a good presentation at work. We use it here as a <b>case study</b>: the same four aspects apply when you make a <b>PowerPoint presentation</b>, format an <b>assignment</b> or prepare a <b>formal document for work</b>.</p>
+<div class="kwt-wrap"><table class="kwt"><tr><th>Aspect</th><th>Key words to use in your response</th><th>Seen in a textbook as</th></tr>
+<tr><td>Audience Analysis</td><td>who they are, what they <b>already know</b> and <b>need</b></td><td>local authors writing for the exam the student will sit</td></tr>
+<tr><td>Visual Appeal</td><td><b>clean design</b>, consistent fonts and colours, relevant images</td><td>the cover, layout and readability of the page</td></tr>
+<tr><td>Storyboarding</td><td><b>plan the flow</b> of slides: beginning, middle, end</td><td>a chapter that moves from hook to practice</td></tr>
+<tr><td>Reduced Cognitive Overload</td><td><b>one idea per slide</b>, little text, so the audience can process it</td><td>short headed sections, boxed formulas, one diagram at a time</td></tr></table></div>
+<h3 class="sec">Audience analysis: textbooks for engineering students in Tamil Nadu</h3>
 <p>Many Anna University syllabi list international textbooks as references. These are often <b>exhaustive and technically superb</b>, but their pages are dense, their language is formal and their examples come from other contexts. By contrast, locally authored books such as <b>A. Nagoor Kani's</b> texts for Electronics Engineering and <b>T. Veerarajan's</b> texts for Mathematics are written for the students sitting the exam: <b>simple language, step-by-step worked examples, clear layout</b> and questions in the style of the university papers.</p>
-<p>Students commonly prefer the local books, even though they may cover less ground. The reason is the cover effect in action: a book a student can <b>open, follow and finish</b> teaches more than a better book they cannot get through. Tailored, accessible formatting outweighs extra depth when depth cannot be reached. A presenter should ask the same question of every slide: <b>will this audience be able to absorb it at the speed I present?</b></p>
+<p>Students commonly prefer the local books, even though they may cover less ground. The authors asked the audience analysis questions first: <b>who is reading, what do they already know, and what do they need to pass and to understand?</b> A book a student can <b>open, follow and finish</b> teaches more than a better book they cannot get through. A presenter should ask the same question of every slide: <b>will this audience be able to absorb it at the speed I present?</b></p>
+<h3 class="sec">Visual appeal: judging a book by its cover</h3>
+<p>We are told not to judge a book by its cover, yet everyone does, and quickly. Psychologists Janine Willis and Alexander Todorov (2006) showed people faces for only <b>one-tenth of a second</b> and found that their snap judgements of traits such as competence and trustworthiness closely matched judgements made with unlimited time. Presentations work the same way. Audiences form a view of your credibility in the first moments, from slide design, readability and delivery, <b>before they have evaluated a single argument</b>. A related study by Daniel Oppenheimer (2006) found that needlessly complex writing makes the writer seem <b>less intelligent</b>, not more.</p>
+<p>The lesson is not that style beats substance. It is that <b>substance has to be reachable</b>. Technically excellent content hidden behind dense slides, tiny fonts and long paragraphs is content the audience never actually receives. Visual formatting and readability are therefore part of the message, not decoration around it. This is the cover effect in action: the student who picks up a clean, well-laid-out guide before exams has already decided it will help.</p>
+<h3 class="sec">Storyboarding: a chapter is a storyboard in print</h3>
+<p>A <b>storyboard</b> is the plan of a presentation laid out in order before any slide is made: a <b>beginning</b> that sets up the question, a <b>middle</b> that builds the answer, and an <b>end</b> that leaves the audience with something to do. A well-written textbook chapter is a storyboard on paper. A typical chapter in a locally authored engineering mathematics or electronics book opens by saying why the topic matters, defines the key term, works through <b>solved examples from easy to hard</b>, and ends with a summary and exercises. The details vary from book to book, but the order is the point: the reader never has to ask, &ldquo;where is this going?&rdquo;</p>
+<p>Now picture the opposite: a chapter that opens with a long formula, gives the first example ten pages later, and has no summary. The reader meets the <b>answer before the question</b> and has to build the structure alone. A deck with no storyboard feels the same.</p>
+${STORY}
+<div class="kwt-wrap"><table class="kwt"><tr><th>Part of the chapter</th><th>Matching slide</th><th>Job it does</th></tr>
+<tr><td>Opening: why this topic matters</td><td>Hook</td><td>wins attention and sets up the question</td></tr>
+<tr><td>Definition and key term</td><td>Background</td><td>gives the audience the words they need</td></tr>
+<tr><td>Solved examples, easy to hard</td><td>Evidence and story</td><td>proves the idea and makes it concrete</td></tr>
+<tr><td>Summary box</td><td>Recap</td><td>repeats the few points to remember</td></tr>
+<tr><td>Exercises</td><td>Action</td><td>tells the audience what to do next</td></tr></table></div>
+<div class="say">Say it like this: &ldquo;My storyboard has a beginning that raises the problem, a middle that explains it with two examples, and an end that tells you what to do on Monday.&rdquo;</div>
+<h3 class="sec">Reduced cognitive overload: one idea at a time</h3>
+<p>Working memory can hold only a few items at once. Educational psychologist John Sweller called the effort spent on <b>how information is arranged</b>, rather than on the idea itself, <b>extraneous cognitive load</b>. A page that makes you hunt for where the definition ends and the example begins wastes the effort you needed for learning.</p>
+<p>Compare two ways of teaching <b>Ohm's law</b> to a Class 10 student. The overloaded page puts the statement, formula, units, derivation and exceptions into one block of text. The chunked page gives a <b>heading</b>, the law in <b>one line</b>, the formula in a <b>box</b>, <b>one small circuit diagram</b> and <b>one worked example</b>. The facts are identical; only the second page is easy to take in. The pages below are an illustration made for this course, not a scan from a particular book. Many well-designed school textbooks, such as the NCERT science books, use the same chunking: short headed sections, boxed key points, labelled diagrams and set-apart activities.</p>
+${COG}
+<p>For slides, the rule is the same: <b>one idea per slide</b>, headings of about <b>four words or fewer</b>, lines under <b>six words</b>, and a picture instead of a paragraph wherever you can. If you must show detail, put it in a handout and keep the slide for the headline.</p>
+<div class="say">Marking tip: show you understand the difference. <b>Storyboarding</b> is about the <b>order</b> of ideas across the deck; <b>reduced cognitive overload</b> is about the <b>amount</b> of content on each slide.</div>
 <h2>Non-verbal communication</h2>
 <ul><li><b>Body language</b>: posture, gestures, eye contact, movement</li><li><b>Voice modulation</b>: pace, pitch, volume, pauses</li><li><b>Emotional resonance</b>: the feeling that connects you to the audience</li></ul>
 <h3 class="sec">Why it shapes perception and awareness</h3>
@@ -1161,6 +1329,20 @@ ${DISA}
 <tr><td>Compare categories</td><td><b>bar chart</b></td></tr>
 <tr><td>Parts of a whole</td><td><b>pie chart</b>, only a few slices</td></tr></table></div>
 <p><b>Declutter</b> (remove gridlines and extra colours), <b>label directly</b>, and use an <b>action title</b> that states the takeaway, such as \"Sales rose 20% after launch\".</p>
+<h3 class="sec">Choosing the right chart</h3>
+<p>The same numbers can look clear or confusing depending on the chart. Match the chart to the <b>question</b> you want the audience to answer. Below are three real data sets from official Indian sources, the kind of figures that newspapers such as <i>The Times of India</i> report every year, each drawn in the chart that suits it.</p>
+<p><b>Line chart: education (a trend over time).</b> The question is &ldquo;how has this changed?&rdquo; A line joins points in time order, so the eye follows the slope: steady climb, sudden jump or flat patch. India's gross enrolment ratio (GER) in higher education is the share of the 18-23 age group enrolled in college, and it has risen from <b>19.4% in 2010-11 to 30.0% in 2023-24</b>. A line chart shows the steady climb at a glance. A line may start above zero because the story is the <b>change</b>, but label the axis clearly.</p>
+${LINEFIG}
+<p><b>Bar chart: crime (comparing categories).</b> The question is &ldquo;which is biggest, and by how much?&rdquo; Bars of different length let the eye compare sizes straight away. India recorded <b>1,01,928 cybercrime cases in 2024</b>, up 17.9% from 86,420 in 2023, and the NCRB motive table shows how those cases split. Fraud and online scams account for <b>73,987</b> of them, far ahead of every other motive, and the bars make that gap obvious in a second. A pie of the same data would squeeze five small slices beside one huge one, which is hard to compare. Bars must <b>start at zero</b>, as in the deceptive-chart example below.</p>
+${BARFIG}
+<p><b>Pie chart: food (parts of a whole).</b> The question is &ldquo;what share of the whole is this?&rdquo; A pie is useful only when the slices add up to <b>one meaningful whole</b> and there are <b>very few of them</b>. In the Household Consumption Expenditure Survey 2023-24, food made up <b>47.04%</b> of a rural household's monthly spending and <b>39.68%</b> of an urban household's, so the rest, 52.96% and 60.32%, went on non-food items. Two slices make the &ldquo;almost half of every rupee goes on food&rdquo; message instantly clear. With ten or twelve slices a pie becomes unreadable, and then a bar chart is the better choice.</p>
+${PIEFIG}
+<div class="kwt-wrap"><table class="kwt"><tr><th>Chart</th><th>Best for</th><th>Example above</th><th>Avoid when</th></tr>
+<tr><td>Line</td><td>change <b>over time</b></td><td>higher education GER, 2010-11 to 2023-24</td><td>you only have two or three unrelated categories</td></tr>
+<tr><td>Bar</td><td><b>comparing</b> categories or sizes</td><td>cybercrime cases by motive, 2024</td><td>the axis does not start at zero</td></tr>
+<tr><td>Pie</td><td><b>parts of one whole</b>, 2 to 4 slices</td><td>food and non-food share of household spending</td><td>there are many slices, or the parts do not add to 100%</td></tr></table></div>
+<p><i>Data note:</i> the figures come from the official sources named under each chart (AISHE, NCRB, MoSPI), which are the numbers newspapers report. If you quote one in an exam or a presentation, name the source and the year, and check the latest release, because these figures are revised every year.</p>
+
 <h3 class="sec">Effective versus deceptive representation</h3>
 <p>Darrell Huff's classic <i>How to Lie with Statistics</i> (1954) shows how honest numbers can be drawn dishonestly. Compare the two charts below: both show Brand A at 98 and Brand B at 100.</p>
 ${fig('<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" font-family="Roboto,Arial,sans-serif" role="img" aria-label="Same data, truncated and full axis"><g font-size="12" fill="#111"><text x="170" y="18" text-anchor="middle" font-weight="700">Misleading: axis starts at 97</text><text x="530" y="18" text-anchor="middle" font-weight="700">Honest: axis starts at 0</text><line x1="50" y1="180" x2="300" y2="180" stroke="#111"/><rect x="95" y="160" width="55" height="20" fill="#C62828"/><rect x="195" y="120" width="55" height="60" fill="#C62828"/><text x="122" y="196" text-anchor="middle">A (98)</text><text x="222" y="196" text-anchor="middle">B (100)</text><line x1="410" y1="180" x2="660" y2="180" stroke="#111"/><rect x="455" y="23" width="55" height="157" fill="#005EA6"/><rect x="555" y="20" width="55" height="160" fill="#005EA6"/><text x="482" y="196" text-anchor="middle">A (98)</text><text x="582" y="196" text-anchor="middle">B (100)</text></g></svg>','On the left, Brand B looks three times as large; the real difference is about 2%.','two bar charts of the same data, the left with a truncated axis exaggerating the gap and the right with a full axis.')}
@@ -1501,11 +1683,24 @@ M5_FRQ.push({ text:"In the Super Mario Effect, what should you focus on instead 
 
 
 M2_FRQ.push({ text:"What are the three parts of an evidence-based argument?", answers:["Claim","Evidence","Reasoning"] });
+M2_FRQ.push({ text:"What are the three stages of a feedback sandwich?", answers:["Warm-Up","Feedback","Soften"] });
+M2_MCQ.push({"text": "In the CER framework, what is the job of the Reasoning?", "options": ["To explain why the evidence supports the claim", "To repeat the evidence in different words", "To state the claim again more strongly", "To list every source consulted"], "correct": 0});
+M2_MCQ.push({"text": "Which is the strongest CER claim?", "options": ["In maths practice, schools should use hint-giving AI tutors rather than answer-giving chatbots", "AI is bad", "Everyone uses AI these days", "Students should never think about AI"], "correct": 0});
+M2_MCQ.push({"text": "Which statement best describes how to handle a counter-argument?", "options": ["State the strongest objection fairly, then respond with evidence or a stated limit", "Ignore it so your argument is not weakened", "Repeat your claim more loudly", "Attack the person who raised it"], "correct": 0});
 
 
 
 M1_FRQ.push({ text:"What are three techniques that help a team reach the norming stage and optimal outcomes?", answers:["Belbin Team Roles","RACI Matrix","DRI Model"] });
+M1_MCQ.push({"text": "What is the Dr. Fox effect?", "options": ["Confident delivery and an impressive title make meaningless double talk seem insightful", "Audiences always detect an expert who is lying", "Speakers perform worse when they are nervous", "People remember the first thing they hear"], "correct": 0});
 M1_FRQ.push({ text:"What do the letters in RACI stand for?", answers:["Responsible","Accountable","Consulted","Informed"] });
+const BELBIN_COLS=[
+  {h:"Action",   roles:["Shaper","Implementer","Completer Finisher"]},
+  {h:"People",   roles:["Coordinator","Teamworker","Resource Investigator"]},
+  {h:"Thinking", roles:["Plant","Monitor Evaluator","Specialist"]}
+];
+M1_FRQ.push({ type:"grid", text:"Fill in the Belbin Team Roles table from memory. Type the three group headings in the top row, then the three roles that belong under each heading.",
+  cols:BELBIN_COLS,
+  answers:["Action","People","Thinking"].concat(BELBIN_COLS.flatMap(c=>c.roles)) });
 
 
 
@@ -1585,7 +1780,7 @@ function sessionKey(){ return currentModule + '-' + mode; }
 function captureText(){
   if (!mode || !questions.length) return;
   const q = questions[activeIdx];
-  if (q && q.type !== 'mcq' && !state[activeIdx].checked){ state[activeIdx].text = DOM.answerBox.value; }
+  if (q && q.type !== 'mcq' && q.type !== 'grid' && !state[activeIdx].checked){ state[activeIdx].text = DOM.answerBox.value; }
 }
 
 function saveSession(){
@@ -1598,7 +1793,7 @@ function freshSession(){
     .map(q => Object.assign({}, q, { maxMarks: q.type === 'mcq' ? 1 : q.answers.length }));
   return {
     questions: qs,
-    state: qs.map(() => ({ text:"", checked:false, score:0, selected: undefined, matches: null })),
+    state: qs.map(() => ({ text:"", checked:false, score:0, selected: undefined, matches: null, cells: null })),
     activeIdx: 0
   };
 }
@@ -1658,7 +1853,8 @@ document.getElementById('restartBtn').addEventListener('click', () => {
 });
 
 function normalize(s){
-  return s.toLowerCase().trim().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ');
+  // text inside (...) neither counts for nor against the answer
+  return s.replace(/\([^)]*\)?/g,' ').toLowerCase().trim().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();
 }
 
 function levenshtein(a, b){
@@ -1750,13 +1946,24 @@ function render(){
   DOM.marksBadge.innerText = q.maxMarks + (q.maxMarks === 1 ? ' mark' : ' marks');
   DOM.qText.innerText = q.text;
 
-  if (q.type === 'mcq'){
+  const gridEl = document.getElementById('gridArea');
+  if (q.type === 'grid'){
+    DOM.frqInputArea.style.display = 'none';
+    DOM.mcqOptions.style.display = 'none';
+    DOM.mcqFeedback.style.display = 'none';
+    gridEl.style.display = 'block';
+    DOM.checkBtn.innerText = 'Check Answer';
+    renderGrid(q, s);
+    if (s.checked){ showGridResults(q, s); } else { DOM.resultBox.style.display = 'none'; }
+  } else if (q.type === 'mcq'){
+    gridEl.style.display = 'none';
     DOM.frqInputArea.style.display = 'none';
     DOM.mcqOptions.style.display = 'flex';
     DOM.checkBtn.innerText = 'Check Answer';
     DOM.resultBox.style.display = 'none';
     renderMCQOptions();
   } else {
+    gridEl.style.display = 'none';
     DOM.frqInputArea.style.display = 'block';
     DOM.mcqOptions.style.display = 'none';
     DOM.mcqFeedback.style.display = 'none';
@@ -1792,9 +1999,90 @@ function checkMCQAnswer(){
   updateTotals();
 }
 
+/* ---------- Grid (table) question: Belbin Team Roles ---------- */
+function gridCell(){ return 'cells'; }
+function renderGrid(q, s){
+  if (!s.cells) s.cells = new Array(12).fill('');
+  const el = document.getElementById('gridArea');
+  let h = '<div class="grid-hint">Type one entry in each box. Roles under a heading can be in any order. Then check your answers.</div><div class="grid-wrap"><table class="gridq" role="grid" aria-label="Belbin team roles table">';
+  for (let r = 0; r < 4; r++){
+    h += '<tr' + (r === 0 ? ' class="hd"' : '') + '>';
+    for (let c = 0; c < 3; c++){
+      const i = r * 3 + c;
+      const ph = r === 0 ? 'Group heading' : 'Role ' + r;
+      const cls = s.checked ? (s.matches && s.matches[i] ? 'ok' : 'bad') : '';
+      h += '<td><input type="text" data-i="' + i + '" placeholder="' + ph + '" aria-label="' + (r === 0 ? 'Heading ' + (c+1) : 'Row ' + r + ', column ' + (c+1)) + '" autocomplete="off" autocapitalize="words" spellcheck="false" class="' + cls + '"' + (s.checked ? ' disabled' : '') + '></td>';
+    }
+    h += '</tr>';
+  }
+  h += '</table></div>';
+  el.innerHTML = h;
+  const inputs = el.querySelectorAll('input');
+  inputs.forEach((inp, i) => {
+    inp.value = s.cells[i] || '';
+    inp.addEventListener('input', () => { s.cells[i] = inp.value; });
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter'){ e.preventDefault(); const n = inputs[i + 1]; if (n) n.focus(); else checkAnswer(); }
+    });
+  });
+}
+
+function stripHeading(t){
+  return normalize(t).replace(/\b(oriented|roles?|team|group)\b/g,'').replace(/\s+/g,' ').trim();
+}
+
+function gradeGrid(q, s){
+  const ok = new Array(12).fill(false);
+  q.cols.forEach((col, c) => {
+    const head = stripHeading(s.cells[c] || '');
+    const hb = normalize(col.h);
+    if (head && levenshtein(head, hb) <= Math.max(1, Math.floor(hb.length * 0.25))) ok[c] = true;
+    const pairs = [];
+    for (let r = 1; r <= 3; r++){
+      const u = normalize(s.cells[r * 3 + c] || '');
+      if (!u) continue;
+      col.roles.forEach((role, ri) => {
+        const b = normalize(role);
+        const d = levenshtein(u, b);
+        if (d <= Math.max(1, Math.floor(b.length * 0.25))) pairs.push({ cell: r * 3 + c, ri, d });
+      });
+    }
+    pairs.sort((x, y) => x.d - y.d);
+    const usedCell = {}, usedRole = {};
+    pairs.forEach(p => {
+      if (!usedCell[p.cell] && !usedRole[p.ri]){ usedCell[p.cell] = true; usedRole[p.ri] = true; ok[p.cell] = true; }
+    });
+  });
+  return ok;
+}
+
+function showGridResults(q, s){
+  DOM.resultBox.style.display = 'flex';
+  DOM.scoreNum.innerText = s.score + ' / ' + q.answers.length;
+  DOM.resultRows.innerHTML = '';
+  q.cols.forEach((col, c) => {
+    const full = s.matches[c] && [1,2,3].every(r => s.matches[r * 3 + c]);
+    const row = document.createElement('div');
+    row.className = 'result-row';
+    row.innerHTML = '<div class="result-icon ' + (full ? 'hit' : 'miss') + '">' + (full ? '\u2713' : '\u2715') + '</div>' +
+      '<div class="result-text"><div class="expected">' + col.h.toUpperCase() + '</div><div class="matched">' + col.roles.join(' \u00b7 ') + '</div></div>';
+    DOM.resultRows.appendChild(row);
+  });
+}
+
+function checkGrid(){
+  const q = questions[activeIdx], s = state[activeIdx];
+  if (!s.cells) s.cells = new Array(12).fill('');
+  s.matches = gradeGrid(q, s);
+  s.score = s.matches.filter(Boolean).length;
+  s.checked = true;
+  render();
+}
+
 function checkAnswer(){
   const q = questions[activeIdx];
   if (q.type === 'mcq'){ checkMCQAnswer(); return; }
+  if (q.type === 'grid'){ checkGrid(); return; }
 
   const s = state[activeIdx];
   s.text = DOM.answerBox.value;
@@ -1871,7 +2159,7 @@ function showResults(){
 DOM.checkBtn.addEventListener('click', checkAnswer);
 DOM.clearBtn.addEventListener('click', () => {
   const s = state[activeIdx];
-  s.text = ''; s.checked = false; s.score = 0; s.matches = null; s.selected = undefined;
+  s.text = ''; s.checked = false; s.score = 0; s.matches = null; s.selected = undefined; s.cells = null;
   render();
 });
 
@@ -1879,7 +2167,7 @@ DOM.prevBtn.addEventListener('click', () => { if (activeIdx > 0){ captureText();
 DOM.nextBtn.addEventListener('click', () => { if (activeIdx < questions.length - 1){ captureText(); activeIdx++; saveSession(); render(); } });
 
 document.addEventListener('keydown', (e) => {
-  if (document.activeElement === DOM.answerBox) return;
+  if (document.activeElement === DOM.answerBox || (document.activeElement && document.activeElement.tagName === 'INPUT')) return;
   if (e.key === 'ArrowLeft'){ e.preventDefault(); DOM.prevBtn.click(); }
   else if (e.key === 'ArrowRight'){ e.preventDefault(); DOM.nextBtn.click(); }
 });
