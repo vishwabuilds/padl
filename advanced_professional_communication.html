@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Advanced Professional English — Notes &amp; Practice</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js" onload="renderMath(document.body)"></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%230B2149'/%3E%3Cpath d='M31 10v28H15z' fill='%23fff'/%3E%3Cpath d='M35 18v20h13z' fill='%23FFB100'/%3E%3Cpath d='M14 40h36l-6 7H20z' fill='%23fff'/%3E%3Cpath d='M10 53q5.5-6 11 0t11 0 11 0 11 0' stroke='%23FFB100' stroke-width='3.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto+Slab:wght@500&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -18,13 +21,13 @@
   *{box-sizing:border-box;margin:0;padding:0;font-family:'Roboto',sans-serif;-webkit-font-smoothing:antialiased;}
   body{background:#fff;color:var(--text-main);display:flex;flex-direction:column;height:100vh;overflow:hidden;}
 
-  header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-color);height:60px;background:#fff;z-index:110;flex-shrink:0;}
-  .header-left{display:flex;align-items:center;height:100%;}
-  .logo-container{padding:0 20px;height:100%;display:flex;align-items:center;border-right:1px solid var(--border-color);}
+  header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-color);height:67px;padding:0 16px;background:#fff;z-index:110;flex-shrink:0;}
+  .header-left{display:flex;align-items:center;height:100%;min-width:0;flex:1;}
+  .logo-container{padding:0;height:100%;display:flex;align-items:center;border-right:none;flex-shrink:0;}
   .logo-container .brand-logo{height:34px;width:auto;display:block;}
   .logo-container span{font-weight:700;font-size:15px;letter-spacing:.3px;font-family:'Roboto Slab',serif;color:var(--brand-blue);display:none;}
-  .subject-title{padding-left:24px;font-weight:500;font-size:16px;color:#222;}
-  .header-right{padding-right:24px;font-size:13px;color:#666;}
+  .subject-title{margin-left:28px;font-weight:700;font-size:18px;color:#0B2149;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+  .header-right{padding-right:0;font-size:13px;color:#666;}
 
   .navigation-bar{background:var(--bg-light);border-bottom:1px solid var(--border-color);padding:12px 40px;display:flex;align-items:center;overflow-x:auto;gap:8px;min-height:52px;flex-shrink:0;}
   .nav-bubble{position:relative;min-width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--brand-blue);color:var(--brand-blue);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;cursor:pointer;user-select:none;transition:all .15s ease;flex-shrink:0;}
@@ -382,6 +385,54 @@ a.rd-item.kh-dl:hover{background:#F4F7FD;}
   .kh-main{padding:16px 16px 40px;} .kh-main h1{font-size:25px;} .kh-card{padding:20px 16px;} .kh-cols{grid-template-columns:1fr;gap:26px;}
 }
 
+
+
+/* maths (KaTeX): textbook-style display */
+.kx.d{display:block;text-align:center;margin:6px 0;overflow-x:auto;overflow-y:hidden;}
+.kx.d .katex-display{margin:.6em 0;}
+.kx .katex, .kx .katex *{font-family:inherit;}
+.kx .katex{font-size:1.08em;font-family:KaTeX_Main,"Times New Roman",serif;}
+.kx.d .katex{font-size:1.25em;}
+.kx:not([data-done]){font-family:"Times New Roman",Georgia,serif;font-style:italic;}
+/* PADL header (carried over from the PADL home page) */
+.padl-nav{background:#fff;border-bottom:1px solid #DADCE0;position:sticky;top:0;z-index:20;}
+.padl-nav-in{max-width:none;margin:0;padding:12px 16px;display:flex;align-items:center;gap:30px;}
+.padl-brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;}
+.padl-brand svg{width:42px;height:42px;}
+.padl-brand b{font-family:Roboto,"Segoe UI",Arial,sans-serif;font-size:24px;font-weight:900;color:#0B2149;letter-spacing:.5px;}
+.padl-brand small{font-family:Roboto,"Segoe UI",Arial,sans-serif;font-size:12.5px;color:#5B6068;border-left:1px solid #DADCE0;padding-left:11px;line-height:1.2;}
+.padl-links{display:flex;gap:6px;margin-left:12px;}
+.padl-links a{font-family:Roboto,"Segoe UI",Arial,sans-serif;font-size:16px;font-weight:500;padding:8px 14px;color:#21242C;text-decoration:none;border-bottom:3px solid transparent;}
+.padl-links a:hover,.padl-links a.cur{color:#1865F2;}
+.padl-links a.cur{border-bottom-color:#1865F2;}
+.padl-nav a:focus-visible{outline:3px solid #1865F2;outline-offset:3px;}
+.kh-crumb a{color:#1865F2;text-decoration:none;display:inline-flex;align-items:center;}
+.kh-crumb a:hover{text-decoration:underline;}
+.kh-crumb .here{color:#3B3E45;font-weight:700;}
+.kh-side{top:67px;height:calc(100vh - 67px);}
+@media (max-width:860px){
+  .padl-brand small{display:none;}
+  .padl-nav-in{padding:10px 16px;gap:10px;}
+  .kh-side{top:auto;height:auto;}
+}
+
+/* course page: fits one laptop screen, no scrollbar */
+.start-screen{overflow-x:hidden;}
+@media (min-width:861px){
+  .start-screen{overflow:hidden;}
+  .start-screen .kh{height:calc(100vh - 67px);min-height:0;}
+  .kh-side{position:static;top:auto;height:100%;scrollbar-width:none;}
+  .kh-side::-webkit-scrollbar{display:none;}
+  .kh-main{overflow-y:auto;scrollbar-width:none;padding-top:12px;padding-bottom:20px;}
+  .kh-main::-webkit-scrollbar{display:none;}
+  .kh-main h1{font-size:28px;margin:12px 0 4px;}
+  .kh-legend{margin:12px 0 10px;}
+  .kh-prog{padding-bottom:14px;margin-bottom:16px;}
+  .kh-card{padding:20px 32px 16px;}
+  .kh-card h2{margin-bottom:12px;}
+  .kh-row{padding:5px 0;}
+  .kh-pr{margin-bottom:10px;}
+}
 /* homepage sidebar: same card design as the reader sidebar */
 .kh{background:#fff;}
 .kh-side{width:340px;padding:12px;background:#F7F8FA;border-right:1px solid #DADCE0;}
@@ -432,6 +483,15 @@ a.rd-item.kh-dl:hover{background:#F4F7FD;}
 }
 
 /* reader v2 */
+@media (max-width:700px){header .padl-brand svg{width:30px;height:30px;}header .padl-brand b{font-size:18px;}}
+@media (max-width:1100px){header .padl-brand small{display:none;}}
+@media (max-width:860px){.subject-title{font-size:15px;}}
+@media (max-width:700px){.subject-title{margin-left:0;white-space:normal;overflow:hidden;}}
+/* reader: PADL header on top, sidebar + content below */
+.rd{flex-direction:column;}
+.rd .padl-nav{flex-shrink:0;}
+.rd-cols{flex:1;min-height:0;display:flex;}
+
 .rd-top small{display:block;font-size:10px;color:#626569;letter-spacing:.3px;margin-top:2px;}
 .rd-top b{display:block;}
 .rd-nav b{display:block;}
@@ -455,19 +515,8 @@ a.rd-item.kh-dl:hover{background:#F4F7FD;}
 
 <header>
   <div class="header-left">
-    <div class="logo-container">
-      <img class="brand-logo" id="brand-logo-img" src="examguard-logo.png" alt="Advanced Professional English"
-           onerror="if(!this.dataset.triedJpg){this.dataset.triedJpg='1';this.src='examguard-logo.jpg';}else{this.style.display='none';document.getElementById('brand-logo-fallback').style.display='block';}">
-      <span class="brand-logo-fallback" id="brand-logo-fallback">APE</span>
-    </div>
+    <div class="logo-container"><a class="padl-brand" href="https://vishwabuilds.github.io/padl/#home" aria-label="PADL home"><svg viewBox="0 0 64 64" role="img" aria-label="PADL logo: a sailboat on rough seas"><circle cx="32" cy="32" r="32" fill="#0B2149"/><path d="M31 10v28H15z" fill="#fff"/><path d="M35 18v20h13z" fill="#FFB100"/><path d="M14 40h36l-6 7H20z" fill="#fff"/><path d="M10 53q5.5-6 11 0t11 0 11 0 11 0" stroke="#FFB100" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg><b>PADL</b><small>Platform for<br>Asynchronous Digital Learning</small></a></div>
     <div class="subject-title" id="subjectTitle"></div>
-  </div>
-  <div class="module-tabs" id="moduleTabs">
-    <button class="module-tab" data-mod="m1">Unit 1</button>
-    <button class="module-tab" data-mod="m2">Unit 2</button>
-    <button class="module-tab" data-mod="m3">Unit 3</button>
-    <button class="module-tab" data-mod="m4">Unit 4</button>
-    <button class="module-tab" data-mod="m5">Unit 5</button>
   </div>
   <div class="header-actions">
     <span class="mode-chip" id="modeChip"></span>
@@ -525,43 +574,143 @@ const M1_FRQ = [
   { text:"What are the 5 main conflict resolution techniques observed in relationships?", answers:["Collaboration","Compromise","Accommodation","Avoidance","Competition"] }
 ];
 
+// 25 multiple-choice questions per unit
 const M1_MCQ = [
-  // Analytical frameworks for decision evaluation
-  { text:"Which of the following is NOT one of the 4 analytical frameworks used for decision evaluation?", options:["SWOT Analysis","Root Cause Analysis","Pareto Analysis","Sunk-Cost Analysis"], correct:3 },
-  { text:"Which analytical framework focuses on identifying the underlying source of a problem rather than its symptoms?", options:["Root Cause Analysis","SWOT Analysis","Pareto Analysis","Opportunity-Cost Analysis"], correct:0 },
-  { text:"Which analytical framework is built on the idea that a small number of causes produce most of the effects (the 80/20 principle)?", options:["Pareto Analysis","Root Cause Analysis","SWOT Analysis","Opportunity-Cost Analysis"], correct:0 },
-  { text:"Which analytical framework evaluates a decision by considering the value of the next-best alternative you give up?", options:["Opportunity-Cost Analysis","SWOT Analysis","Pareto Analysis","Root Cause Analysis"], correct:0 },
-
-  // Cognitive biases
-  { text:"Which bias occurs when people rely too heavily on the first piece of information they receive?", options:["Anchoring Bias","Hindsight Bias","Framing Bias","Overconfidence Bias"], correct:0 },
-  { text:"Which bias is the tendency to seek out information that supports existing beliefs while ignoring contradicting evidence?", options:["Confirmation Bias","Anchoring Bias","Framing Bias","Hindsight Bias"], correct:0 },
-  { text:"Which bias describes the tendency to believe, after an outcome is known, that it was predictable all along?", options:["Hindsight Bias","Confirmation Bias","Overconfidence Bias","Anchoring Bias"], correct:0 },
-  { text:"Which bias occurs when the way information is presented (for example, as a gain versus a loss) changes the decision made?", options:["Framing Bias","Anchoring Bias","Hindsight Bias","Confirmation Bias"], correct:0 },
-  { text:"Which bias involves having more confidence in one's own judgement or abilities than is objectively justified?", options:["Overconfidence Bias","Framing Bias","Hindsight Bias","Anchoring Bias"], correct:0 },
-
-  // Logical fallacies
-  { text:"Which of the following is a logical fallacy rather than a cognitive bias?", options:["Anchoring Bias","Framing Bias","Sunk-Cost Fallacy","Overconfidence Bias"], correct:2 },
-  { text:"Which fallacy involves continuing with a course of action because of resources already invested, even though it is no longer beneficial?", options:["Sunk-Cost Fallacy","Authority Fallacy","Causal Fallacy","Framing Fallacy"], correct:0 },
-  { text:"Which fallacy involves accepting a claim as true simply because an authority figure said it?", options:["Authority Fallacy","Sunk-Cost Fallacy","Causal Fallacy","Confirmation Fallacy"], correct:0 },
-  { text:"Which fallacy involves wrongly assuming that because one event followed another, the first caused the second?", options:["Causal Fallacy","Authority Fallacy","Sunk-Cost Fallacy","Anchoring Fallacy"], correct:0 },
-
-  // Emotional intelligence (Goleman)
-  { text:"Which of the following is NOT one of the 5 components of emotional intelligence according to Daniel Goleman?", options:["Self-awareness","Empathy","Social Skills","Analytical Reasoning"], correct:3 },
-  { text:"Which component of emotional intelligence is the ability to recognise and understand other people's emotions?", options:["Empathy","Self-regulation","Social Skills","Self-awareness"], correct:0 },
-  { text:"Which component of emotional intelligence involves managing disruptive emotions and impulses?", options:["Self-regulation","Self-awareness","Empathy","Intrinsic motivation"], correct:0 },
-  { text:"Which component of emotional intelligence is a drive to achieve for inner reasons rather than for external rewards?", options:["Intrinsic motivation","Social Skills","Empathy","Self-regulation"], correct:0 },
-
-  // Tuckman
-  { text:"What is the correct order of Bruce Tuckman's stages of Group Development?", options:["Forming → Storming → Norming → Performing → Adjourning","Forming → Norming → Storming → Performing → Adjourning","Storming → Forming → Norming → Performing → Adjourning","Forming → Storming → Performing → Norming → Adjourning"], correct:0 },
-  { text:"Which stage of Tuckman's model is typically marked by disagreement, competition and conflict among team members?", options:["Storming","Forming","Norming","Performing"], correct:0 },
-  { text:"Which stage of Tuckman's model is when the team wraps up its work and disbands?", options:["Adjourning","Performing","Norming","Storming"], correct:0 },
-
-  // Conflict resolution
-  { text:"Which of the following is NOT one of the 5 main conflict resolution techniques?", options:["Collaboration","Compromise","Avoidance","Escalation"], correct:3 },
-  { text:"Which conflict resolution technique involves working together to find a win-win solution that fully satisfies both parties?", options:["Collaboration","Compromise","Avoidance","Competition"], correct:0 },
-  { text:"Which conflict resolution technique involves each party giving up something to reach a middle ground?", options:["Compromise","Collaboration","Accommodation","Competition"], correct:0 },
-  { text:"Which conflict resolution technique involves putting the other person's needs ahead of your own to keep the peace?", options:["Accommodation","Competition","Avoidance","Compromise"], correct:0 }
+  {"text": "Which of the following is NOT one of the 4 analytical frameworks used for decision evaluation?", "options": ["SWOT Analysis", "Root Cause Analysis", "Pareto Analysis", "Sunk-Cost Analysis"], "correct": 3},
+  {"text": "Which analytical framework evaluates a decision by considering the value of the next-best alternative you give up?", "options": ["Opportunity-Cost Analysis", "SWOT Analysis", "Pareto Analysis", "Root Cause Analysis"], "correct": 0},
+  {"text": "Which bias occurs when people rely too heavily on the first piece of information they receive?", "options": ["Anchoring Bias", "Hindsight Bias", "Framing Bias", "Overconfidence Bias"], "correct": 0},
+  {"text": "Which bias is the tendency to seek out information that supports existing beliefs while ignoring contradicting evidence?", "options": ["Confirmation Bias", "Anchoring Bias", "Framing Bias", "Hindsight Bias"], "correct": 0},
+  {"text": "Which bias occurs when the way information is presented (for example, as a gain versus a loss) changes the decision made?", "options": ["Framing Bias", "Anchoring Bias", "Hindsight Bias", "Confirmation Bias"], "correct": 0},
+  {"text": "Which statement best distinguishes a cognitive bias from a logical fallacy?", "options": ["A bias is a mental shortcut in our thinking; a fallacy is a flaw in an argument's structure", "A bias is always deliberate; a fallacy is always accidental", "They are the same thing", "A fallacy only affects the thinker, a bias only affects the audience"], "correct": 0},
+  {"text": "Which fallacy involves accepting a claim as true simply because an authority figure said it?", "options": ["Authority Fallacy", "Sunk-Cost Fallacy", "Causal Fallacy", "Confirmation Fallacy"], "correct": 0},
+  {"text": "Which fallacy involves wrongly assuming that because one event followed another, the first caused the second?", "options": ["Causal Fallacy", "Authority Fallacy", "Sunk-Cost Fallacy", "Anchoring Fallacy"], "correct": 0},
+  {"text": "Which of the following is NOT one of the 5 components of emotional intelligence according to Daniel Goleman?", "options": ["Self-awareness", "Empathy", "Social Skills", "Analytical Reasoning"], "correct": 3},
+  {"text": "Which component of emotional intelligence is the ability to recognise and understand other people's emotions?", "options": ["Empathy", "Self-regulation", "Social Skills", "Self-awareness"], "correct": 0},
+  {"text": "Which component of emotional intelligence involves managing disruptive emotions and impulses?", "options": ["Self-regulation", "Self-awareness", "Empathy", "Intrinsic motivation"], "correct": 0},
+  {"text": "What is the correct order of Bruce Tuckman's stages of Group Development?", "options": ["Forming → Storming → Norming → Performing → Adjourning", "Forming → Norming → Storming → Performing → Adjourning", "Storming → Forming → Norming → Performing → Adjourning", "Forming → Storming → Performing → Norming → Adjourning"], "correct": 0},
+  {"text": "At which Tuckman stage does performance usually dip because of conflict?", "options": ["Storming", "Forming", "Performing", "Adjourning"], "correct": 0},
+  {"text": "In a group project, one teammate says 'Fine, use your design' and asks for nothing in return. Which style is this?", "options": ["Accommodation", "Compromise", "Collaboration", "Competition"], "correct": 0},
+  {"text": "Two teammates each give up part of their preferred design and combine ideas halfway. Which style is this?", "options": ["Compromise", "Accommodation", "Avoidance", "Competition"], "correct": 0},
+  {"text": "When can avoidance be a sound conflict strategy?", "options": ["As a short cooling-off period before discussing the issue calmly", "When the issue is important and you never plan to return to it", "Always, because conflict is harmful", "Only when you want to win"], "correct": 0},
+  {"text": "In a RACI matrix, how many people should be Accountable for each task?", "options": ["Exactly one", "Two or more", "None", "Everyone on the team"], "correct": 0},
+  {"text": "What does DRI stand for?", "options": ["Directly Responsible Individual", "Departmental Review Item", "Designated Risk Investigator", "Delegated Report Initiative"], "correct": 0},
+  {"text": "How many team roles did Belbin identify?", "options": ["Nine", "Five", "Seven", "Twelve"], "correct": 0},
+  {"text": "Why are Belbin, RACI and DRI used early in a team's life?", "options": ["They clarify roles and ownership, helping the team reach norming faster", "They replace the need for a leader", "They guarantee no conflict", "They end the project sooner"], "correct": 0},
+  {"text": "Why is a DRI useful in a team where everyone has an equal say?", "options": ["One person can decide and own the outcome, avoiding ego fights and delays", "It removes the need for any team members", "It guarantees nobody disagrees", "It replaces the RACI matrix"], "correct": 0},
+  {"text": "Which pairing correctly describes a manager rather than a leader?", "options": ["Executes plans and focuses on stability", "Creates a vision and focuses on change", "Influences mainly through motivation", "Encourages innovation above efficiency"], "correct": 0},
+  {"text": "Which leadership style relies mainly on a system of rewards and penalties?", "options": ["Transactional", "Transformational", "Laissez-faire", "Charismatic"], "correct": 0},
+  {"text": "Why is it useful for a leader to blend transactional and transformational styles?", "options": ["Vision supplies direction and inspiration, while structure and consequences supply reliable delivery", "Transformational leaders never need rules", "Transactional leaders cannot motivate anyone", "A blend removes the need for any planning"], "correct": 0},
+  {"text": "Which approach helps a transformational leader avoid being a push-over?", "options": ["Being warm on the person but firm on the standard, with clear expectations", "Saying yes to every request to keep everyone happy", "Avoiding difficult conversations", "Waiting until every team member agrees before deciding"], "correct": 0}
 ];
+const M2_MCQ = [
+  {"text": "Which discussion technique has a small inner group discussing while an outer group observes and later reflects?", "options": ["Fishbowl Discussion", "Socratic Questioning", "Dialectical Reasoning", "Brainwriting"], "correct": 0},
+  {"text": "Which discussion technique uses probing, open-ended questions to stimulate critical thinking and expose assumptions?", "options": ["Socratic Questioning", "Fishbowl Discussion", "Dialectical Reasoning", "Role Play"], "correct": 0},
+  {"text": "Which discussion technique tests opposing viewpoints against each other to reach a deeper, combined understanding?", "options": ["Dialectical Reasoning", "Fishbowl Discussion", "Socratic Questioning", "Round-Robin Sharing"], "correct": 0},
+  {"text": "Which \"C\" of cross cultural communication involves asking open questions and showing genuine interest in other cultures?", "options": ["Curiosity", "Clarity", "Consideration", "Confidence"], "correct": 0},
+  {"text": "Which \"C\" of cross cultural communication involves using simple, unambiguous language and avoiding idioms or slang?", "options": ["Clarity", "Curiosity", "Consideration", "Conformity"], "correct": 0},
+  {"text": "Which \"C\" of cross cultural communication involves respecting other people's norms, values and feelings?", "options": ["Consideration", "Clarity", "Curiosity", "Correction"], "correct": 0},
+  {"text": "Which of the following correctly lists the steps of the crisis framework CALM?", "options": ["Communicate, Acknowledge, Listen, Manage", "Control, Acknowledge, Listen, Mediate", "Communicate, Assess, Learn, Manage", "Clarify, Acknowledge, Listen, Motivate"], "correct": 0},
+  {"text": "What is the correct order of the crisis framework STEADY?", "options": ["Stabilize → Tell → Empathize → Address → Decide → Yield", "Stabilize → Empathize → Tell → Address → Decide → Yield", "Tell → Stabilize → Empathize → Decide → Address → Yield", "Stabilize → Tell → Address → Empathize → Yield → Decide"], "correct": 0},
+  {"text": "Which step comes immediately after \"Empathize\" in the crisis framework STEADY?", "options": ["Address (Concerns)", "Decide", "Stabilize", "Yield (Results)"], "correct": 0},
+  {"text": "In a GD, one member keeps dominating. What is the best facilitation response?", "options": ["Politely redirect and invite others to speak", "Let them continue", "Interrupt loudly", "End the discussion"], "correct": 0},
+  {"text": "Which structure best supports an evidence-based argument?", "options": ["Claim, Evidence, Reasoning", "Opinion, Repetition, Emphasis", "Story, Joke, Conclusion", "Question, Silence, Exit"], "correct": 0},
+  {"text": "In dialectical reasoning, what is a counter-argument?", "options": ["The strongest objection the other side is likely to raise, which you answer openly", "A louder repetition of your own thesis", "A personal attack on the person who disagrees", "A summary that leaves out the opposing view"], "correct": 0},
+  {"text": "What do the 3 Cs of cross cultural communication stand for?", "options": ["Curiosity, Clarity, Consideration", "Confidence, Clarity, Compliance", "Curiosity, Conformity, Correction", "Courtesy, Control, Consideration"], "correct": 0},
+  {"text": "In the crisis framework CALM, which step gives affected people a way to be heard and lets you understand their concerns?", "options": ["Listen", "Communicate", "Acknowledge", "Manage"], "correct": 0},
+  {"text": "According to the crisis framework STEADY, what is the first step?", "options": ["Stabilize: take control of the situation and stop further harm", "Yield: report what was achieved", "Decide: set long-term policy", "Address: respond to each individual concern"], "correct": 0},
+  {"text": "When does a claim settle a factual disagreement in a discussion?", "options": ["When it can be checked against a documented source", "When the most experienced speaker states it", "When it is repeated confidently", "When nobody objects aloud"], "correct": 0},
+  {"text": "Which statement is strongest in a group discussion?", "options": ["\"A 2023 survey by a named organisation found that...\"", "\"Everyone knows that...\"", "\"I am sure that...\"", "\"My friend says that...\""], "correct": 0},
+  {"text": "What does audience localization mean?", "options": ["Choosing examples, units, currency, idioms and references from the listeners' own experience", "Translating every word into the local language", "Presenting only in the listeners' home city", "Using as much technical vocabulary as possible"], "correct": 0},
+  {"text": "What is extraneous cognitive load?", "options": ["Mental effort spent on unfamiliar setting or format instead of on the idea itself", "The effort needed to understand the core concept", "The motivation a learner brings to a task", "The limit on how much a person can memorise"], "correct": 0},
+  {"text": "In audience localization, what is a \"false friend\"?", "options": ["A familiar-sounding term that carries a different meaning for the audience", "A listener who agrees with everything you say", "A term that has no translation", "A technical word the audience already knows well"], "correct": 0},
+  {"text": "Which statement about localizing examples is supported by the unit?", "options": ["It must be meaningful, not cosmetic: the new context has to be realistic, not just a renamed label", "Renaming the context is always enough", "It helps only when every number is changed", "Studies from one country give exact results for every other country"], "correct": 0},
+  {"text": "What makes a discussion \"high-stakes\"?", "options": ["Its outcome seriously affects lives, money, safety or reputation, or is hard to undo", "It lasts longer than an hour", "It has more than ten participants", "It is held in a formal room"], "correct": 0},
+  {"text": "A member has stayed silent throughout a discussion. What is a good facilitation approach?", "options": ["Open a door gently: invite anyone who has not spoken or ask an easy, low-risk question", "Call them out by name with the hardest question", "Assume silence means they have no opinion", "Tell them to speak up or leave"], "correct": 0},
+  {"text": "A discussion becomes heated. What should the facilitator do?", "options": ["Pause, separate people from ideas and steer back to evidence", "Let the loudest side finish the argument", "Take sides to end it quickly", "Close the discussion immediately"], "correct": 0},
+  {"text": "In the closing stage of a group discussion, what should you do?", "options": ["Summarise the discussion without introducing new points", "Raise a fresh argument to impress the panel", "Repeat your opening definition word for word", "Stay silent until asked"], "correct": 0}
+];
+const M3_MCQ = [
+  {"text": "Which of the following is NOT one of the 4 main aspects of creating a good presentation?", "options": ["Audience Analysis", "Storyboarding", "Visual Appeal", "Increased Cognitive Load"], "correct": 3},
+  {"text": "Which aspect of a good presentation involves understanding your listeners' knowledge, needs and expectations before you begin?", "options": ["Audience Analysis", "Storyboarding", "Visual Appeal", "Reduced Cognitive Overload"], "correct": 0},
+  {"text": "Which aspect of a good presentation involves limiting the amount of text and information per slide so the audience can process it?", "options": ["Reduced Cognitive Overload", "Visual Appeal", "Storyboarding", "Audience Analysis"], "correct": 0},
+  {"text": "Which aspect of Non-Verbal Communication includes posture, gestures, eye contact and facial expressions?", "options": ["Body Language", "Voice Modulation", "Emotional Resonance", "Storyboarding"], "correct": 0},
+  {"text": "Which aspect of Non-Verbal Communication involves varying pitch, pace, volume and pauses?", "options": ["Voice Modulation", "Body Language", "Emotional Resonance", "Audience Analysis"], "correct": 0},
+  {"text": "Which aspect of Non-Verbal Communication involves connecting with the audience's feelings through tone and expression?", "options": ["Emotional Resonance", "Body Language", "Voice Modulation", "Visual Appeal"], "correct": 0},
+  {"text": "Which of Aristotle's modes of persuasion appeals to the speaker's credibility and character?", "options": ["Ethos", "Pathos", "Logos", "Kairos"], "correct": 0},
+  {"text": "Which of Aristotle's modes of persuasion appeals to the audience's emotions?", "options": ["Pathos", "Ethos", "Logos", "Telos"], "correct": 0},
+  {"text": "A presenter backs up their argument with statistics and a clear chain of reasoning. Which mode of persuasion is this?", "options": ["Logos", "Pathos", "Ethos", "Kairos"], "correct": 0},
+  {"text": "Which sequence best describes how to present data persuasively?", "options": ["Data → Insight → Story → Action", "Story → Data → Action → Insight", "Insight → Data → Action → Story", "Action → Story → Data → Insight"], "correct": 0},
+  {"text": "Which slide of a 10-slide deck answers the \"so what?\" of the data?", "options": ["Insight", "Hook", "Title", "Close / Q&A"], "correct": 0},
+  {"text": "Which chart best shows a trend over time?", "options": ["Line chart", "Pie chart", "Venn diagram", "Table of text"], "correct": 0},
+  {"text": "What is an 'action title' on a data slide?", "options": ["A title that states the takeaway of the chart", "A title that says 'Chart 1'", "A title in all capitals", "A title with no verb"], "correct": 0},
+  {"text": "For a virtual presentation, where should the camera be placed?", "options": ["At eye level", "Below the chin", "Far to one side", "Facing the ceiling"], "correct": 0},
+  {"text": "Which is a hallmark of a TED-style talk?", "options": ["One big idea told with story", "Reading dense slides aloud", "Ten unrelated topics", "No opening"], "correct": 0},
+  {"text": "In a 10-slide exam presentation sketched on paper, what should each slide contain?", "options": ["One idea and one simple sketch", "Full paragraphs of text", "Five charts", "No heading"], "correct": 0},
+  {"text": "According to the \"judging a book by its cover\" principle, when do audiences form a view of a presenter's credibility?", "options": ["In the first moments, from design, readability and delivery, before weighing the arguments", "Only after evaluating every argument", "After the question-and-answer round", "Never; first impressions are random"], "correct": 0},
+  {"text": "What does the \"cover\" principle imply about formatting and readability?", "options": ["Substance must be reachable, so readability is part of the message", "Style matters more than substance", "Dense, detailed pages are always better", "Formatting is only decoration"], "correct": 0},
+  {"text": "A speaker notices confused faces and slows down to explain again. Which EQ skill is mainly at work?", "options": ["Empathy", "Intrinsic motivation", "Self-regulation", "Hindsight bias"], "correct": 0},
+  {"text": "According to the unit, which use of Aristotle's modes of persuasion becomes manipulation?", "options": ["Pathos without logos or ethos", "Ethos combined with logos", "Logos combined with pathos", "All three used with true claims"], "correct": 0},
+  {"text": "Why is a story paired with data in the Data, Insight, Story, Action sequence?", "options": ["A story makes the point human and memorable, while data supplies the evidence", "A story replaces the need for data", "Data alone is always the most memorable", "A story is added only to lengthen the talk"], "correct": 0},
+  {"text": "For which kind of reader should a science communicator write?", "options": ["A general reader without specialist background, who is not less intelligent", "Only fellow specialists", "The least intelligent readers", "Journalists who will simplify the message later"], "correct": 0},
+  {"text": "Why does a bar chart whose axis does not start at zero mislead?", "options": ["It exaggerates small differences between the bars", "It hides some of the bars", "It changes the data values", "It turns the bars into a pie"], "correct": 0},
+  {"text": "In a pictograph, what happens if an icon's height and width are both doubled?", "options": ["Its area becomes four times larger, so a twofold increase looks fourfold", "Its area doubles, so the chart stays honest", "Its area is unchanged", "Its meaning changes to a percentage"], "correct": 0},
+  {"text": "How does poor audio quality affect a virtual presentation?", "options": ["It suggests poor preparation and lowers the speaker's perceived credibility", "It has no effect on how the speaker is judged", "It raises perceived credibility", "Only video quality affects credibility"], "correct": 0}
+];
+const M4_MCQ = [
+  {"text": "Which pair lists the two main types of interviewing methods?", "options": ["Behavioural and Situational", "Behavioural and Technical", "Situational and Panel", "Structured and Stress"], "correct": 0},
+  {"text": "Which interviewing method asks how you would handle hypothetical scenarios?", "options": ["Situational", "Behavioural", "Group", "Technical"], "correct": 0},
+  {"text": "Which method includes a step for a complication or problem that arose in the situation?", "options": ["SCORE Method", "STAR Method", "Situational Method", "Pareto Method"], "correct": 0},
+  {"text": "What is the correct order of the STAR method?", "options": ["Situation → Task → Action → Result", "Task → Situation → Action → Result", "Situation → Action → Task → Result", "Situation → Task → Result → Action"], "correct": 0},
+  {"text": "What is the correct order of the SCORE method?", "options": ["Situation → Complication → Outcome → Remedial Action → End Result", "Situation → Outcome → Complication → Remedial Action → End Result", "Situation → Complication → Remedial Action → Outcome → End Result", "Complication → Situation → Outcome → Remedial Action → End Result"], "correct": 0},
+  {"text": "In the SCORE method, which step describes the corrective steps taken to address the problem?", "options": ["Remedial Action", "Outcome", "End Result", "Complication"], "correct": 0},
+  {"text": "Which interview answer is best suited to the SCORE method?", "options": ["A story about a setback and how you fixed it", "A smooth success with no obstacles", "A hypothetical question about the future", "A question about your salary"], "correct": 0},
+  {"text": "Which resume style is most commonly recommended for early-career applicants?", "options": ["One page, reverse-chronological, with quantified achievements", "Three pages listing every task", "A narrative paragraph with no headings", "A resume with no keywords so ATS ignores it"], "correct": 0},
+  {"text": "What are the usual parts of a strong cover letter?", "options": ["Hook, evidence of fit, call to action", "Salary demand, complaints, references", "Full biography, hobbies, photographs", "Repeat of the resume, apology, thanks"], "correct": 0},
+  {"text": "Which best describes a Statement of Purpose (SOP)?", "options": ["A personal essay on goals, preparation and fit with the programme", "A list of references", "A legal contract with the employer", "A one-line job title"], "correct": 0},
+  {"text": "Which formula is recommended for writing a strong resume bullet?", "options": ["Action verb + what you did + tool or method + result (a number)", "Responsible for + list of duties", "A long paragraph describing your day", "Only the job title and dates"], "correct": 0},
+  {"text": "Which is a common interview mistake?", "options": ["Memorising answers mechanically", "Giving a specific example", "Looking at the person speaking", "Pausing before answering"], "correct": 0},
+  {"text": "Which panel member mainly assesses teamwork, leadership and decision-making?", "options": ["Project manager or team leader", "HR professional", "Technical expert only", "The receptionist"], "correct": 0},
+  {"text": "Why does practising in mock interviews help?", "options": ["It builds familiarity and confidence, and does not mean you are flawed", "It proves you will fail the real interview", "It replaces the need to research the company", "It is only for weak candidates"], "correct": 0},
+  {"text": "What does BATNA stand for in salary negotiation?", "options": ["Best Alternative To a Negotiated Agreement", "Basic Amount To Negotiate Annually", "Best Approach To Negotiating Assertively", "Balanced Offer To Nobody Attached"], "correct": 0},
+  {"text": "An employer offers a lower salary than you hoped. What is a sound response?", "options": ["Make a researched counter-offer and weigh the whole package", "Accept immediately", "Walk out without a reply", "Threaten to accept another job without having one"], "correct": 0},
+  {"text": "Why should a fresher mirror the exact words of the job posting in the skills section?", "options": ["Applicant tracking (ATS) software matches keywords from the job description", "Recruiters dislike original wording", "It lets the resume exceed one page", "It replaces the need for a cover letter"], "correct": 0},
+  {"text": "A candidate says, \"I have not used that tool, but I learned a similar one in two weeks.\" Which pillar of executive presence is this?", "options": ["Credibility", "Confidence", "Authority", "Charisma"], "correct": 0},
+  {"text": "Which answer style shows authority in an interview?", "options": ["Leading with the recommendation, then giving the reasons", "A long build-up before the actual answer", "Hedging every sentence", "Listing duties without a conclusion"], "correct": 0},
+  {"text": "Which is genuine interview practice?", "options": ["Rehearsing answers aloud with a friend, a mentor or a recording", "Reading answers silently", "Memorising every word", "Skimming the company website only"], "correct": 0},
+  {"text": "About how long should an interview answer be?", "options": ["About 90 seconds to two minutes, with the main point first", "About 10 seconds", "About five minutes", "As long as possible"], "correct": 0},
+  {"text": "Which is an example of strong mock-interview feedback?", "options": ["\"Your ideas were relevant, but several answers ran long; use STAR and put the main point first.\"", "\"Your communication needs improvement.\"", "\"You did fine overall.\"", "\"Try harder next time.\""], "correct": 0},
+  {"text": "In salary negotiation, what is the usual advice about who names the first number?", "options": ["Let the employer go first if possible; if you must, anchor at the high end of a reasonable range", "Always name the lowest figure you would accept", "Never discuss numbers at all", "Accept the first number to avoid losing the offer"], "correct": 0},
+  {"text": "Which preparation does the unit recommend for \"Tell me about yourself\" and behavioural questions?", "options": ["Five STAR or SCORE stories plus a 60-second introduction", "One memorised speech for every question", "No preparation, to sound spontaneous", "A list of your hobbies"], "correct": 0},
+  {"text": "Which panel member mainly assesses communication, attitude and cultural fit?", "options": ["HR professional", "Technical expert", "Project manager or team leader", "Situational-question interviewer"], "correct": 0}
+];
+const M5_MCQ = [
+  {"text": "Which pair lists two frameworks for goal setting?", "options": ["OKR and SMART", "OKR and STAR", "SMART and SCORE", "SMART and SWOT"], "correct": 0},
+  {"text": "What does the SMART goal-setting framework stand for?", "options": ["Specific, Measurable, Achievable, Relevant, Time-bound", "Specific, Meaningful, Achievable, Realistic, Timely", "Simple, Measurable, Attainable, Relevant, Time-bound", "Strategic, Measurable, Achievable, Relevant, Targeted"], "correct": 0},
+  {"text": "Which SMART criterion ensures progress can be tracked with numbers or clear indicators?", "options": ["Measurable", "Achievable", "Specific", "Relevant"], "correct": 0},
+  {"text": "Which SMART criterion ensures a goal aligns with broader objectives?", "options": ["Relevant", "Specific", "Time-bound", "Measurable"], "correct": 0},
+  {"text": "Which of the following is NOT part of the SMART framework?", "options": ["Specific", "Measurable", "Time-bound", "Objective"], "correct": 3},
+  {"text": "In OKRs, what are Key Results?", "options": ["Measurable outcomes that show the objective was achieved", "The inspiring objective itself", "Daily to-do items", "Personal values"], "correct": 0},
+  {"text": "Which is an example of thought leadership?", "options": ["Publishing original insights in articles or posts", "Copying others' posts without credit", "Updating your photo only", "Keeping your profile private"], "correct": 0},
+  {"text": "What does a continuous feedback loop involve?", "options": ["Act, measure and get feedback, adjust, repeat", "Setting a goal once a year and not revisiting it", "Avoiding criticism", "Only receiving feedback at appraisals"], "correct": 0},
+  {"text": "What does a growth mindset assume?", "options": ["Abilities can be developed through effort and learning", "Talent is fixed at birth", "Failure should be hidden", "Change should be avoided"], "correct": 0},
+  {"text": "According to the Super Mario Effect, what should you keep your focus on rather than on failed attempts?", "options": ["The goal you are working towards", "The number of failed attempts", "The penalties for mistakes", "What others think of each attempt"], "correct": 0},
+  {"text": "Which is a recommended part of a personal website or portfolio?", "options": ["Projects with the problem, your role, tools and results", "Your home address and full phone number", "Only your school marks", "A list of your weaknesses"], "correct": 0},
+  {"text": "When pivoting careers, what should you identify first?", "options": ["Transferable skills", "Your previous salary", "Your colleagues' opinions", "The oldest job on your resume"], "correct": 0},
+  {"text": "What is a key principle of strategic networking?", "options": ["Build genuine, reciprocal relationships and follow up", "Collect as many contacts as possible and never contact them", "Only ask for favours", "Network only when unemployed"], "correct": 0},
+  {"text": "About how long should an elevator pitch be?", "options": ["30 to 60 seconds", "10 minutes", "5 seconds", "As long as needed"], "correct": 0},
+  {"text": "What separates a confident pitch from a cocky one?", "options": ["Evidence, credit to the team and curiosity about the listener", "Louder speech", "Claiming to be the best", "Avoiding all numbers"], "correct": 0},
+  {"text": "Which is part of keeping a personal brand ethical?", "options": ["Protecting confidential information and crediting collaborators", "Rounding up achievements", "Copying others' posts", "Sharing unverified news"], "correct": 0},
+  {"text": "In an OKR, what is the Objective?", "options": ["A qualitative, inspiring goal", "A numeric target", "A daily task", "A list of deadlines"], "correct": 0},
+  {"text": "Which element of personal branding means giving the same message on every professional platform?", "options": ["Consistency", "Visibility", "Authenticity", "Professional identity"], "correct": 0},
+  {"text": "What should a strong LinkedIn headline contain?", "options": ["Your skills and goal as keywords, not only your college", "Only the name of your college", "Only that you are looking for opportunities", "General traits such as hard worker"], "correct": 0},
+  {"text": "How should you audit your online presence?", "options": ["Search your name plus college or city in a private window and note the first page", "Ask friends to like your posts", "Delete all your accounts", "Check only your most recent post"], "correct": 0},
+  {"text": "How often should you review your personal brand?", "options": ["Every three to six months, and after each new project, certificate or internship", "Once in a lifetime", "Only when applying for a job", "Every day"], "correct": 0},
+  {"text": "What is the correct structure of an elevator pitch?", "options": ["Hook, Who you are, Value and proof, Ask", "Who you are, Hook, Ask, Value and proof", "Ask, Hook, Who you are, Value and proof", "Value and proof, Ask, Hook, Who you are"], "correct": 0},
+  {"text": "What is the difference between a mentor and a sponsor?", "options": ["A mentor gives advice and guidance; a sponsor advocates for you", "A mentor hires you; a sponsor trains you", "They are the same role", "A sponsor gives advice; a mentor pays for your course"], "correct": 0},
+  {"text": "Why does a referral improve a candidate's chances?", "options": ["The employer borrows a trusted person's reputation, which reduces the risk of a bad hire", "It removes the need for any skills", "It replaces the interview", "Recruiters never read other applications"], "correct": 0},
+  {"text": "Which reference letter from a professor is most useful?", "options": ["One with specific examples of your work", "A generic \"hardworking student\" letter", "A letter you write with no input from them", "A letter praising only the college"], "correct": 0}
+];
+
 
 const M2_FRQ = [
   { text:"What are the 3 commonly used discussion techniques?", answers:["Fishbowl Discussion","Socratic Questioning","Dialectical Reasoning"] },
@@ -570,32 +719,7 @@ const M2_FRQ = [
   { text:"What is the crisis framework STEADY?", answers:["Stabilize","Tell (Communicate)","Empathize","Address (Concerns)","Decide","Yield (Results)"] }
 ];
 
-const M2_MCQ = [
-  // Discussion techniques
-  { text:"Which of the following is NOT one of the 3 commonly used discussion techniques?", options:["Fishbowl Discussion","Socratic Questioning","Dialectical Reasoning","Delphi Polling"], correct:3 },
-  { text:"Which discussion technique has a small inner group discussing while an outer group observes and later reflects?", options:["Fishbowl Discussion","Socratic Questioning","Dialectical Reasoning","Brainwriting"], correct:0 },
-  { text:"Which discussion technique uses probing, open-ended questions to stimulate critical thinking and expose assumptions?", options:["Socratic Questioning","Fishbowl Discussion","Dialectical Reasoning","Role Play"], correct:0 },
-  { text:"Which discussion technique tests opposing viewpoints against each other to reach a deeper, combined understanding?", options:["Dialectical Reasoning","Fishbowl Discussion","Socratic Questioning","Round-Robin Sharing"], correct:0 },
 
-  // 3 Cs of cross cultural communication
-  { text:"Which of the following is NOT one of the 3 \"Cs\" of cross cultural communication?", options:["Curiosity","Clarity","Consideration","Compliance"], correct:3 },
-  { text:"Which \"C\" of cross cultural communication involves asking open questions and showing genuine interest in other cultures?", options:["Curiosity","Clarity","Consideration","Confidence"], correct:0 },
-  { text:"Which \"C\" of cross cultural communication involves using simple, unambiguous language and avoiding idioms or slang?", options:["Clarity","Curiosity","Consideration","Conformity"], correct:0 },
-  { text:"Which \"C\" of cross cultural communication involves respecting other people's norms, values and feelings?", options:["Consideration","Clarity","Curiosity","Correction"], correct:0 },
-
-  // CALM
-  { text:"Which of the following correctly lists the steps of the crisis framework CALM?", options:["Communicate, Acknowledge, Listen, Manage","Control, Acknowledge, Listen, Mediate","Communicate, Assess, Learn, Manage","Clarify, Acknowledge, Listen, Motivate"], correct:0 },
-  { text:"In the crisis framework CALM, what does the letter \"A\" stand for?", options:["Acknowledge","Address","Assess","Adapt"], correct:0 },
-  { text:"Which of the following is NOT a step in the crisis framework CALM?", options:["Communicate","Listen","Manage","Decide"], correct:3 },
-
-  // STEADY
-  { text:"What is the correct order of the crisis framework STEADY?", options:["Stabilize → Tell → Empathize → Address → Decide → Yield","Stabilize → Empathize → Tell → Address → Decide → Yield","Tell → Stabilize → Empathize → Decide → Address → Yield","Stabilize → Tell → Address → Empathize → Yield → Decide"], correct:0 },
-  { text:"Which of the following is NOT a step in the crisis framework STEADY?", options:["Stabilize","Empathize","Decide","Acknowledge"], correct:3 },
-  { text:"In the crisis framework STEADY, what does the letter \"S\" stand for?", options:["Stabilize","Summarize","Strategize","Support"], correct:0 },
-  { text:"Which step comes immediately after \"Empathize\" in the crisis framework STEADY?", options:["Address (Concerns)","Decide","Stabilize","Yield (Results)"], correct:0 },
-  { text:"In the crisis framework STEADY, which step involves choosing a course of action?", options:["Decide","Tell (Communicate)","Stabilize","Yield (Results)"], correct:0 },
-  { text:"How many steps does the crisis framework STEADY have?", options:["6","4","5","7"], correct:0 }
-];
 
 const M3_FRQ = [
   { text:"What are the 4 main aspects to creating a good presentation?", answers:["Audience Analysis","Storyboarding","Visual Appeal","Reduced Cognitive Overload"] },
@@ -603,27 +727,7 @@ const M3_FRQ = [
   { text:"What are Aristotle's three foundational modes of persuasion?", answers:["Ethos","Pathos","Logos"] }
 ];
 
-const M3_MCQ = [
-  // Good presentations
-  { text:"Which of the following is NOT one of the 4 main aspects of creating a good presentation?", options:["Audience Analysis","Storyboarding","Visual Appeal","Increased Cognitive Load"], correct:3 },
-  { text:"Which aspect of a good presentation involves understanding your listeners' knowledge, needs and expectations before you begin?", options:["Audience Analysis","Storyboarding","Visual Appeal","Reduced Cognitive Overload"], correct:0 },
-  { text:"Which aspect of a good presentation involves planning the sequence and flow of slides before building them?", options:["Storyboarding","Audience Analysis","Visual Appeal","Reduced Cognitive Overload"], correct:0 },
-  { text:"Which aspect of a good presentation involves clean design, consistent layout and effective imagery?", options:["Visual Appeal","Storyboarding","Audience Analysis","Reduced Cognitive Overload"], correct:0 },
-  { text:"Which aspect of a good presentation involves limiting the amount of text and information per slide so the audience can process it?", options:["Reduced Cognitive Overload","Visual Appeal","Storyboarding","Audience Analysis"], correct:0 },
 
-  // Non-verbal communication
-  { text:"Which of the following is NOT one of the three main aspects of Non-Verbal Communication?", options:["Body Language","Voice Modulation","Emotional Resonance","Word Choice"], correct:3 },
-  { text:"Which aspect of Non-Verbal Communication includes posture, gestures, eye contact and facial expressions?", options:["Body Language","Voice Modulation","Emotional Resonance","Storyboarding"], correct:0 },
-  { text:"Which aspect of Non-Verbal Communication involves varying pitch, pace, volume and pauses?", options:["Voice Modulation","Body Language","Emotional Resonance","Audience Analysis"], correct:0 },
-  { text:"Which aspect of Non-Verbal Communication involves connecting with the audience's feelings through tone and expression?", options:["Emotional Resonance","Body Language","Voice Modulation","Visual Appeal"], correct:0 },
-
-  // Aristotle's modes of persuasion
-  { text:"Which of the following is NOT one of Aristotle's three foundational modes of persuasion?", options:["Ethos","Pathos","Logos","Mythos"], correct:3 },
-  { text:"Which of Aristotle's modes of persuasion appeals to the speaker's credibility and character?", options:["Ethos","Pathos","Logos","Kairos"], correct:0 },
-  { text:"Which of Aristotle's modes of persuasion appeals to the audience's emotions?", options:["Pathos","Ethos","Logos","Telos"], correct:0 },
-  { text:"Which of Aristotle's modes of persuasion appeals to logic, reasoning and evidence?", options:["Logos","Ethos","Pathos","Kairos"], correct:0 },
-  { text:"A presenter backs up their argument with statistics and a clear chain of reasoning. Which mode of persuasion is this?", options:["Logos","Pathos","Ethos","Kairos"], correct:0 }
-];
 
 const M4_FRQ = [
   { text:"What are the two main types of interviewing methods?", answers:["Behavioural","Situational"] },
@@ -632,54 +736,14 @@ const M4_FRQ = [
   { text:"What is the expansion of the SCORE method?", answers:["Situation","Complication","Outcome","Remedial Action","End Result"] }
 ];
 
-const M4_MCQ = [
-  // Interview types
-  { text:"Which pair lists the two main types of interviewing methods?", options:["Behavioural and Situational","Behavioural and Technical","Situational and Panel","Structured and Stress"], correct:0 },
-  { text:"Which interviewing method asks about your past experiences to predict how you will behave in future?", options:["Behavioural","Situational","Panel","Stress"], correct:0 },
-  { text:"Which interviewing method asks how you would handle hypothetical scenarios?", options:["Situational","Behavioural","Group","Technical"], correct:0 },
 
-  // Methods for behavioural interviews
-  { text:"Which pair lists the methods that can be employed to ace behavioural interviews?", options:["STAR Method and SCORE Method","STAR Method and SWOT Method","SCORE Method and SMART Method","SMART Method and STEADY Method"], correct:0 },
-  { text:"Which method includes a step for a complication or problem that arose in the situation?", options:["SCORE Method","STAR Method","Situational Method","Pareto Method"], correct:0 },
-
-  // STAR
-  { text:"What does the STAR method stand for?", options:["Situation, Task, Action, Result","Situation, Target, Approach, Review","Scenario, Task, Action, Response","Strategy, Task, Analysis, Result"], correct:0 },
-  { text:"What is the correct order of the STAR method?", options:["Situation → Task → Action → Result","Task → Situation → Action → Result","Situation → Action → Task → Result","Situation → Task → Result → Action"], correct:0 },
-  { text:"In the STAR method, what does the letter \"T\" stand for?", options:["Task","Team","Timeline","Test"], correct:0 },
-  { text:"In the STAR method, which step describes the specific steps you personally took?", options:["Action","Situation","Task","Result"], correct:0 },
-  { text:"Which of the following is NOT a step in the STAR method?", options:["Situation","Task","Action","Complication"], correct:3 },
-
-  // SCORE
-  { text:"What does the SCORE method stand for?", options:["Situation, Complication, Outcome, Remedial Action, End Result","Situation, Challenge, Objective, Response, Evaluation","Scenario, Complication, Outcome, Recovery, End Result","Situation, Complication, Objective, Remedial Action, Evaluation"], correct:0 },
-  { text:"What is the correct order of the SCORE method?", options:["Situation → Complication → Outcome → Remedial Action → End Result","Situation → Outcome → Complication → Remedial Action → End Result","Situation → Complication → Remedial Action → Outcome → End Result","Complication → Situation → Outcome → Remedial Action → End Result"], correct:0 },
-  { text:"In the SCORE method, what does the letter \"C\" stand for?", options:["Complication","Conflict","Context","Challenge"], correct:0 },
-  { text:"In the SCORE method, which step describes the corrective steps taken to address the problem?", options:["Remedial Action","Outcome","End Result","Complication"], correct:0 },
-  { text:"Which of the following is NOT a step in the SCORE method?", options:["Situation","Outcome","End Result","Task"], correct:3 }
-];
 
 const M5_FRQ = [
   { text:"What are two frameworks for goal setting?", answers:["OKR","SMART"] },
   { text:"What is the expansion of SMART goal setting?", answers:["Specific","Measurable","Achievable","Relevant","Time-bound"] }
 ];
 
-const M5_MCQ = [
-  // Frameworks
-  { text:"Which pair lists two frameworks for goal setting?", options:["OKR and SMART","OKR and STAR","SMART and SCORE","SMART and SWOT"], correct:0 },
-  { text:"Which of the following is a framework for goal setting?", options:["OKR","STAR","CALM","STEADY"], correct:0 },
 
-  // SMART
-  { text:"What does the SMART goal-setting framework stand for?", options:["Specific, Measurable, Achievable, Relevant, Time-bound","Specific, Meaningful, Achievable, Realistic, Timely","Simple, Measurable, Attainable, Relevant, Time-bound","Strategic, Measurable, Achievable, Relevant, Targeted"], correct:0 },
-  { text:"In SMART goals, what does the letter \"S\" stand for?", options:["Specific","Simple","Strategic","Sustainable"], correct:0 },
-  { text:"In SMART goals, what does the letter \"M\" stand for?", options:["Measurable","Meaningful","Motivating","Managed"], correct:0 },
-  { text:"In SMART goals, what does the letter \"A\" stand for?", options:["Achievable","Ambitious","Assigned","Approved"], correct:0 },
-  { text:"In SMART goals, what does the letter \"R\" stand for?", options:["Relevant","Realistic","Rewarding","Recorded"], correct:0 },
-  { text:"In SMART goals, what does the letter \"T\" stand for?", options:["Time-bound","Team-based","Tangible","Targeted"], correct:0 },
-  { text:"Which SMART criterion ensures a goal has a deadline?", options:["Time-bound","Specific","Relevant","Measurable"], correct:0 },
-  { text:"Which SMART criterion ensures progress can be tracked with numbers or clear indicators?", options:["Measurable","Achievable","Specific","Relevant"], correct:0 },
-  { text:"Which SMART criterion ensures a goal aligns with broader objectives?", options:["Relevant","Specific","Time-bound","Measurable"], correct:0 },
-  { text:"What is the correct order of the SMART framework?", options:["Specific → Measurable → Achievable → Relevant → Time-bound","Measurable → Specific → Achievable → Relevant → Time-bound","Specific → Achievable → Measurable → Relevant → Time-bound","Specific → Measurable → Relevant → Achievable → Time-bound"], correct:0 },
-  { text:"Which of the following is NOT part of the SMART framework?", options:["Specific","Measurable","Time-bound","Objective"], correct:3 }
-];
 
 
 const COLORS={m1:'#1865F2',m2:'#0D923F',m3:'#9059FF',m4:'#E0641B',m5:'#D6336C'};
@@ -720,6 +784,22 @@ function pptSvg(){
  ];
  return '<svg viewBox="0 0 756 268" xmlns="http://www.w3.org/2000/svg" font-family="Roboto,Arial,sans-serif" role="img" aria-label="Ten slide plan">'+S.map((a,i)=>pslide(i,a[0],a[1],a[2])).join('')+'</svg>';
 }
+
+function pptSvgAI(){
+ const S=[
+  ['Boon or Curse?','Title','<rect x="50" y="30" width="40" height="28" rx="4"/><circle cx="61" cy="42" r="3"/><circle cx="79" cy="42" r="3"/><line x1="60" y1="51" x2="80" y2="51"/><line x1="70" y1="30" x2="70" y2="25"/>'+tx(70,78,'AI in Education',9)],
+  ['Can You Check It?','Hook','<rect x="22" y="30" width="96" height="34" rx="8"/><path d="M40 64 L36 78 L52 64"/>'+tx(70,44,'AI answered in',9)+tx(70,56,'3 seconds. Right?',9)],
+  ['Why It Matters','Problem','<rect x="12" y="46" width="34" height="22"/>'+tx(29,60,'AI',9)+'<line x1="50" y1="57" x2="78" y2="57"/><path d="M72 52 L79 57 L72 62"/><circle cx="100" cy="38" r="6"/><circle cx="100" cy="58" r="6"/><circle cx="100" cy="78" r="6"/>'+tx(124,41,'Marks',7)+tx(124,61,'Skills',7)+tx(124,81,'Jobs',7)],
+  ['How We Use AI','Data','<line x1="22" y1="82" x2="124" y2="82"/><line x1="22" y1="30" x2="22" y2="82"/><rect x="34" y="58" width="16" height="24"/><rect x="62" y="44" width="16" height="38"/><rect x="90" y="34" width="16" height="48"/>'+tx(42,90,'Notes',6.5)+tx(70,90,'Code',6.5)+tx(98,90,'Essays',6.5)],
+  ['Tool, Not Substitute','Insight',tx(70,37,'So what?',9)+'<circle cx="26" cy="52" r="6"/><line x1="32" y1="52" x2="124" y2="52"/><path d="M117 47 L124 52 L117 57"/>'+tx(26,70,'Chart',8)+tx(92,70,'Think first,',8)+tx(92,81,'then prompt',8)],
+  ['Fake Citations','Story','<circle cx="28" cy="42" r="7"/><line x1="28" y1="49" x2="28" y2="68"/><line x1="16" y1="57" x2="40" y2="57"/><line x1="28" y1="68" x2="19" y2="84"/><line x1="28" y1="68" x2="37" y2="84"/><rect x="50" y="30" width="80" height="34" rx="6"/>'+tx(90,44,'Made-up cases',8)+tx(90,56,'in court',8)],
+  ['CITE Before Using','Framework',['C','I','T','E'].map((c,k)=>'<rect x="'+(14+k*28)+'" y="38" width="24" height="22"/>'+tx(26+k*28,54,c,11)).join('')+tx(70,82,'Verify. Then trust.',8.5)],
+  ['Boon vs Curse','Balance','<line x1="70" y1="28" x2="70" y2="90"/>'+tx(40,38,'BOON',8)+tx(100,38,'CURSE',8)+'<line x1="14" y1="48" x2="60" y2="48"/><line x1="14" y1="60" x2="52" y2="60"/><line x1="14" y1="72" x2="56" y2="72"/><line x1="80" y1="48" x2="126" y2="48"/><line x1="80" y1="60" x2="118" y2="60"/><line x1="80" y1="72" x2="122" y2="72"/>'],
+  ['Your Action','Action',[0,1,2].map(k=>'<rect x="14" y="'+(32+k*20)+'" width="10" height="10"/><line x1="32" y1="'+(37+k*20)+'" x2="118" y2="'+(37+k*20)+'"/>').join('')],
+  ['Think. Then Prompt.','Close / Q&amp;A',tx(70,66,'?',34)+tx(70,86,'Questions',8.5)]
+ ];
+ return '<svg viewBox="0 0 756 268" xmlns="http://www.w3.org/2000/svg" font-family="Roboto,Arial,sans-serif" role="img" aria-label="Ten slide plan for AI in education">'+S.map((a,i)=>pslide(i,a[0],a[1],a[2])).join('')+'</svg>';
+}
 const PPT_NOTE=`<h2>Designing Slidedecks <span class="tag-new">NEW</span></h2>
 <p>A slide deck is not a document projected on a wall. It is a <b>visual aid for a spoken story</b>: the slides carry the headline and the picture, and <b>you</b> carry the explanation. In an exam you may be asked to <b>design a presentation on paper</b> in a fixed time, usually 10 slides. Use only <b>boxes, lines, arrows, circles and stick figures</b>, with <b>one idea and one sketch per slide</b>. The skill being tested is not artistic ability; it is whether you can <b>plan a flow</b> (storyboarding), keep each slide <b>light</b> (reduced cognitive load) and make it <b>look clear</b> (visual appeal).</p>
 <p>Our sample topic is <b>"The Importance of Mindful Messaging and Posting in the 21st Century"</b>, built around the <b>Grandma Test</b>: do not post anything your grandmother would not approve of.</p>
@@ -749,9 +829,28 @@ const PPT_NOTE=`<h2>Designing Slidedecks <span class="tag-new">NEW</span></h2>
 <tr><td>8. Do / Don't</td><td>Quality Over Quantity</td><td>Two columns, tick and cross</td></tr>
 <tr><td>9. Action</td><td>Start This Week</td><td>Three tick-box lines</td></tr>
 <tr><td>10. Close</td><td>Your Work, Visible</td><td>Question mark, "Q&amp;A"</td></tr></table></div>
+<h3 class="sec">A fully solved example: AI in education, boon or curse?</h3>
+<p>Here is a complete answer to an exam-style prompt: <b>"Design a 10-slide presentation on Artificial Intelligence: challenges, threats, boon or curse, and education."</b> The audience is <b>engineering students and faculty</b>. Before sketching anything, decide your <b>position</b>, because a deck with no position is only a list of facts. The position used here is balanced and defensible: <b>AI is neither boon nor curse by itself; it amplifies how we use it.</b> It rewards the learner who thinks first and harms the learner who skips thinking. The ten slides below build that argument in the same order as the posting example: set up (1 to 3), evidence and meaning (4 and 5), story (6), tool (7), judgement (8), action (9) and close (10).</p>
+<figure class="dg"><button class="dg-btn" onclick="this.parentNode.classList.toggle('blank');this.textContent=this.parentNode.classList.contains('blank')?'Show labels':'Hide labels (test yourself)'">Hide labels (test yourself)</button>${pptSvgAI()}<figcaption><b>Draw it yourself:</b> the same <b>2 rows of 5 boxes</b>. Row 1 sets up the topic (title, hook, problem, data, insight); row 2 turns it into a story, a tool, a judgement, an action and a close. Keep every heading to <b>4 words or fewer</b>.</figcaption></figure>
+<p><b>Slide 1: Title.</b> <i>Heading:</i> "Boon or Curse?" with the subtitle "AI in Education" and your name. <i>Sketch:</i> a simple robot head (a square, two circles for eyes, a line for a mouth). <i>You say:</i> "Today I will argue that AI is neither a boon nor a curse. It depends on how we use it."</p>
+<p><b>Slide 2: Hook.</b> <i>Heading:</i> "Can You Check It?" <i>Sketch:</i> a speech bubble reading "AI answered in 3 seconds. Right?" <i>You say:</i> "An AI tool just wrote you a confident answer in three seconds. How many of us would know if it were wrong?" The hook is a <b>challenge to the audience</b>, so they are thinking before you give any background.</p>
+<p><b>Slide 3: Problem.</b> <i>Heading:</i> "Why It Matters" <i>Sketch:</i> a box labelled AI with arrows to three circles: Marks, Skills, Jobs. <i>What it shows:</i> the <b>challenges</b> that touch this audience directly. AI can now draft essays, solve problems and write code in seconds, so it changes <b>how we are assessed</b>, <b>which skills are worth building</b> and <b>what employers expect</b>. Other challenges to name aloud: <b>wrong answers delivered confidently</b> (often called hallucinations), <b>bias</b> inherited from training data, <b>privacy</b> when confidential material is pasted into public tools, and unequal access to good tools. <i>You say:</i> "This is not a distant debate. It decides how you are marked and what you can do."</p>
+<p><b>Slide 4: Data.</b> <i>Heading:</i> "How We Use AI" <i>Sketch:</i> one bar chart with three bars: Notes, Code, Essays. Use <b>your own evidence</b>: a quick show of hands or a short class survey on what students actually use AI for. One chart, one message, labelled axes. <i>You say:</i> "I asked our class how they use AI. Most of us use it for help, and a few use it to replace the work."</p>
+<p><b>Slide 5: Insight.</b> <i>Heading:</i> "Tool, Not Substitute" <i>Sketch:</i> an arrow from the chart to the sentence "Think first, then prompt." <i>What it shows:</i> the <b>so what?</b> of the data and your <b>thesis</b> in one line: "AI amplifies the learner: it helps those who think first and harms those who skip thinking." This is also where you cover the <b>boon-or-curse</b> answer without sitting on the fence: the outcome depends on use.</p>
+<p><b>Slide 6: Story.</b> <i>Heading:</i> "Fake Citations" <i>Sketch:</i> a stick figure beside a box reading "Made-up cases in court". <i>What it shows:</i> a real case that makes the threat human. In 2023, two New York lawyers filed a court brief citing legal cases that ChatGPT had invented. The judge fined them, and the incident became a worldwide warning to check AI output. <i>You say:</i> "They trusted a confident answer and never checked the source. The tool did not lose their case. Skipping the check did."</p>
+<p><b>Slide 7: Framework.</b> <i>Heading:</i> "CITE Before Using" <i>Sketch:</i> four boxes, one per letter. <b>C</b>heck every fact against a named source. <b>I</b>dentify where AI helped, as your college allows. <b>T</b>hink first: draft your own idea, then prompt. <b>E</b>valuate the answer for bias and gaps. <i>You say:</i> "Four letters, and you can use them tonight." The framework connects back to <b>documentation and citation</b>: a claim is only as good as its source.</p>
+<p><b>Slide 8: Boon vs Curse.</b> <i>Heading:</i> "Boon vs Curse" <i>Sketch:</i> two columns with a vertical line between them. <b>Boon:</b> a patient personal tutor, instant feedback, accessibility (captions, text to speech) and language support such as Tamil explanations. <b>Curse:</b> copied work, confident wrong answers, hidden bias, over-dependence and privacy leaks. Keep each line <b>under 6 words</b>. <i>You say:</i> "The same tool sits on both sides. What decides the side is the user."</p>
+<p><b>Slide 9: Action.</b> <i>Heading:</i> "Your Action" <i>Sketch:</i> three tick-box lines. (1) Write your own outline before you prompt. (2) Fact-check two AI claims with named sources. (3) Note where AI helped in every assignment. <i>You say:</i> "Do these three things this week and you will already use AI better than most."</p>
+<p><b>Slide 10: Close / Q&amp;A.</b> <i>Heading:</i> "Think. Then Prompt." <i>Sketch:</i> a large question mark. <i>You say:</i> "AI is a boon when we think first and a curse when we stop thinking. Thank you. Questions?" Ending on a <b>memorable line</b> that repeats your thesis gives the audience the one sentence they will remember.</p>
+<div class="kwt-wrap"><table class="kwt"><tr><th>Where the deck earns marks</th><th>How this deck does it</th></tr>
+<tr><td><b>Audience analysis</b></td><td>Slide 3 names marks, skills and jobs: what <b>this</b> audience cares about.</td></tr>
+<tr><td><b>Storyboarding</b></td><td>Setup, evidence, story, tool, judgement, action, close: a clear beginning, middle and end.</td></tr>
+<tr><td><b>DISA</b> (Data, Insight, Story, Action)</td><td>Slides 4, 5, 6 and 9 follow the sequence exactly.</td></tr>
+<tr><td><b>Ethos, pathos, logos</b></td><td>Logos: the data and the framework. Pathos: the fake-citations story. Ethos: named, checkable sources.</td></tr>
+<tr><td><b>Reduced cognitive overload</b></td><td>One idea and one sketch per slide, headings of 4 words or fewer, lines under 6 words.</td></tr></table></div>
 <div class="say">Marking tips: <b>one idea per slide</b>, <b>storyboard</b> in order, <b>visual appeal</b> through simple sketches, and <b>reduced cognitive load</b> through under 6 words per line.</div>
 <div class="why"><b class="t">Use this page to practise</b>Choose any topic from this course, hide the labels in the diagram, and write the ten headings from memory. Then add your own <b>Slide N: info</b> notes, in the same format as above, so your storyboard grows into a full talk. Check each slide against one question: <b>"Can the audience take this in within five seconds?"</b></div>
-`;
+`;;
 
 const BELBIN=(()=>{const C=[['ACTION','Gets things done',[['Shaper','Drives, challenges'],['Implementer','Turns plans into tasks'],['Completer Finisher','Checks details, deadlines']]],['PEOPLE','Builds relationships',[['Coordinator','Clarifies goals, delegates'],['Teamworker','Supports, eases conflict'],['Resource Investigator','Finds outside contacts']]],['THINKING','Solves problems',[['Plant','Creative ideas'],['Monitor Evaluator','Logical, sober judgement'],['Specialist','Deep expert knowledge']]]];
  let o='<svg viewBox="0 0 700 218" xmlns="http://www.w3.org/2000/svg" font-family="Roboto,Arial,sans-serif" role="img" aria-label="Belbin team roles">';
@@ -974,9 +1073,9 @@ m2:{t:'Discussion & Cross-Cultural Communication',h:`
 <p>A message can be accurate, well structured and still fail, because the <b>examples, references, language and humour</b> belong to a world the audience does not live in. <b>Audience localization</b> means choosing examples, units, currency, idioms and cultural references from your listeners' own experience. It is the discussion-side twin of the audience analysis you will meet in Unit 3: before you speak or write, ask <b>who they are and what already makes sense to them</b>.</p>
 <h3 class="sec">Case study: a textbook problem that misses its audience</h3>
 <p>The following problem appears in a Probability and Random Processes textbook intended for engineering students in <b>Tamil Nadu</b>.</p>
-<div class="note"><strong class="t">The problem as printed</strong>"In professional baseball, hitters often exhibit streakiness (where success in a current plate appearance is influenced by the outcome of the immediately preceding one). Consider a batter whose plate appearance outcomes are modeled as a two-state Markov chain:
-<div class="pmx"><span><i>P</i> =</span><span class="pmx-grid"><span class="pmx-m"><span><i>p</i></span><span>1 &minus; <i>p</i></span><span><i>q</i></span><span>1 &minus; <i>q</i></span></span></span></div>
-where state <i>H</i> is hit, state <i>O</i> is out, and <i>p</i> &gt; <i>q</i>. Find the long-term batting average."</div>
+<div class="note"><strong class="t">The problem as printed</strong>&ldquo;In professional baseball, hitters often exhibit streakiness (where success in a current plate appearance is influenced by the outcome of the immediately preceding one). Consider a batter whose plate appearance outcomes are modeled as a two-state Markov chain:
+<div class="kx d">P=\\begin{bmatrix}p &amp; 1-p \\\\ q &amp; 1-q\\end{bmatrix}</div>
+where state <span class="kx">H</span> is hit, state <span class="kx">O</span> is out, and <span class="kx">p&gt;q</span>. Find the long-term batting average.&rdquo;</div>
 <h3 class="sec">Analysis: where the problem goes wrong</h3>
 <ul>
 <li><b>The sport is unfamiliar.</b> Baseball is a mass sport in the United States and Japan, but it is hardly played or televised in India. A student must first decode "plate appearance", "hitter" and what counts as a "hit" before reaching the mathematics. That decoding is <b>extraneous cognitive load</b>: effort spent on the setting instead of the idea.</li>
@@ -984,8 +1083,12 @@ where state <i>H</i> is hit, state <i>O</i> is out, and <i>p</i> &gt; <i>q</i>. 
 <li><b>It signals "this book is not for you."</b> When every example comes from another country, students may feel the subject belongs to someone else, which reduces interest and confidence.</li>
 </ul>
 <h3 class="sec">The localized version</h3>
-<div class="note"><strong class="t">Rewritten with a cricket context</strong>In T20 cricket, batters often show <b>momentum</b>: after scoring off a ball, they are more likely to score again. Model each ball a batter faces as a two-state Markov chain with state <b>S</b> (scoring shot: a run or a boundary) and state <b>D</b> (dot ball). The transition matrix is:<div class="pmx lab"><span><i>P</i> =</span><span class="pmx-grid"><span class="pmx-cl"><span>S</span><span>D</span></span><span class="pmx-rl"><span>S</span><span>D</span></span><span class="pmx-m"><span><i>p</i></span><span>1 &minus; <i>p</i></span><span><i>q</i></span><span>1 &minus; <i>q</i></span></span></span></div>where <i>p</i> = P(S then S) and <i>q</i> = P(D then S), with <i>p</i> &gt; <i>q</i>. Find the long-run proportion of scoring balls.</div>
-<p>The mathematics is unchanged. Solving <b>&pi;<sub>S</sub> = &pi;<sub>S</sub><i>p</i> + &pi;<sub>D</sub><i>q</i></b> with <b>&pi;<sub>S</sub> + &pi;<sub>D</sub> = 1</b> gives the long-run scoring proportion <b>&pi;<sub>S</sub> = q / (1 &minus; p + q)</b>. For example, with <i>p</i> = 0.6 and <i>q</i> = 0.3, the answer is 0.3 / 0.7 &asymp; <b>0.43</b>. A useful check: if there is no streakiness (<i>p</i> = <i>q</i>), the formula returns <i>q</i> itself, and because <i>p</i> &gt; <i>q</i> the answer is higher than <i>q</i>, which matches the idea of momentum. The same formula answers the original baseball question, since <i>H</i> and <i>O</i> play the roles of <i>S</i> and <i>D</i>.</p>
+<div class="note"><strong class="t">Rewritten with a cricket context</strong>&ldquo;In T20 cricket, batters often exhibit <b>momentum</b> (where success on the current ball is influenced by the outcome of the immediately preceding one). Consider a batter whose ball-by-ball outcomes are modeled as a two-state Markov chain:
+<div class="kx d">P=\\begin{bmatrix}p &amp; 1-p \\\\ q &amp; 1-q\\end{bmatrix}</div>
+where state <span class="kx">S</span> is a scoring ball (a run or a boundary), state <span class="kx">D</span> is a dot ball, and <span class="kx">p&gt;q</span>. Find the long-term proportion of scoring balls.&rdquo;</div>
+<p>Solving <span class="kx">\\pi=\\pi P</span> together with <span class="kx">\\pi_S+\\pi_D=1</span> gives the long-term proportion of scoring balls:</p>
+<div class="kx d">\\pi_S=\\dfrac{q}{1-p+q}</div>
+<p>The mathematics is identical to the baseball version; only the setting has changed, and that is the point. A student in Tamil Nadu already knows what momentum in an innings feels like, so a scoring ball and a dot ball need no explanation. The audience recognises their own world in the problem, relates to it at once and keeps their attention on the idea being shared, the Markov chain and what it says, instead of spending effort decoding plate appearances, hits and outs. A familiar context does not make the message easier; it removes the distraction between the listener and the message.</p>
 <h3 class="sec">What the research says about localizing context</h3>
 <div class="kwt-wrap"><table class="kwt"><tr><th>Evidence</th><th>What it found</th></tr>
 <tr><td>Walkington (2013), <i>Journal of Educational Psychology</i></td><td>In a randomised experiment with <b>145 ninth-grade Algebra I students</b>, those given problems matched to their out-of-school interests solved problems more accurately and efficiently, and the gains <b>carried over</b> to ordinary, non-personalized problems afterwards.</td></tr>
@@ -1238,6 +1341,23 @@ m5:{t:'Goal Setting & Career Management',h:`
 <div class="obj"><strong>What you will learn</strong><ul><li>Write SMART goals and OKRs</li><li>Build a personal brand: website, online presence and LinkedIn <span class="tag-new">NEW</span></li><li>Craft a confident, not cocky, elevator pitch <span class="tag-new">NEW</span></li><li>Build resilience, adaptability and a continuous feedback habit: <b>Act, Measure Feedback, Adjust</b> <span class="tag-new">NEW</span></li><li>Use the Super Mario Effect to learn from failure <span class="tag-new">NEW</span></li><li>Use mentorship and networking <span class="tag-new">NEW</span></li></ul></div>
 <h2>SMART goals</h2>
 ${fig(chain(['S','M','A','R','T'],['Specific','Measurable','Achievable','Relevant','Time-bound'],['Clear,|not vague','Numbers to|track progress','Realistic|with effort','Aligned with|bigger aims','Has a|deadline'],'SMART goals'),'Example: "Increase my LinkedIn connections from 200 to 400 by 31 March by contacting 5 alumni a week."','five rectangles in a row, arrows between them, letters S M A R T inside, one cue under each.')}
+<p>SMART is not just a tidy checklist. It is a <b>motivation tool</b>. Research on goal setting by Edwin Locke and Gary Latham found that <b>specific, challenging goals</b> lead to better performance than vague advice such as "do your best", because a clear target tells you what to do next and lets you judge how you are doing. But a goal only helps if you <b>keep going</b>, and that depends on whether you believe it can be done.</p>
+<h3 class="sec">Why "achievable" protects your motivation</h3>
+<p>Think of a goal as a jump. If the bar is <b>too low</b>, you clear it without effort and feel nothing: no growth, no pride. If it is <b>too high</b>, every week shows you how far away it still is, and people quietly give up. The sweet spot is <b>a stretch that you can reach with real effort</b>. Psychologist Albert Bandura called the belief "I can do this" <b>self-efficacy</b>, and it strongly shapes how hard you try and how long you persist after a setback. An achievable goal builds that belief; an impossible one erodes it.</p>
+<p>Achievable also feeds a second motor of motivation: <b>visible progress</b>. In studies of people's daily work diaries, Teresa Amabile and Steven Kramer found that the best days were usually the days on which people made progress on something meaningful, even a small step. This is called the <b>progress principle</b>. A goal that you can finish in weeks gives you <b>small wins</b> to celebrate along the way, while a goal that needs three years of luck gives you nothing to feel good about until the end.</p>
+<p><b>Achievable does not mean easy.</b> It means realistic given your <b>time, skills, resources and support</b>. Ask three questions before you commit: <i>Have I done something similar before? What would I still need to learn? Does my current schedule leave room for it?</i> If the honest answers are "no, a lot and no", the goal is not wrong, but it is too big for one step. Break it into <b>milestones</b>, each one a SMART goal of its own.</p>
+<div class="kwt-wrap"><table class="kwt"><tr><th>Letter</th><th>Without it</th><th>How it protects motivation</th></tr>
+<tr><td><b>S</b>pecific</td><td>"Get better at coding" leaves you unsure what to do today, so you put it off.</td><td>A clear target removes doubt and makes the first step obvious.</td></tr>
+<tr><td><b>M</b>easurable</td><td>You cannot tell whether you are improving.</td><td>Numbers give you feedback, and seeing progress keeps you going.</td></tr>
+<tr><td><b>A</b>chievable</td><td>Too easy bores you; too hard discourages you.</td><td>A realistic stretch builds confidence and keeps effort steady.</td></tr>
+<tr><td><b>R</b>elevant</td><td>You chase a goal because others expect it.</td><td>A goal tied to your own aims gives you a reason to continue when it gets hard.</td></tr>
+<tr><td><b>T</b>ime-bound</td><td>"Someday" never arrives.</td><td>A deadline creates healthy urgency and a point to review.</td></tr></table></div>
+<h3 class="sec">From vague wish to SMART goal</h3>
+<p><b>Vague:</b> "I want to become a data scientist." This is a direction, not a goal: nothing to do this week, nothing to measure, no deadline. <b>Too big:</b> "I will master machine learning by next month" fails the <b>achievable</b> test, and a missed deadline feels like personal failure. <b>SMART:</b> "I will complete the first four modules of an introductory machine-learning course and build one small project on a public dataset by 31 January, studying five hours a week." It is <b>specific</b> (course and project), <b>measurable</b> (four modules, one project), <b>achievable</b> (five hours a week for the time available), <b>relevant</b> (it moves you toward data science) and <b>time-bound</b> (31 January). Better still, the finished milestone becomes a small win and the base for the next goal.</p>
+<h3 class="sec">Common mistakes</h3>
+<p>Setting <b>too many goals at once</b>, which splits your effort until none of them moves. Copying someone else's goal, so <b>relevance</b> is missing. Treating the goal as fixed, even when your exams, health or circumstances change: <b>review it</b> and adjust the plan, not your self-worth. And ignoring setbacks. A missed week is data, not a verdict, which is exactly why the feedback loop and the Super Mario Effect later in this unit matter.</p>
+<div class="say">Say it like this: "I chose a goal I can reach with effort, because a goal I believe in keeps me going, while an impossible one only teaches me to quit."</div>
+<div class="why"><b class="t">Try it now</b>Take one vague goal of your own and rewrite it using all five letters. Then ask: <b>"Would I feel confident starting this tomorrow?"</b> If not, shrink it into a milestone until the answer is yes.</div>
 <h2>OKRs (Objectives and Key Results)</h2>
 <p>An <b>Objective</b> is a qualitative, inspiring goal. <b>Key Results</b> are 2 to 5 <b>measurable</b> outcomes that show it was reached.</p>
 <figure class="dg"><svg viewBox="0 0 700 190" xmlns="http://www.w3.org/2000/svg" font-family="Roboto,Arial,sans-serif" role="img" aria-label="OKR structure"><rect x="200" y="4" width="300" height="52" fill="#F2F2F2" stroke="#111" stroke-width="2"/><text x="350" y="26" text-anchor="middle" font-size="14" font-weight="700">OBJECTIVE</text><text x="350" y="44" text-anchor="middle" font-size="11.5" fill="#444">Become a confident interviewer</text><path d="M350 56V84M110 84H590M110 84V108M350 84V108M590 84V108" fill="none" stroke="#111" stroke-width="2"/><g stroke="#111" stroke-width="2" fill="#fff"><rect x="10" y="108" width="200" height="70"/><rect x="250" y="108" width="200" height="70"/><rect x="490" y="108" width="200" height="70"/></g><g font-size="12" text-anchor="middle"><text x="110" y="132" font-weight="700">KEY RESULT 1</text><text x="110" y="152" fill="#444">Complete 6 mock</text><text x="110" y="166" fill="#444">interviews</text><text x="350" y="132" font-weight="700">KEY RESULT 2</text><text x="350" y="152" fill="#444">Score 4/5 on peer</text><text x="350" y="166" fill="#444">feedback</text><text x="590" y="132" font-weight="700">KEY RESULT 3</text><text x="590" y="152" fill="#444">Write 5 STAR</text><text x="590" y="166" fill="#444">stories</text></g></svg><figcaption><b>Draw it yourself:</b> one box on top, a horizontal bar beneath it, three boxes hanging below. Label the top box Objective and the lower ones Key Results.</figcaption></figure>
@@ -1370,101 +1490,42 @@ Object.keys(NOTES).forEach(m=>{
   TOPICS[m]=NOTES[m].h.replace(/<details class="qc">[\s\S]*?<\/details>/g,'').split('<h2>').slice(1).map(p=>{const k=p.indexOf('</h2>'),raw=p.slice(0,k);return {t:raw.replace(/<span class="tag-new">.*?<\/span>/g,'').replace(/<[^>]*>/g,'').trim(),isNew:/tag-new/.test(raw),h:p.slice(k+5)};});
 });
 
-M3_MCQ.push({ text:"Which sequence best describes how to present data persuasively?", options:["Data → Insight → Story → Action","Story → Data → Action → Insight","Insight → Data → Action → Story","Action → Story → Data → Insight"], correct:0 });
+
 M4_FRQ.push({ text:"Which method should you use for a story about a failure or a problem you fixed, STAR or SCORE?", answers:["SCORE"] });
 M4_FRQ.push({ text:"What are three pillars of executive presence?", answers:["Confidence","Authority","Credibility"] });
-M4_MCQ.push(
- { text:"Which resume style is most commonly recommended for early-career applicants?", options:["One page, reverse-chronological, with quantified achievements","Three pages listing every task","A narrative paragraph with no headings","A resume with no keywords so ATS ignores it"], correct:0 },
- { text:"What are the usual parts of a strong cover letter?", options:["Hook, evidence of fit, call to action","Salary demand, complaints, references","Full biography, hobbies, photographs","Repeat of the resume, apology, thanks"], correct:0 },
- { text:"Which best describes a Statement of Purpose (SOP)?", options:["A personal essay on goals, preparation and fit with the programme","A list of references","A legal contract with the employer","A one-line job title"], correct:0 },
- { text:"Which interview answer is best suited to the SCORE method?", options:["A story about a setback and how you fixed it","A smooth success with no obstacles","A hypothetical question about the future","A question about your salary"], correct:0 },
- { text:"What does BATNA stand for in salary negotiation?", options:["Best Alternative To a Negotiated Agreement","Basic Amount To Negotiate Annually","Best Approach To Negotiating Assertively","Balanced Offer To Nobody Attached"], correct:0 },
- { text:"An employer offers a lower salary than you hoped. What is a sound response?", options:["Make a researched counter-offer and weigh the whole package","Accept immediately","Walk out without a reply","Threaten to accept another job without having one"], correct:0 },
- { text:"Which formula is recommended for writing a strong resume bullet?", options:["Action verb + what you did + tool or method + result (a number)","Responsible for + list of duties","A long paragraph describing your day","Only the job title and dates"], correct:0 }
-);
+
 M5_FRQ.push({ text:"What are three ways to build a personal brand online?", answers:["LinkedIn optimization","Personal website","Thought leadership"] });
 M5_FRQ.push({ text:"What mindset, described by Carol Dweck, helps with resilience and career pivots?", answers:["Growth mindset"] });
 M5_FRQ.push({ text:"What are the three steps of the continuous feedback loop?", answers:["Act","Measure and get feedback","Adjust"] });
 M5_FRQ.push({ text:"In the Super Mario Effect, what should you focus on instead of the pits?", answers:["The princess (the goal)"] });
-M5_MCQ.push(
- { text:"In OKRs, what are Key Results?", options:["Measurable outcomes that show the objective was achieved","The inspiring objective itself","Daily to-do items","Personal values"], correct:0 },
- { text:"Which is an example of thought leadership?", options:["Publishing original insights in articles or posts","Copying others' posts without credit","Updating your photo only","Keeping your profile private"], correct:0 },
- { text:"What does a continuous feedback loop involve?", options:["Act, measure and get feedback, adjust, repeat","Setting a goal once a year and not revisiting it","Avoiding criticism","Only receiving feedback at appraisals"], correct:0 },
- { text:"What does a growth mindset assume?", options:["Abilities can be developed through effort and learning","Talent is fixed at birth","Failure should be hidden","Change should be avoided"], correct:0 },
- { text:"In Mark Rober's Super Mario Effect experiment, which group tried the puzzle more often and solved it more?", options:["The group that was not penalised for failed attempts","The group that lost points for every failure","Both groups equally","Neither group; the puzzle was impossible"], correct:0 },
- { text:"Which is a recommended part of a personal website or portfolio?", options:["Projects with the problem, your role, tools and results","Your home address and full phone number","Only your school marks","A list of your weaknesses"], correct:0 },
- { text:"When pivoting careers, what should you identify first?", options:["Transferable skills","Your previous salary","Your colleagues' opinions","The oldest job on your resume"], correct:0 },
- { text:"What is a key principle of strategic networking?", options:["Build genuine, reciprocal relationships and follow up","Collect as many contacts as possible and never contact them","Only ask for favours","Network only when unemployed"], correct:0 }
-);
+
 
 M2_FRQ.push({ text:"What are the three parts of an evidence-based argument?", answers:["Claim","Evidence","Reasoning"] });
-M2_MCQ.push(
- { text:"In a GD, one member keeps dominating. What is the best facilitation response?", options:["Politely redirect and invite others to speak","Let them continue","Interrupt loudly","End the discussion"], correct:0 },
- { text:"Which structure best supports an evidence-based argument?", options:["Claim, Evidence, Reasoning","Opinion, Repetition, Emphasis","Story, Joke, Conclusion","Question, Silence, Exit"], correct:0 },
-);
-M3_MCQ.push(
- { text:"Which chart best shows a trend over time?", options:["Line chart","Pie chart","Venn diagram","Table of text"], correct:0 },
- { text:"For a virtual presentation, where should the camera be placed?", options:["At eye level","Below the chin","Far to one side","Facing the ceiling"], correct:0 },
- { text:"Which is a hallmark of a TED-style talk?", options:["One big idea told with story","Reading dense slides aloud","Ten unrelated topics","No opening"], correct:0 },
- { text:"What is an 'action title' on a data slide?", options:["A title that states the takeaway of the chart","A title that says 'Chart 1'","A title in all capitals","A title with no verb"], correct:0 }
-);
+
+
 
 M1_FRQ.push({ text:"What are three techniques that help a team reach the norming stage and optimal outcomes?", answers:["Belbin Team Roles","RACI Matrix","DRI Model"] });
 M1_FRQ.push({ text:"What do the letters in RACI stand for?", answers:["Responsible","Accountable","Consulted","Informed"] });
-M1_MCQ.push(
- { text:"In a RACI matrix, how many people should be Accountable for each task?", options:["Exactly one","Two or more","None","Everyone on the team"], correct:0 },
- { text:"In RACI, which letter describes someone who gives two-way input before a decision?", options:["Consulted","Informed","Accountable","Responsible"], correct:0 },
- { text:"What does DRI stand for?", options:["Directly Responsible Individual","Departmental Review Item","Designated Risk Investigator","Delegated Report Initiative"], correct:0 },
- { text:"Which problem does the DRI model mainly prevent?", options:["Diffusion of responsibility","Overspending","Late payment","Too many meetings only"], correct:0 },
- { text:"How many team roles did Belbin identify?", options:["Nine","Five","Seven","Twelve"], correct:0 },
- { text:"Which Belbin role generates creative ideas?", options:["Plant","Implementer","Completer Finisher","Coordinator"], correct:0 },
- { text:"Which Belbin group includes Shaper, Implementer and Completer Finisher?", options:["Action-oriented roles","People-oriented roles","Thinking-oriented roles","Support roles"], correct:0 },
- { text:"At which Tuckman stage does performance usually dip because of conflict?", options:["Storming","Forming","Performing","Adjourning"], correct:0 },
- { text:"Why are Belbin, RACI and DRI used early in a team's life?", options:["They clarify roles and ownership, helping the team reach norming faster","They replace the need for a leader","They guarantee no conflict","They end the project sooner"], correct:0 }
-);
 
-M1_MCQ.push(
- { text:"In a group project, one teammate says 'Fine, use your design' and asks for nothing in return. Which style is this?", options:["Accommodation","Compromise","Collaboration","Competition"], correct:0 },
- { text:"Two teammates each give up part of their preferred design and combine ideas halfway. Which style is this?", options:["Compromise","Accommodation","Avoidance","Competition"], correct:0 },
- { text:"When can avoidance be a sound conflict strategy?", options:["As a short cooling-off period before discussing the issue calmly","When the issue is important and you never plan to return to it","Always, because conflict is harmful","Only when you want to win"], correct:0 },
- { text:"Which statement best distinguishes a cognitive bias from a logical fallacy?", options:["A bias is a mental shortcut in our thinking; a fallacy is a flaw in an argument's structure","A bias is always deliberate; a fallacy is always accidental","They are the same thing","A fallacy only affects the thinker, a bias only affects the audience"], correct:0 },
- { text:"Which technique is best for checking whether a team has missing roles?", options:["Belbin Team Roles","RACI Matrix","DRI Model","SWOT Analysis"], correct:0 },
- { text:"Why is a DRI useful in a team where everyone has an equal say?", options:["One person can decide and own the outcome, avoiding ego fights and delays","It removes the need for any team members","It guarantees nobody disagrees","It replaces the RACI matrix"], correct:0 }
-);
+
+
 
 M1_FRQ.push({ text:"Name the two leadership styles that Lee Kuan Yew is said to have blended.", answers:["Transactional","Transformational"] });
-M1_MCQ.push(
- { text:"7. Which of the following traits are found in both Transactional and Transformational leaders?", options:["Authoritative: yes, Empathetic: no, Persuasive: yes","Authoritative: no, Empathetic: yes, Persuasive: no","Authoritative: no, Empathetic: no, Persuasive: yes","Authoritative: yes, Empathetic: no, Persuasive: no"], correct:2 },
- { text:"Which pairing correctly describes a manager rather than a leader?", options:["Executes plans and focuses on stability","Creates a vision and focuses on change","Influences mainly through motivation","Encourages innovation above efficiency"], correct:0 },
- { text:"Which leadership style relies mainly on a system of rewards and penalties?", options:["Transactional","Transformational","Laissez-faire","Charismatic"], correct:0 },
- { text:"Why is it useful for a leader to blend transactional and transformational styles?", options:["Vision supplies direction and inspiration, while structure and consequences supply reliable delivery","Transformational leaders never need rules","Transactional leaders cannot motivate anyone","A blend removes the need for any planning"], correct:0 },
- { text:"Which approach helps a transformational leader avoid being a push-over?", options:["Being warm on the person but firm on the standard, with clear expectations","Saying yes to every request to keep everyone happy","Avoiding difficult conversations","Waiting until every team member agrees before deciding"], correct:0 }
-);
 
-M3_MCQ.push(
- { text:"In a 10-slide exam presentation sketched on paper, what should each slide contain?", options:["One idea and one simple sketch","Full paragraphs of text","Five charts","No heading"], correct:0 },
- { text:"Which slide of a 10-slide deck answers the \"so what?\" of the data?", options:["Insight","Hook","Title","Close / Q&A"], correct:0 }
-);
+
+
 
 M4_FRQ.push({ text:"What four qualities should interview feedback have?", answers:["Specific","Constructive","Evidence-based","Action-oriented"] });
-M4_MCQ.push(
- { text:"Why does practising in mock interviews help?", options:["It builds familiarity and confidence, and does not mean you are flawed","It proves you will fail the real interview","It replaces the need to research the company","It is only for weak candidates"], correct:0 },
- { text:"Which is a common interview mistake?", options:["Memorising answers mechanically","Giving a specific example","Looking at the person speaking","Pausing before answering"], correct:0 },
- { text:"Which panel member mainly assesses teamwork, leadership and decision-making?", options:["Project manager or team leader","HR professional","Technical expert only","The receptionist"], correct:0 }
-);
+
 M5_FRQ.push({ text:"What are the four parts of an elevator pitch?", answers:["Hook","Who you are","Value and proof","Ask"] });
-M5_MCQ.push(
- { text:"About how long should an elevator pitch be?", options:["30 to 60 seconds","10 minutes","5 seconds","As long as needed"], correct:0 },
- { text:"What separates a confident pitch from a cocky one?", options:["Evidence, credit to the team and curiosity about the listener","Louder speech","Claiming to be the best","Avoiding all numbers"], correct:0 },
- { text:"Which is part of keeping a personal brand ethical?", options:["Protecting confidential information and crediting collaborators","Rounding up achievements","Copying others' posts","Sharing unverified news"], correct:0 }
-);
+
 
 const MODULES = {
   m1: { name:"Unit 1 - Techniques for Interpersonal Skills", frq:M1_FRQ, mcq:M1_MCQ },
-  m2: { name:"Unit 2", frq:M2_FRQ, mcq:M2_MCQ },
-  m3: { name:"Unit 3", frq:M3_FRQ, mcq:M3_MCQ },
-  m4: { name:"Unit 4", frq:M4_FRQ, mcq:M4_MCQ },
-  m5: { name:"Unit 5", frq:M5_FRQ, mcq:M5_MCQ }
+  m2: { name:"Unit 2 - Discussion & Cross-Cultural Communication", frq:M2_FRQ, mcq:M2_MCQ },
+  m3: { name:"Unit 3 - Presentations & Persuasion", frq:M3_FRQ, mcq:M3_MCQ },
+  m4: { name:"Unit 4 - Interviewing", frq:M4_FRQ, mcq:M4_MCQ },
+  m5: { name:"Unit 5 - Goal Setting & Career Management", frq:M5_FRQ, mcq:M5_MCQ }
 };
 
 function shuffle(arr){
@@ -1834,9 +1895,9 @@ function renderCourse(){
   const prog=T.map((t,i)=>'<span class="sq '+(visited[m][i]?'fam':'')+'"></span>').join('')+'<span class="sq ic">'+STAR+'</span><span class="sq ic">'+STAR+'</span>';
   const nf=MODULES[m].frq.length,nm=MODULES[m].mcq.length;
   document.getElementById('startScreen').innerHTML=
-  '<div class="kh"><aside class="kh-side"><div class="rd-sc"><div class="rd-top"><div class="kh-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M4 5h16v11H9l-5 4z"/></svg></div><div><b>Advanced Professional English</b><small>5 UNITS</small></div></div><div class="rd-nav"><small>Course: Advanced Professional English</small></div>'+
+  '<nav class="padl-nav"><div class="padl-nav-in"><a class="padl-brand" href="https://vishwabuilds.github.io/padl/#home" aria-label="PADL home"><svg viewBox="0 0 64 64" role="img" aria-label="PADL logo: a sailboat on rough seas"><circle cx="32" cy="32" r="32" fill="#0B2149"/><path d="M31 10v28H15z" fill="#fff"/><path d="M35 18v20h13z" fill="#FFB100"/><path d="M14 40h36l-6 7H20z" fill="#fff"/><path d="M10 53q5.5-6 11 0t11 0 11 0 11 0" stroke="#FFB100" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg><b>PADL</b><small>Platform for<br>Asynchronous Digital Learning</small></a></div></nav>'+'<div class="kh"><aside class="kh-side"><div class="rd-sc"><div class="rd-top"><div class="kh-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M4 5h16v11H9l-5 4z"/></svg></div><div><b>Advanced Professional English</b><small>5 UNITS</small></div></div><div class="rd-nav"><small>Course: Advanced Professional English</small></div>'+
   ids.map((id,i)=>'<button class="rd-item kh-u'+(id===m?' sel':'')+'" data-u="'+id+'"><span class="pg">'+PGI+'</span><span><small>Unit '+(i+1)+'</small>'+NOTES[id].t+'</span></button>').join('')+'<a class="rd-item kh-dl" href="https://vishwabuilds.github.io/padl/questionbank.pdf" download="Advanced_Professional_English_Questionbank.pdf"><span class="pg">'+PGI+'</span><span><small>Resource</small>Questionbank (PDF)</span></a></div></aside>'+
-  '<main class="kh-main"><div class="kh-crumb">'+home+'<i>&bull;</i>English<i>&bull;</i>Advanced Professional English</div>'+
+  '<main class="kh-main"><div class="kh-crumb"><a href="https://vishwabuilds.github.io/padl/#home" aria-label="Home">'+home+'</a><i>&bull;</i><a href="https://vishwabuilds.github.io/padl/#courses">Courses</a><i>&bull;</i><span class="here" aria-current="page">Advanced Professional English</span></div>'+
   '<h1>Unit '+m.slice(1)+': '+NOTES[m].t+'</h1><div class="kh-skills">'+T.length+' skills</div>'+
   '<div class="kh-legend"><span><i class="sq mastered"></i>Mastered</span><span><i class="sq prof"></i>Proficient</span><span><i class="sq fam"></i>Familiar</span><span><i class="sq att"></i>Attempted</span><span><i class="sq"></i>Not started</span><span><i class="sq ic">'+STAR+'</i>Quiz</span></div>'+
   '<div class="kh-prog">'+prog+'</div>'+
@@ -1855,10 +1916,16 @@ renderCourse();
 
 const PGI2='<svg width="12" height="14" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 1.5h6l2.5 2.5v8.5H2z"/><path d="M4 7h4M4 9.5h4"/></svg>';
 const rd=document.createElement('div'); rd.id='reader'; rd.className='rd';
-rd.innerHTML='<aside class="rd-side" id="rdSide"><div class="rd-sc"><div class="rd-top"><div class="kh-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M4 5h16v11H9l-5 4z"/></svg></div><div><b>Advanced Professional English</b><small>5 UNITS</small></div></div><div class="rd-nav"><small id="rdCourse"></small><b id="rdLesson"></b></div><div id="rdList"></div></div></aside>'+
-'<section class="rd-main"><div class="rd-mtop"><button id="rdBackM">&larr; Back</button><select id="rdSel" aria-label="Choose a reading"></select></div><div class="rd-scroll" id="rdScroll"><div class="rd-in"><h1 id="rdH1"></h1><p class="rd-desc">Read the key ideas and bold key words, then try the practice questions.</p><div class="rd-body" id="rdBody"></div></div></div><div class="rd-bar"><button id="rdBack" class="ghost">Back to course page</button><button id="rdNext"></button></div></section>';
+rd.innerHTML=document.querySelector('#startScreen .padl-nav').outerHTML+'<div class="rd-cols">'+'<aside class="rd-side" id="rdSide"><div class="rd-sc"><div class="rd-top"><div class="kh-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M4 5h16v11H9l-5 4z"/></svg></div><div><b>Advanced Professional English</b><small>5 UNITS</small></div></div><div class="rd-nav"><small id="rdCourse"></small><b id="rdLesson"></b></div><div id="rdList"></div></div></aside>'+
+'<section class="rd-main"><div class="rd-mtop"><button id="rdBackM">&larr; Back</button><select id="rdSel" aria-label="Choose a reading"></select></div><div class="rd-scroll" id="rdScroll"><div class="rd-in"><h1 id="rdH1"></h1><p class="rd-desc">Read the key ideas and bold key words, then try the practice questions.</p><div class="rd-body" id="rdBody"></div></div></div><div class="rd-bar"><button id="rdBack" class="ghost">Back to course page</button><button id="rdNext"></button></div></section></div>';
 document.body.appendChild(rd);
 let rdM=null;
+function renderMath(root){
+  if(!window.katex||!root)return;
+  root.querySelectorAll('.kx:not([data-done])').forEach(function(el){
+    try{katex.render(el.textContent,el,{displayMode:el.classList.contains('d'),throwOnError:false,strict:false,macros:{'\\arraystretch':'1.55'}});el.setAttribute('data-done','1');}catch(e){}
+  });
+}
 function openReader(m,i){
   const T=TOPICS[m],t=T[i],side=document.getElementById('rdSide'),sy=side.scrollTop; rdM=m; visited[m][i]=true;
   document.getElementById('rdCourse').textContent='Course: Advanced Professional English > Unit '+m.slice(1);
@@ -1868,7 +1935,7 @@ function openReader(m,i){
   list.querySelectorAll('.rd-item').forEach(b=>b.onclick=()=>openReader(m,+b.dataset.k));
   const sel=document.getElementById('rdSel'); sel.innerHTML=T.map((x,k)=>'<option value="'+k+'"'+(k===i?' selected':'')+'>'+x.t+'</option>').join(''); sel.onchange=()=>openReader(m,+sel.value);
   document.getElementById('rdH1').textContent='Learn: '+t.t;
-  document.getElementById('rdBody').innerHTML=t.h;
+  document.getElementById('rdBody').innerHTML=t.h; renderMath(document.getElementById('rdBody'));
   const nx=document.getElementById('rdNext'); if(i<T.length-1){nx.style.display='';nx.textContent='Up next: '+T[i+1].t;nx.onclick=()=>openReader(m,i+1);}else nx.style.display='none';
   rd.style.display='flex'; document.getElementById('rdScroll').scrollTop=0; side.scrollTop=sy;
 }
