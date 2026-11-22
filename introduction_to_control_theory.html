@@ -1604,7 +1604,14 @@ const bdSum=(cx,cy,s)=>{const r=14,q=r*.7071;return '<circle cx="'+cx+'" cy="'+c
 const bdB=(x,y,n,sub,w)=>mmBox(x,y,w||70,44,n,sub);
 const bdIn=(y)=>mmT(6,y+6,'R','','start','(<tspan font-style="italic">s</tspan>)');
 const bdOut=(x,y)=>mmT(x,y+6,'C','','start','(<tspan font-style="italic">s</tspan>)');
-const bdQ=(n,txt,svg)=>'<div style="border:1px solid #000;margin:18px 0;background:#fff"><div style="background:#000;color:#fff;font-weight:700;padding:6px 18px">Example '+n+'</div><div style="padding:8px 18px 14px"><p style="margin:6px 0 2px">'+txt+'</p>'+svg+'</div></div>';
+const BDANS={
+ 1:T`\dfrac{C(s)}{R(s)}=\dfrac{G_1G_2G_3}{1-G_1G_2G_3-G_1G_2H_1+G_2G_3H_2}`,
+ 2:T`\dfrac{C(s)}{R(s)}=\dfrac{G_1G_2G_3}{1+G_2G_3\,(H_1-H_2+H_3)}`,
+ 3:T`\dfrac{C(s)}{R(s)}=\dfrac{G_1(G_2G_3+G_4)}{1+G_2H_2+G_1(G_2G_3+G_4)(1+H_1)}`,
+ 4:T`\dfrac{C(s)}{R(s)}=\dfrac{G_1G_2}{(1+G_1H_1)(1+G_2H_2)+G_1G_2H_3}`,
+ 5:T`\dfrac{C(s)}{R(s)}=\dfrac{G_3G_4\,(1+2G_1G_2)}{(1+G_3G_4)(1+2G_1G_2)+G_1G_3H_1H_2}`,
+ 6:T`\dfrac{C(s)}{R(s)}=\dfrac{G_2\,(1+G_1)}{1+G_2H_2+G_1G_2H_1}`};
+const bdQ=(n,txt,svg)=>'<div style="border:1px solid #000;margin:18px 0;background:#fff"><div style="background:#000;color:#fff;font-weight:700;padding:6px 18px">Example '+n+'</div><div style="padding:8px 18px 14px"><p style="margin:6px 0 2px">'+txt+'</p>'+svg+mmRes(eq(BDANS[n]))+'</div></div>';
 const bdTF=()=>m(T`\dfrac{C(s)}{R(s)}`);
 
 function bdQ1(){const L=bdLine,P='+',N='\u2212';
@@ -1738,6 +1745,35 @@ function sfL3(){return `${sfEx(3,`${sfFig3()}<p>Using Mason&rsquo;s gain formula
  ${stp('Path determinants')}<ul><li>${m('P_1')} passes through nodes ${m('2,\\dots,7')}, so all loops touch it: ${m('\\Delta_1=1')}.</li><li>${m('P_2')} passes through nodes ${m('2,5,6,7')}. ${m('L_2')} touches at node ${m('5')} and ${m('L_3')} at ${m('6,7')}. ${m('L_1\\{3,4\\}')} does not touch, so ${m('\\Delta_2=1-L_1=1+G_2H_1')}.</li></ul>
  ${stp('Transfer function')}${mmRes(eq(T`\dfrac{C(s)}{R(s)}=\dfrac{G_1G_2G_3G_4G_5+G_4G_5G_6\,(1+G_2H_1)}{(1+G_2H_1+G_2G_3H_2)(1+G_5H_3)}`))}`}
 
+function sfFig4(){const id='sfd',y=150,X=[110,270,430,590,750],P=X.map(x=>[x,y]);
+ return mmSvg(900,310,'Signal flow graph with nodes 1 to 5: forward gains G1 to G4, a self-loop G5 at node 4, a bypass G6 from node 3 to node 5, and feedback gains minus H1 from node 4 to node 2, minus H2 from node 3 to node 2, and minus H3 from node 5 to node 2',
+  sfMk(id)+[0,1,2,3].map(i=>sfLine(id,P[i],P[i+1])).join('')+
+  sfEdge(id,P[3],[550,10],[630,10],P[3])+
+  sfArc(id,P[3],P[1],90)+sfArc(id,P[2],P[1],186)+sfArc(id,P[2],P[4],205)+sfArc(id,P[4],P[1],270)+
+  P.map(p=>sfNode(p[0],p[1])).join('')+
+  sfL(190,138,'G',1)+sfL(350,138,'G',2)+sfL(510,138,'G',3)+sfL(670,138,'G',4)+sfL(655,72,'G',5)+
+  sfL(430,76,'\u2212H',1)+sfL(350,171,'\u2212H',2)+sfL(590,230,'G',6)+sfL(510,296,'\u2212H',3)+
+  mmT(52,y+6,'R','','middle','(<tspan font-style="italic">s</tspan>)',22)+mmT(772,y+6,'C','','start','(<tspan font-style="italic">s</tspan>)',22)+
+  P.map((p,i)=>sfNum(p[0]+(i==0?0:i==4?16:i==2?-14:-20),p[1]+(i==4?32:i==2?-14:34),String(i+1))).join(''))}
+
+function sfL4(){return `${sfEx(4,`${sfFig4()}<p>Find the overall gain ${m(T`\dfrac{C(s)}{R(s)}`)} for the signal flow graph shown.</p>`)}
+ ${stp('Forward paths')}${eq(T`\begin{align}P_1&=1\to2\to3\to4\to5&&=G_1G_2G_3G_4\\P_2&=1\to2\to3\to5&&=G_1G_2G_6\end{align}`)}
+ ${stp('Individual loops')}${eq(T`\begin{align}L_1&=4\to4&&=G_5&&\{4\}\\L_2&=2\to3\to4\to2&&=-G_2G_3H_1&&\{2,3,4\}\\L_3&=2\to3\to2&&=-G_2H_2&&\{2,3\}\\L_4&=2\to3\to5\to2&&=-G_2G_6H_3&&\{2,3,5\}\\L_5&=2\to3\to4\to5\to2&&=-G_2G_3G_4H_3&&\{2,3,4,5\}\end{align}`)}
+ ${stp('Non-touching loops')}<p>${m('L_2,L_3,L_4,L_5')} all pass through nodes ${m('2')} and ${m('3')}, so they touch one another. The self-loop ${m('L_1')} at node ${m('4')} touches ${m('L_2')} and ${m('L_5')}, but shares no node with ${m('L_3')} or ${m('L_4')}:</p>${eq(T`L_1L_3=-G_2G_5H_2,\qquad L_1L_4=-G_2G_5G_6H_3.`)}<p>There are no triples.</p>
+ ${stp('Determinant')}${eq(T`\begin{align}\Delta&=1-(L_1+L_2+L_3+L_4+L_5)+(L_1L_3+L_1L_4)\\&=1-G_5+G_2G_3H_1+G_2H_2+G_2G_6H_3+G_2G_3G_4H_3-G_2G_5H_2-G_2G_5G_6H_3.\end{align}`)}
+ ${stp('Path determinants')}<ul><li>${m('P_1')} passes through nodes ${m('1,2,3,4,5')}, so all loops touch it: ${m('\\Delta_1=1')}.</li><li>${m('P_2')} passes through nodes ${m('1,2,3,5')}. ${m('L_2,L_3,L_4,L_5')} touch it at nodes ${m('2,3')}, but ${m('L_1\\{4\\}')} does not, so ${m('\\Delta_2=1-L_1=1-G_5')}.</li></ul>
+ ${stp('Transfer function')}${mmRes(eq(T`\dfrac{C(s)}{R(s)}=\dfrac{G_1G_2G_3G_4+G_1G_2G_6\,(1-G_5)}{1-G_5+G_2G_3H_1+G_2H_2+G_2G_6H_3+G_2G_3G_4H_3-G_2G_5H_2-G_2G_5G_6H_3}`))}`}
+
+function bdQ6(){const L=bdLine,P='+',N='\u2212';
+ return bdQ(6,'Determine the transfer function '+bdTF()+'.',
+ mmSvg(860,350,'Block diagram with G1 and G2 in the forward path, an input R that also feeds the second summing junction directly, feedback H2 around G2 and feedback H1 from the output to the first summing junction',
+  bdIn(150)+L([[50,150],[186,150]],1)+bdDot(90,150)+bdSum(200,150,{l:P,b:N})+
+  L([[90,150],[90,50],[440,50],[440,136]],1)+
+  L([[214,150],[270,150]],1)+bdB(270,128,'G','1')+L([[340,150],[426,150]],1)+bdSum(440,150,{l:P,t:P,b:N})+
+  L([[454,150],[550,150]],1)+bdB(550,128,'G','2')+L([[620,150],[800,150]],1)+bdDot(680,150)+bdDot(740,150)+bdOut(808,150)+
+  L([[680,150],[680,230],[640,230]],1)+bdB(570,208,'H','2')+L([[570,230],[440,230],[440,164]],1)+
+  L([[740,150],[740,310],[390,310]],1)+bdB(320,288,'H','1')+L([[320,310],[200,310],[200,164]],1)))}
+
 const UNITS={
  u1:{n:1,name:'Mathematical Modelling of Systems',sections:[
   {name:'Modelling of Mechanical Systems',topics:[
@@ -1745,9 +1781,9 @@ const UNITS={
    {t:'Example 3: Three-Mass System',h:mmL3},
    {t:'Example 4: Rotational System',h:mmL4}]},
   {name:'Block Diagram Reduction',topics:[
-   {t:'Example 1',h:bdQ1},{t:'Example 2',h:bdQ2},{t:'Example 3',h:bdQ3},{t:'Example 4',h:bdQ4},{t:'Example 5',h:bdQ5}]},
+   {t:'Example 1',h:bdQ1},{t:'Example 2',h:bdQ2},{t:'Example 3',h:bdQ3},{t:'Example 4',h:bdQ4},{t:'Example 5',h:bdQ5},{t:'Example 6',h:bdQ6}]},
   {name:"Signal Flow Graphs &amp; Mason\u2019s Gain Formula",topics:[
-   {t:"Mason\u2019s Gain Formula",h:sfL0},{t:'Example 1',h:sfL1},{t:'Example 2',h:sfL2},{t:'Example 3',h:sfL3}]}]},
+   {t:"Mason\u2019s Gain Formula",h:sfL0},{t:'Example 1',h:sfL1},{t:'Example 2',h:sfL2},{t:'Example 3',h:sfL3},{t:'Example 4',h:sfL4}]}]},
  u2:{n:2,name:'Time-Domain Response Analysis',sections:[
   {name:'Analysis of First Order Systems',topics:[
    {t:'First-Order Formula Sheet',h:tdL1},
