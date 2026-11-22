@@ -1611,10 +1611,10 @@ const BDANS={
  4:T`\dfrac{C(s)}{R(s)}=\dfrac{G_1G_2}{(1+G_1H_1)(1+G_2H_2)+G_1G_2H_3}`,
  5:T`\dfrac{C(s)}{R(s)}=\dfrac{G_3G_4\,(1+2G_1G_2)}{(1+G_3G_4)(1+2G_1G_2)+G_1G_3H_1H_2}`,
  6:T`\dfrac{C(s)}{R(s)}=\dfrac{G_2\,(1+G_1)}{1+G_2H_2+G_1G_2H_1}`};
-const bdQ=(n,txt,svg)=>'<div style="border:1px solid #000;margin:18px 0;background:#fff"><div style="background:#000;color:#fff;font-weight:700;padding:6px 18px">Example '+n+'</div><div style="padding:8px 18px 14px"><p style="margin:6px 0 2px">'+txt+'</p>'+svg+mmRes(eq(BDANS[n]))+'</div></div>';
+const bdQ=(n,txt,svg)=>'<div style="border:1px solid #000;margin:18px 0;background:#fff"><div style="background:#000;color:#fff;font-weight:700;padding:6px 18px">Example '+n+'</div><div style="padding:8px 18px 14px"><p style="margin:6px 0 2px">'+txt+'</p>'+svg+((n<=6)?'':mmRes(eq(BDANS[n])))+'</div></div>';
 const bdTF=()=>m(T`\dfrac{C(s)}{R(s)}`);
 
-function bdQ1(){const L=bdLine,P='+',N='\u2212';
+function bdQ1fig(){const L=bdLine,P='+',N='\u2212';
  return bdQ(1,'Using the method of block reduction, determine the transfer function of the total system.',
  mmSvg(860,360,'Block diagram with three summing junctions, G1, G2, G3 in the forward path and feedback through H1, H2 and a unity outer loop',
   bdIn(130)+L([[50,130],[96,130]],1)+bdSum(110,130,{l:P,b:P})+L([[124,130],[216,130]],1)+bdSum(230,130,{l:P,b:P})+L([[244,130],[300,130]],1)+
@@ -1624,7 +1624,7 @@ function bdQ1(){const L=bdLine,P='+',N='\u2212';
   L([[620,130],[620,260],[410,260]],1)+bdB(340,238,'H','1')+L([[340,260],[230,260],[230,144]],1)+
   L([[760,130],[760,330],[110,330],[110,144]],1)))}
 
-function bdQ2(){const L=bdLine,P='+',N='\u2212';
+function bdQ2fig(){const L=bdLine,P='+',N='\u2212';
  return bdQ(2,'Reduce the block diagram and determine the transfer function '+bdTF()+'.',
  mmSvg(880,410,'Block diagram with G1, a cascade of three summing junctions, G2 and G3, and feedback paths H1, H2 and H3 from the output',
   bdIn(100)+L([[50,100],[90,100]],1)+bdB(90,78,'G','1')+L([[160,100],[216,100]],1)+
@@ -1635,7 +1635,7 @@ function bdQ2(){const L=bdLine,P='+',N='\u2212';
   L([[760,280],[640,280]],1)+bdB(570,258,'H','2')+L([[570,280],[330,280],[330,114]],1)+
   L([[760,370],[640,370]],1)+bdB(570,348,'H','3')+L([[570,370],[230,370],[230,114]],1)))}
 
-function bdQ3(){const L=bdLine,P='+',N='\u2212';
+function bdQ3fig(){const L=bdLine,P='+',N='\u2212';
  return bdQ(3,'Reduce the given system to canonical form through step-by-step reduction.',
  mmSvg(930,430,'Block diagram with three summing junctions, G1, G2, G3 in series, a parallel forward path G4, and feedback through H1, H2 and a unity outer loop',
   bdIn(150)+L([[50,150],[86,150]],1)+bdSum(100,150,{l:P,b:N})+L([[114,150],[186,150]],1)+bdSum(200,150,{l:P,b:N})+L([[214,150],[270,150]],1)+
@@ -1647,7 +1647,7 @@ function bdQ3(){const L=bdLine,P='+',N='\u2212';
   L([[830,150],[830,400]],0)+bdDot(830,330)+L([[830,330],[320,330]],1)+bdB(250,308,'H','1')+L([[250,330],[200,330],[200,164]],1)+
   L([[830,400],[100,400],[100,164]],1)))}
 
-function bdQ4(){const L=bdLine,P='+',N='\u2212';
+function bdQ4fig(){const L=bdLine,P='+',N='\u2212';
  return bdQ(4,'Reduce the system network shown below to a single block representing the canonical transfer function.',
  mmSvg(760,440,'Block diagram with G1 and G2 in the forward path, summing junctions, and feedback paths H1, H2 and H3',
   bdIn(110)+L([[50,110],[106,110]],1)+bdSum(120,110,{l:P,b:N})+L([[134,110],[200,110]],1)+bdB(200,88,'G','1')+L([[270,110],[386,110]],1)+bdDot(330,110)+
@@ -1656,7 +1656,7 @@ function bdQ4(){const L=bdLine,P='+',N='\u2212';
   L([[330,110],[330,300],[260,300]],1)+bdB(190,278,'H','1')+L([[190,300],[134,300]],1)+bdSum(120,300,{r:P,b:P})+L([[120,286],[120,124]],1)+
   L([[620,400],[430,400]],1)+bdB(360,378,'H','3')+L([[360,400],[120,400],[120,314]],1)))}
 
-function bdQ5(){const L=bdLine,P='+',N='\u2212';
+function bdQ5fig(){const L=bdLine,P='+',N='\u2212';
  return bdQ(5,'Reduce the block diagram and determine the transfer function '+bdTF()+'.',
  mmSvg(900,460,'Block diagram with G3 and G4 in the forward path, feedback through H2, an inner system containing G1 and G2, H1, and a unity outer loop',
   bdIn(85)+L([[50,85],[136,85]],1)+bdSum(150,85,{l:P,t:N,b:N})+L([[164,85],[200,85]],1)+bdB(200,63,'G','3',75)+
@@ -1764,7 +1764,7 @@ function sfL4(){return `${sfEx(4,`${sfFig4()}<p>Find the overall gain ${m(T`\dfr
  ${stp('Path determinants')}<ul><li>${m('P_1')} passes through nodes ${m('1,2,3,4,5')}, so all loops touch it: ${m('\\Delta_1=1')}.</li><li>${m('P_2')} passes through nodes ${m('1,2,3,5')}. ${m('L_2,L_3,L_4,L_5')} touch it at nodes ${m('2,3')}, but ${m('L_1\\{4\\}')} does not, so ${m('\\Delta_2=1-L_1=1-G_5')}.</li></ul>
  ${stp('Transfer function')}${mmRes(eq(T`\dfrac{C(s)}{R(s)}=\dfrac{G_1G_2G_3G_4+G_1G_2G_6\,(1-G_5)}{1-G_5+G_2G_3H_1+G_2H_2+G_2G_6H_3+G_2G_3G_4H_3-G_2G_5H_2-G_2G_5G_6H_3}`))}`}
 
-function bdQ6(){const L=bdLine,P='+',N='\u2212';
+function bdQ6fig(){const L=bdLine,P='+',N='\u2212';
  return bdQ(6,'Determine the transfer function '+bdTF()+'.',
  mmSvg(860,350,'Block diagram with G1 and G2 in the forward path, an input R that also feeds the second summing junction directly, feedback H2 around G2 and feedback H1 from the output to the first summing junction',
   bdIn(150)+L([[50,150],[186,150]],1)+bdDot(90,150)+bdSum(200,150,{l:P,b:N})+
@@ -1773,6 +1773,181 @@ function bdQ6(){const L=bdLine,P='+',N='\u2212';
   L([[454,150],[550,150]],1)+bdB(550,128,'G','2')+L([[620,150],[800,150]],1)+bdDot(680,150)+bdDot(740,150)+bdOut(808,150)+
   L([[680,150],[680,230],[640,230]],1)+bdB(570,208,'H','2')+L([[570,230],[440,230],[440,164]],1)+
   L([[740,150],[740,310],[390,310]],1)+bdB(320,288,'H','1')+L([[320,310],[200,310],[200,164]],1)))}
+
+/* ----- Example 1: step-by-step reduction ----- */
+function bdLab(s){let o='',back=false;const em=(t,it,sub)=>{o+='<tspan'+(it?' font-style="italic"':'')+(sub?' dy="4" font-size="12"':back?' dy="-4"':'')+'>'+t+'</tspan>';back=!!sub};
+ for(let i=0;i<s.length;i++){const c=s[i];if(c=='G'||c=='H'){em(c,1,0);if(/\d/.test(s[i+1]||'')){i++;em(s[i],1,1)}}else em(c==' '?'\u00a0':c,0,0)}return o}
+const bdTx=(x,y,s,sz)=>'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+(sz||17)+'" font-family=\''+mmF+'\' fill="#000">'+bdLab(s)+'</text>';
+const bdBX=(x,y,w,s)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="44" fill="#fff" stroke="#000" stroke-width="1.6"/>'+bdTx(x+w/2,y+28,s);
+const bdBF=(x,y,w,nu,de)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="64" fill="#fff" stroke="#000" stroke-width="1.6"/>'+bdTx(x+w/2,y+25,nu)+mmLn(x+10,y+32,x+w-10,y+32,1.2)+bdTx(x+w/2,y+54,de);
+function bdS(k){const L=bdLine,P='+',N='\u2212',y=130,D='1 + G2G3H2 \u2212 G1G2H1',
+ head=bdIn(y)+L([[50,y],[96,y]],1)+bdSum(110,y,{l:P,b:P}),
+ out=(x)=>L([[x,y],[780,y]],1)+bdDot(700,y)+bdOut(788,y),
+ outer=L([[700,y],[700,330],[110,330],[110,y+14]],1);
+ if(k==1)return mmSvg(860,360,'Block diagram after moving the H1 take-off point to the output, so the feedback block is H1 over G3',
+  bdIn(y)+L([[50,y],[96,y]],1)+bdSum(110,y,{l:P,b:P})+L([[124,y],[216,y]],1)+bdSum(230,y,{l:P,b:P})+L([[244,y],[300,y]],1)+bdB(300,108,'G','1')+L([[370,y],[436,y]],1)+bdSum(450,y,{l:P,t:N})+L([[464,y],[520,y]],1)+bdB(520,108,'G','2')+L([[590,y],[650,y]],1)+bdB(650,108,'G','3')+L([[720,y],[800,y]],1)+bdOut(808,y)+bdDot(760,y)+
+  L([[760,y],[760,40],[680,40]],1)+bdB(610,18,'H','2')+L([[610,40],[450,40],[450,116]],1)+
+  L([[760,y],[760,260],[420,260]],1)+bdBX(330,238,90,'H1/G3')+L([[330,260],[230,260],[230,144]],1)+
+  L([[760,y],[760,330],[110,330],[110,144]],1));
+ if(k==2)return mmSvg(860,360,'Block diagram after moving the summing junction past G1 and merging it, so the feedback block is G1 H1 over G3',
+  head+L([[124,y],[180,y]],1)+bdB(180,108,'G','1')+L([[250,y],[316,y]],1)+bdSum(330,y,{l:P,t:N,b:P})+L([[344,y],[400,y]],1)+bdB(400,108,'G','2')+L([[470,y],[530,y]],1)+bdB(530,108,'G','3')+out(600)+
+  L([[700,y],[700,40],[580,40]],1)+bdB(510,18,'H','2')+L([[510,40],[330,40],[330,116]],1)+
+  L([[700,y],[700,260],[490,260]],1)+bdBX(360,238,130,'G1H1/G3')+L([[360,260],[330,260],[330,144]],1)+outer);
+ if(k==3)return mmSvg(860,360,'Block diagram with the two parallel feedback paths combined into one block H2 minus G1 H1 over G3',
+  head+L([[124,y],[180,y]],1)+bdB(180,108,'G','1')+L([[250,y],[316,y]],1)+bdSum(330,y,{l:P,b:N})+L([[344,y],[400,y]],1)+bdB(400,108,'G','2')+L([[470,y],[530,y]],1)+bdB(530,108,'G','3')+out(600)+
+  L([[700,y],[700,260],[560,260]],1)+bdBX(370,238,190,'H2 \u2212 G1H1/G3')+L([[370,260],[330,260],[330,144]],1)+outer);
+ if(k==4)return mmSvg(860,360,'Block diagram with the inner feedback loop replaced by a single block, in series with G1',
+  head+L([[124,y],[200,y]],1)+bdB(200,108,'G','1')+L([[270,y],[340,y]],1)+bdBF(340,98,250,'G2G3',D)+out(590)+outer);
+ if(k==5)return mmSvg(860,360,'Block diagram with G1 and the inner loop block combined into one forward block with unity positive feedback',
+  head+L([[124,y],[210,y]],1)+bdBF(210,98,270,'G1G2G3',D)+out(480)+outer);
+ return mmSvg(860,200,'Single block representing the overall transfer function',
+  bdIn(y)+L([[50,y],[240,y]],1)+bdBF(240,98,400,'G1G2G3','1 \u2212 G1G2G3 \u2212 G1G2H1 + G2G3H2')+L([[640,y],[780,y]],1)+bdOut(788,y))}
+
+function bdQ1(){const tf=m(T`\dfrac{C(s)}{R(s)}`);
+ return bdQ1fig()+`<p>The reduction uses three rules: a take-off point moved forward past a block ${m('G')} needs its branch divided by ${m('G')}; a summing point moved forward past ${m('G')} needs its extra input multiplied by ${m('G')}; and a feedback loop with forward gain ${m('F')} and feedback gain ${m('H')} reduces to ${m(T`F/(1\pm FH)`)}.</p>
+ ${stp('Step 1. Move the H<sub>1</sub> take-off point to the output')}<p>${m('H_1')} is picked off between ${m('G_2')} and ${m('G_3')}. Moving the take-off point forward past ${m('G_3')} means it now samples ${m('C=G_3Y')} instead of ${m('Y')}, so the branch must be divided by ${m('G_3')}: ${m('H_1')} becomes ${m('H_1/G_3')}. Now ${m('G_2')} and ${m('G_3')} are in cascade and both feedbacks start at ${m('C')}.</p>${bdS(1)}
+ ${stp('Step 2. Move the summing junction past G<sub>1</sub> and merge')}<p>The junction that receives ${m('H_1/G_3')} sits before ${m('G_1')}. Moving it forward past ${m('G_1')} multiplies the feedback input by ${m('G_1')}, and the other input now passes through ${m('G_1')} first. It then sits next to the junction that receives ${m('H_2')}, and the two combine into one junction.</p>${eq(T`G_1\left(A+\dfrac{H_1}{G_3}C\right)=G_1A+\dfrac{G_1H_1}{G_3}C`)}${bdS(2)}
+ ${stp('Step 3. Combine the parallel feedback paths')}<p>Both feedback paths run from ${m('C')} to the same junction, one with sign ${m('-')} through ${m('H_2')} and one with sign ${m('+')} through ${m('G_1H_1/G_3')}, so they add into a single negative feedback block:</p>${eq(T`H_{eq}=H_2-\dfrac{G_1H_1}{G_3}`)}${bdS(3)}
+ ${stp('Step 4. Reduce the inner feedback loop')}<p>${m('G_2')} and ${m('G_3')} are in cascade with negative feedback ${m('H_{eq}')}:</p>${eq(T`\dfrac{G_2G_3}{1+G_2G_3H_{eq}}=\dfrac{G_2G_3}{1+G_2G_3H_2-G_1G_2H_1}`)}<p>since ${m(T`G_2G_3\cdot\dfrac{G_1H_1}{G_3}=G_1G_2H_1`)}.</p>${bdS(4)}
+ ${stp('Step 5. Combine the series blocks')}<p>${m('G_1')} is in series with the loop block just found:</p>${eq(T`F=G_1\cdot\dfrac{G_2G_3}{1+G_2G_3H_2-G_1G_2H_1}=\dfrac{G_1G_2G_3}{1+G_2G_3H_2-G_1G_2H_1}`)}${bdS(5)}
+ ${stp('Step 6. Close the outer unity positive feedback loop')}<p>The remaining loop has forward gain ${m('F')} and unity feedback with a ${m('+')} sign, so the denominator is ${m('1-F')}:</p>${eq(T`\dfrac{C(s)}{R(s)}=\dfrac{F}{1-F}=\dfrac{G_1G_2G_3}{1+G_2G_3H_2-G_1G_2H_1-G_1G_2G_3}`)}${bdS(6)}
+ ${mmRes(eq(BDANS[1]))}`}
+
+/* ----- Example 2: step-by-step reduction ----- */
+function bdT(k){const L=bdLine,P='+',N='\u2212',y=130,HE='H1 \u2212 H2 + H3',
+ head=bdIn(y)+L([[50,y],[110,y]],1)+bdB(110,108,'G','1'),
+ tail=(x)=>L([[x,y],[800,y]],1)+bdDot(700,y)+bdOut(808,y);
+ if(k==1)return mmSvg(860,370,'Block diagram with the three summing junctions merged into one, with H2 entering from above and H1 and H3 entering from below',
+  head+L([[180,y],[316,y]],1)+bdSum(330,y,{l:P,t:P,b:N})+L([[344,y],[420,y]],1)+bdB(420,108,'G','2')+L([[490,y],[540,y]],1)+bdB(540,108,'G','3')+tail(610)+
+  L([[700,y],[700,40],[520,40]],1)+bdB(450,18,'H','2')+L([[450,40],[330,40],[330,116]],1)+
+  L([[700,y],[700,330],[520,330]],1)+bdB(450,308,'H','3')+L([[450,330],[330,330],[330,144]],1)+
+  L([[700,260],[520,260]],0)+bdDot(700,260)+bdB(450,238,'H','1')+L([[450,260],[330,260]],0)+bdDot(330,260));
+ if(k==2)return mmSvg(860,330,'Block diagram with the three feedback paths combined into one block H1 minus H2 plus H3',
+  head+L([[180,y],[316,y]],1)+bdSum(330,y,{l:P,b:N})+L([[344,y],[420,y]],1)+bdB(420,108,'G','2')+L([[490,y],[540,y]],1)+bdB(540,108,'G','3')+tail(610)+
+  L([[700,y],[700,260],[560,260]],1)+bdBX(370,238,190,HE)+L([[370,260],[330,260],[330,144]],1));
+ if(k==3)return mmSvg(860,330,'Block diagram with G2 and G3 combined into one block G2 G3',
+  head+L([[180,y],[316,y]],1)+bdSum(330,y,{l:P,b:N})+L([[344,y],[430,y]],1)+bdBX(430,108,110,'G2G3')+tail(540)+
+  L([[700,y],[700,260],[560,260]],1)+bdBX(370,238,190,HE)+L([[370,260],[330,260],[330,144]],1));
+ if(k==4)return mmSvg(860,200,'Block diagram with the feedback loop replaced by a single block, in series with G1',
+  head+L([[180,y],[250,y]],1)+bdBF(250,98,280,'G2G3','1 + G2G3(H1 \u2212 H2 + H3)')+L([[530,y],[800,y]],1)+bdOut(808,y));
+ return mmSvg(860,200,'Single block representing the overall transfer function',
+  bdIn(y)+L([[50,y],[210,y]],1)+bdBF(210,98,420,'G1G2G3','1 + G2G3(H1 \u2212 H2 + H3)')+L([[630,y],[800,y]],1)+bdOut(808,y))}
+
+function bdQ2(){return bdQ2fig()+`<p>The reduction uses four rules: summing junctions with no block between them can be merged into one junction; feedback paths that start at the same point and end at the same junction add; blocks in series multiply; and a feedback loop with forward gain ${m('F')} and feedback gain ${m('H')} reduces to ${m(T`F/(1+FH)`)}.</p>
+ ${stp('Step 1. Merge the three summing junctions')}<p>There is no block between the three junctions, so they behave as a single junction that adds all four signals: ${m('G_1R')}, ${m('-H_3C')}, ${m('+H_2C')} and ${m('-H_1C')}. The order in which they are added does not matter.</p>${eq(T`E=G_1R-H_3C+H_2C-H_1C`)}${bdT(1)}
+ ${stp('Step 2. Combine the parallel feedback paths')}<p>All three feedback paths run from ${m('C')} to the same junction, so they add into one negative feedback block:</p>${eq(T`-H_3C+H_2C-H_1C=-(H_1-H_2+H_3)\,C\quad\Rightarrow\quad H_{eq}=H_1-H_2+H_3`)}${bdT(2)}
+ ${stp('Step 3. Combine the blocks in series')}<p>${m('G_2')} and ${m('G_3')} are in cascade:</p>${eq(T`G_2\cdot G_3=G_2G_3`)}${bdT(3)}
+ ${stp('Step 4. Reduce the feedback loop')}<p>The loop has forward gain ${m('G_2G_3')} and negative feedback ${m('H_{eq}')}:</p>${eq(T`\dfrac{G_2G_3}{1+G_2G_3H_{eq}}=\dfrac{G_2G_3}{1+G_2G_3(H_1-H_2+H_3)}`)}${bdT(4)}
+ ${stp('Step 5. Combine with G<sub>1</sub>')}<p>${m('G_1')} is in series with the loop block:</p>${eq(T`\dfrac{C(s)}{R(s)}=G_1\cdot\dfrac{G_2G_3}{1+G_2G_3(H_1-H_2+H_3)}=\dfrac{G_1G_2G_3}{1+G_2G_3(H_1-H_2+H_3)}`)}${bdT(5)}
+ ${mmRes(eq(BDANS[2]))}`}
+
+/* ----- Example 3: step-by-step reduction ----- */
+function bdU(k){const L=bdLine,P='+',N='\u2212',y=130,
+ head=bdIn(y)+L([[50,y],[96,y]],1)+bdSum(110,y,{l:P,b:N})+L([[124,y],[180,y]],1)+bdB(180,108,'G','1'),
+ fb=(x,xe,lab,w)=>L([[x,y],[x,270],[xe+w,270]],1)+bdBX(xe,248,w,lab)+L([[xe,270],[110,270],[110,144]],1),
+ H2=L([[510,y],[510,200],[480,200]],1)+bdB(410,178,'H','2')+L([[410,200],[330,200],[330,144]],1)+bdDot(510,y);
+ if(k==1)return mmSvg(860,300,'Block diagram with the unity feedback and H1 combined into one feedback block 1 plus H1',
+  head+L([[250,y],[316,y]],1)+bdSum(330,y,{l:P,b:N})+L([[344,y],[410,y]],1)+bdDot(380,y)+bdB(410,108,'G','2')+L([[480,y],[540,y]],1)+bdB(540,108,'G','3')+L([[610,y],[636,y]],1)+bdSum(650,y,{l:P,t:P})+L([[664,y],[800,y]],1)+bdDot(730,y)+bdOut(808,y)+
+  L([[380,y],[380,40],[470,40]],1)+bdB(470,18,'G','4')+L([[540,40],[650,40],[650,116]],1)+H2+fb(730,300,'1 + H1',110));
+ if(k==2)return mmSvg(860,300,'Block diagram after moving the G4 take-off point past G2, so the parallel branch is G4 over G2',
+  head+L([[250,y],[316,y]],1)+bdSum(330,y,{l:P,b:N})+L([[344,y],[410,y]],1)+bdB(410,108,'G','2')+L([[480,y],[540,y]],1)+bdB(540,108,'G','3')+L([[610,y],[636,y]],1)+bdSum(650,y,{l:P,t:P})+L([[664,y],[800,y]],1)+bdDot(730,y)+bdOut(808,y)+
+  L([[510,y],[510,40],[530,40]],1)+bdBX(530,18,90,'G4/G2')+L([[620,40],[650,40],[650,116]],1)+H2+fb(730,300,'1 + H1',110));
+ if(k==3)return mmSvg(860,300,'Block diagram with the two parallel forward branches combined into one block G3 plus G4 over G2',
+  head+L([[250,y],[316,y]],1)+bdSum(330,y,{l:P,b:N})+L([[344,y],[410,y]],1)+bdB(410,108,'G','2')+L([[480,y],[540,y]],1)+bdBX(540,108,170,'G3 + G4/G2')+L([[710,y],[800,y]],1)+bdDot(750,y)+bdOut(808,y)+H2+fb(750,300,'1 + H1',110));
+ if(k==4)return mmSvg(860,300,'Block diagram with the H2 loop around G2 replaced by the block G2 over 1 plus G2 H2',
+  head+L([[250,y],[300,y]],1)+bdBF(300,98,130,'G2','1 + G2H2')+L([[430,y],[460,y]],1)+bdBX(460,108,170,'G3 + G4/G2')+L([[630,y],[800,y]],1)+bdDot(720,y)+bdOut(808,y)+fb(720,300,'1 + H1',110));
+ if(k==5)return mmSvg(860,300,'Block diagram with all forward blocks combined into one block K, with feedback 1 plus H1',
+  bdIn(y)+L([[50,y],[96,y]],1)+bdSum(110,y,{l:P,b:N})+L([[124,y],[190,y]],1)+bdBF(190,98,330,'G1(G2G3 + G4)','1 + G2H2')+L([[520,y],[800,y]],1)+bdDot(660,y)+bdOut(808,y)+fb(660,300,'1 + H1',110));
+ return mmSvg(860,200,'Single block representing the overall transfer function',
+  bdIn(y)+L([[50,y],[200,y]],1)+bdBF(200,98,460,'G1(G2G3 + G4)','1 + G2H2 + G1(G2G3 + G4)(1 + H1)')+L([[660,y],[800,y]],1)+bdOut(808,y))}
+
+function bdQ3(){return bdQ3fig()+`<p>The reduction uses these rules: summing junctions with no block between them can be merged; feedback paths from the same point add; a take-off point moved forward past a block ${m('G')} needs its branch divided by ${m('G')}; parallel forward paths add; blocks in series multiply; and a feedback loop with forward gain ${m('F')} and feedback gain ${m('H')} reduces to ${m(T`F/(1+FH)`)}.</p>
+ ${stp('Step 1. Combine the two feedback paths from the output')}<p>The first two summing junctions have no block between them, so they merge. The unity feedback and ${m('H_1')} both run from ${m('C')} to this junction, so they add into one negative feedback block:</p>${eq(T`R-C-H_1C=R-(1+H_1)\,C\quad\Rightarrow\quad H_{eq}=1+H_1`)}${bdU(1)}
+ ${stp('Step 2. Move the G<sub>4</sub> take-off point past G<sub>2</sub>')}<p>The ${m('G_4')} branch is taken from the input of ${m('G_2')}. Moving the take-off point forward past ${m('G_2')} means it samples ${m('G_2\\times')} the original signal, so the branch is divided by ${m('G_2')}:</p>${eq(T`G_4\,u=\dfrac{G_4}{G_2}\,(G_2u)`)}${bdU(2)}
+ ${stp('Step 3. Combine the parallel forward paths')}<p>Both forward branches now start at the output of ${m('G_2')} and end at the output summing junction, so they add:</p>${eq(T`G_3+\dfrac{G_4}{G_2}=\dfrac{G_2G_3+G_4}{G_2}`)}${bdU(3)}
+ ${stp('Step 4. Reduce the H<sub>2</sub> loop')}<p>${m('G_2')} has negative feedback ${m('H_2')}:</p>${eq(T`\dfrac{G_2}{1+G_2H_2}`)}${bdU(4)}
+ ${stp('Step 5. Combine the blocks in series')}<p>${m('G_1')}, the loop block and the parallel block are in series:</p>${eq(T`K=G_1\cdot\dfrac{G_2}{1+G_2H_2}\cdot\dfrac{G_2G_3+G_4}{G_2}=\dfrac{G_1(G_2G_3+G_4)}{1+G_2H_2}`)}${bdU(5)}
+ ${stp('Step 6. Close the outer feedback loop')}<p>The remaining loop has forward gain ${m('K')} and negative feedback ${m('1+H_1')}:</p>${eq(T`\dfrac{C(s)}{R(s)}=\dfrac{K}{1+K(1+H_1)}=\dfrac{G_1(G_2G_3+G_4)}{1+G_2H_2+G_1(G_2G_3+G_4)(1+H_1)}`)}${bdU(6)}
+ ${mmRes(eq(BDANS[3]))}`}
+
+/* ----- Example 4: step-by-step reduction ----- */
+function bdV(k){const L=bdLine,P='+',N='\u2212',y=110,
+ head=bdIn(y)+L([[50,y],[96,y]],1)+bdSum(110,y,{l:P,b:N}),
+ tl=(x)=>L([[x,y],[700,y]],1)+bdDot(620,y)+bdOut(708,y),
+ h2=L([[620,y],[620,210],[510,210]],1)+bdDot(620,210)+bdB(440,188,'H','2')+L([[440,210],[400,210],[400,124]],1),
+ h1=L([[340,y],[340,300],[270,300]],1)+bdB(200,278,'H','1')+L([[200,300],[180,300],[180,124]],1),
+ h3=L([[620,y],[620,400],[430,400]],1)+bdB(360,378,'H','3')+L([[360,400],[110,400],[110,124]],1);
+ if(k==1)return mmSvg(760,440,'Block diagram with the first junction split into two adjacent junctions, one for H3 and one for H1',
+  head+L([[124,y],[166,y]],1)+bdSum(180,y,{l:P,b:N})+L([[194,y],[230,y]],1)+bdB(230,88,'G','1')+L([[300,y],[386,y]],1)+bdDot(340,y)+bdSum(400,y,{l:P,b:N})+L([[414,y],[470,y]],1)+bdB(470,88,'G','2')+tl(540)+h2+h1+h3);
+ if(k==2)return mmSvg(760,440,'Block diagram with the H2 loop around G2 replaced by the block G2 over 1 plus G2 H2',
+  head+L([[124,y],[166,y]],1)+bdSum(180,y,{l:P,b:N})+L([[194,y],[230,y]],1)+bdB(230,88,'G','1')+L([[300,y],[400,y]],1)+bdDot(340,y)+bdBF(400,78,170,'G2','1 + G2H2')+tl(570)+h1+h3);
+ if(k==3)return mmSvg(760,440,'Block diagram with the H1 loop around G1 replaced by the block G1 over 1 plus G1 H1',
+  head+L([[124,y],[180,y]],1)+bdBF(180,78,150,'G1','1 + G1H1')+L([[330,y],[400,y]],1)+bdBF(400,78,170,'G2','1 + G2H2')+tl(570)+h3);
+ if(k==4)return mmSvg(760,440,'Block diagram with the two loop blocks combined in series into one forward block, with feedback H3',
+  head+L([[124,y],[180,y]],1)+bdBF(180,78,390,'G1G2','(1 + G1H1)(1 + G2H2)')+tl(570)+h3);
+ return mmSvg(860,200,'Single block representing the overall transfer function',
+  bdIn(130)+L([[50,130],[230,130]],1)+bdBF(230,98,420,'G1G2','(1 + G1H1)(1 + G2H2) + G1G2H3')+L([[650,130],[800,130]],1)+bdOut(808,130))}
+
+function bdQ4(){return bdQ4fig()+`<p>The reduction uses these rules: a summing junction with several inputs can be split into adjacent junctions, taken in any order; a feedback loop with forward gain ${m('F')} and feedback gain ${m('H')} reduces to ${m(T`F/(1+FH)`)}; and blocks in series multiply.</p>
+ ${stp('Step 1. Split the first junction')}<p>The first junction receives ${m('R')}, the ${m('H_1')} signal taken after ${m('G_1')}, and the ${m('H_3')} signal taken from ${m('C')}. Because the order of addition does not matter, treat it as two adjacent junctions. The first subtracts ${m('H_3C')}; the second subtracts ${m('H_1X')}, where ${m('X')} is the output of ${m('G_1')}. Now ${m('H_1')} closes a loop around ${m('G_1')} alone, and ${m('H_2')} closes a loop around ${m('G_2')} alone.</p>${eq(T`E_1=R-H_3C-H_1X,\qquad X=G_1E_1`)}${bdV(1)}
+ ${stp('Step 2. Reduce the H<sub>2</sub> loop')}<p>${m('G_2')} has negative feedback ${m('H_2')}:</p>${eq(T`\dfrac{G_2}{1+G_2H_2}`)}${bdV(2)}
+ ${stp('Step 3. Reduce the H<sub>1</sub> loop')}<p>${m('G_1')} has negative feedback ${m('H_1')}, and the ${m('H_3')} feedback enters before this loop, so it is unaffected:</p>${eq(T`\dfrac{G_1}{1+G_1H_1}`)}${bdV(3)}
+ ${stp('Step 4. Combine the blocks in series')}${eq(T`F=\dfrac{G_1}{1+G_1H_1}\cdot\dfrac{G_2}{1+G_2H_2}=\dfrac{G_1G_2}{(1+G_1H_1)(1+G_2H_2)}`)}${bdV(4)}
+ ${stp('Step 5. Close the H<sub>3</sub> loop')}<p>The remaining loop has forward gain ${m('F')} and negative feedback ${m('H_3')}:</p>${eq(T`\dfrac{C(s)}{R(s)}=\dfrac{F}{1+FH_3}=\dfrac{G_1G_2}{(1+G_1H_1)(1+G_2H_2)+G_1G_2H_3}`)}${bdV(5)}
+ ${mmRes(eq(BDANS[4]))}`}
+
+/* ----- Example 5: step-by-step reduction ----- */
+function bdY(k){const L=bdLine,P='+',N='\u2212',
+ top=(xd)=>L([[xd,85],[xd,20],[150,20],[150,71]],1),
+ base=bdIn(85)+L([[50,85],[136,85]],1)+bdSum(150,85,{l:P,t:N,b:N})+L([[164,85],[200,85]],1)+bdB(200,63,'G','3',75)+L([[275,85],[370,85]],1)+bdDot(315,85)+mmT(315,66,'N','')+bdB(370,63,'G','4',75)+L([[445,85],[860,85]],1)+bdDot(507,85)+bdOut(866,85)+top(507),
+ fb=L([[750,278],[750,215],[708,215]],1)+bdB(632,193,'H','1',76)+L([[632,215],[436,215,'h'],[150,215],[150,99]],1);
+ if(k==1)return mmSvg(900,430,'Block diagram with the two adjacent junctions merged into one, with the feedback through G2 doubled to 2 G2',
+  base+L([[315,85],[315,172],[345,172]],1)+bdB(345,150,'H','2',75)+L([[420,172],[436,172],[436,278],[462,278]],1)+bdSum(476,278,{l:P,b:N})+L([[490,278],[625,278]],1)+bdB(625,256,'G','1',75)+L([[700,278],[750,278]],0)+bdDot(750,278)+mmT(759,271,'Y','1','start')+fb+
+  L([[750,278],[750,380],[670,380]],1)+bdBX(595,358,75,'2G2')+L([[595,380],[476,380],[476,292]],1));
+ if(k==2)return mmSvg(900,300,'Block diagram with the G1 loop replaced by the block G1 over 1 plus 2 G1 G2',
+  base+L([[315,85],[315,190],[345,190]],1)+bdB(345,168,'H','2',75)+L([[420,190],[450,190]],1)+bdBF(450,158,160,'G1','1 + 2G1G2')+L([[610,190],[680,190],[680,260],[636,260]],1)+bdBX(560,238,76,'H1')+L([[560,260],[150,260],[150,99]],1));
+ if(k==3)return mmSvg(900,260,'Block diagram with H2, the loop block and H1 combined into one feedback block from N to the first junction',
+  base+L([[315,85],[315,190],[300,190]],1)+bdBF(160,158,140,'G1H1H2','1 + 2G1G2')+L([[160,190],[150,190],[150,99]],1));
+ if(k==4)return mmSvg(900,140,'Block diagram with the inner loop around G3 replaced by a single block, followed by G4 and unity feedback',
+  bdIn(85)+L([[50,85],[136,85]],1)+bdSum(150,85,{l:P,t:N})+L([[164,85],[200,85]],1)+bdBF(200,53,270,'G3(1 + 2G1G2)','1 + 2G1G2 + G1G3H1H2')+L([[470,85],[510,85]],1)+bdB(510,63,'G','4',75)+L([[585,85],[860,85]],1)+bdDot(660,85)+bdOut(866,85)+top(660));
+ if(k==5)return mmSvg(900,140,'Block diagram with all forward blocks combined into one block F with unity negative feedback',
+  bdIn(85)+L([[50,85],[136,85]],1)+bdSum(150,85,{l:P,t:N})+L([[164,85],[220,85]],1)+bdBF(220,53,300,'G3G4(1 + 2G1G2)','1 + 2G1G2 + G1G3H1H2')+L([[520,85],[860,85]],1)+bdDot(600,85)+bdOut(866,85)+top(600));
+ return mmSvg(860,200,'Single block representing the overall transfer function',
+  bdIn(130)+L([[50,130],[200,130]],1)+bdBF(200,98,450,'G3G4(1 + 2G1G2)','(1 + G3G4)(1 + 2G1G2) + G1G3H1H2')+L([[650,130],[800,130]],1)+bdOut(808,130))}
+
+function bdQ5(){return bdQ5fig()+`<p>The reduction uses these rules: feedback paths that start at the same point and end at adjacent junctions add; blocks in series multiply; a junction with several inputs can be split into adjacent junctions; and a feedback loop with forward gain ${m('F')} and feedback gain ${m('H')} reduces to ${m(T`F/(1+FH)`)}. Work from the innermost loop outwards.</p>
+ ${stp('Step 1. Merge the two junctions fed through G<sub>2</sub>')}<p>Both lower junctions subtract the same signal ${m('G_2Y_1')}, taken from ${m('Y_1')} through ${m('G_2')}, and no block lies between them. They merge into one junction, and the two identical feedback paths add into ${m('2G_2')}:</p>${eq(T`S=H_2N-G_2Y_1-G_2Y_1=H_2N-2G_2Y_1`)}${bdY(1)}
+ ${stp('Step 2. Reduce the innermost loop')}<p>${m('G_1')} has negative feedback ${m('2G_2')}:</p>${eq(T`\dfrac{Y_1}{S}=\dfrac{G_1}{1+2G_1G_2}`)}${bdY(2)}
+ ${stp('Step 3. Combine the path from N back to the first junction')}<p>The signal ${m('N')} passes through ${m('H_2')}, the loop block and then ${m('H_1')}, which are in series, and returns to the first junction with a negative sign:</p>${eq(T`B=H_2\cdot\dfrac{G_1}{1+2G_1G_2}\cdot H_1=\dfrac{G_1H_1H_2}{1+2G_1G_2}`)}${bdY(3)}
+ ${stp('Step 4. Reduce the loop around G<sub>3</sub>')}<p>The first junction receives ${m('R')}, ${m('-C')} and ${m('-BN')}. Split it into two adjacent junctions: ${m('R-C')} first, then ${m('-BN')}. Now ${m('B')} closes a loop around ${m('G_3')} alone:</p>${eq(T`\dfrac{G_3}{1+G_3B}=\dfrac{G_3}{1+\dfrac{G_1G_3H_1H_2}{1+2G_1G_2}}=\dfrac{G_3(1+2G_1G_2)}{1+2G_1G_2+G_1G_3H_1H_2}`)}${bdY(4)}
+ ${stp('Step 5. Combine with G<sub>4</sub>')}${eq(T`F=\dfrac{G_3(1+2G_1G_2)}{1+2G_1G_2+G_1G_3H_1H_2}\cdot G_4=\dfrac{G_3G_4(1+2G_1G_2)}{1+2G_1G_2+G_1G_3H_1H_2}`)}${bdY(5)}
+ ${stp('Step 6. Close the unity feedback loop')}<p>With forward gain ${m('F')} and unity negative feedback, the transfer function is ${m(T`F/(1+F)`)}. Multiply the numerator and denominator by ${m('D=1+2G_1G_2+G_1G_3H_1H_2')}:</p>${eq(T`\dfrac{C(s)}{R(s)}=\dfrac{G_3G_4(1+2G_1G_2)}{1+2G_1G_2+G_1G_3H_1H_2+G_3G_4(1+2G_1G_2)}=\dfrac{G_3G_4(1+2G_1G_2)}{(1+G_3G_4)(1+2G_1G_2)+G_1G_3H_1H_2}`)}${bdY(6)}
+ ${mmRes(eq(BDANS[5]))}`}
+
+/* ----- Example 6: step-by-step reduction ----- */
+function bdZ(k){const L=bdLine,P='+',N='\u2212',y=150,
+ rin=bdIn(y)+L([[50,y],[140,y]],1),
+ dir=(x)=>L([[90,y],[90,50],[x,50],[x,136]],1),
+ fbB=(x)=>L([[x,y],[x,260],[510,260]],1)+bdBX(320,238,190,'H2 + G1H1')+L([[320,260],[300,260],[300,164]],1);
+ if(k==1)return mmSvg(860,350,'Block diagram after moving the first summing junction past G1, with feedback G1 H1 and H2 entering two adjacent junctions',
+  rin+bdDot(90,y)+bdB(140,128,'G','1')+L([[210,y],[286,y]],1)+bdSum(300,y,{l:P,t:P,b:N})+L([[314,y],[356,y]],1)+bdSum(370,y,{l:P,b:N})+L([[384,y],[470,y]],1)+bdB(470,128,'G','2')+L([[540,y],[800,y]],1)+bdDot(620,y)+bdDot(700,y)+bdOut(808,y)+dir(300)+
+  L([[620,y],[620,230],[510,230]],1)+bdB(440,208,'H','2')+L([[440,230],[370,230],[370,164]],1)+L([[700,y],[700,310],[450,310]],1)+bdBX(350,288,100,'G1H1')+L([[350,310],[300,310],[300,164]],1));
+ if(k==2)return mmSvg(860,320,'Block diagram with the two junctions merged and the feedback paths combined into H2 plus G1 H1',
+  rin+bdDot(90,y)+bdB(140,128,'G','1')+L([[210,y],[286,y]],1)+bdSum(300,y,{l:P,t:P,b:N})+L([[314,y],[380,y]],1)+bdB(380,128,'G','2')+L([[450,y],[800,y]],1)+bdDot(560,y)+bdOut(808,y)+dir(300)+fbB(560));
+ if(k==3)return mmSvg(860,320,'Block diagram with the two parallel forward paths from R combined into one block 1 plus G1',
+  rin+bdBX(140,128,110,'1 + G1')+L([[250,y],[286,y]],1)+bdSum(300,y,{l:P,b:N})+L([[314,y],[380,y]],1)+bdB(380,128,'G','2')+L([[450,y],[800,y]],1)+bdDot(560,y)+bdOut(808,y)+fbB(560));
+ if(k==4)return mmSvg(860,320,'Block diagram with the loop around G2 replaced by a single block, in series with 1 plus G1',
+  rin+bdBX(140,128,110,'1 + G1')+L([[250,y],[300,y]],1)+bdBF(300,118,240,'G2','1 + G2H2 + G1G2H1')+L([[540,y],[800,y]],1)+bdOut(808,y));
+ return mmSvg(860,200,'Single block representing the overall transfer function',
+  bdIn(130)+L([[50,130],[200,130]],1)+bdBF(200,98,440,'G2(1 + G1)','1 + G2H2 + G1G2H1')+L([[640,130],[800,130]],1)+bdOut(808,130))}
+
+function bdQ6(){return bdQ6fig()+`<p>The reduction uses these rules: a summing junction moved forward past a block ${m('G')} needs its other input multiplied by ${m('G')}; adjacent junctions merge; parallel paths between the same two points add; blocks in series multiply; and a feedback loop with forward gain ${m('F')} and feedback gain ${m('H')} reduces to ${m(T`F/(1+FH)`)}.</p>
+ ${stp('Step 1. Move the first junction forward past G<sub>1</sub>')}<p>The first junction forms ${m('R-H_1C')} and passes it through ${m('G_1')}. Moving the junction forward past ${m('G_1')} means ${m('R')} now goes through ${m('G_1')} and the feedback input is multiplied by ${m('G_1')}:</p>${eq(T`G_1(R-H_1C)=G_1R-G_1H_1C`)}<p>The junction now sits next to the one that receives ${m('R')} directly and ${m('H_2')}.</p>${bdZ(1)}
+ ${stp('Step 2. Merge the junctions and combine the feedback paths')}<p>No block lies between the two junctions, so they merge into one. Both feedback paths run from ${m('C')} to this junction with a negative sign, so they add:</p>${eq(T`H_{eq}=H_2+G_1H_1`)}${bdZ(2)}
+ ${stp('Step 3. Combine the parallel forward paths from R')}<p>${m('R')} reaches the junction through ${m('G_1')} and through a direct path of gain ${m('1')}, both positive, so they add:</p>${eq(T`G_1+1=1+G_1`)}${bdZ(3)}
+ ${stp('Step 4. Reduce the loop around G<sub>2</sub>')}<p>${m('G_2')} has negative feedback ${m('H_{eq}')}:</p>${eq(T`\dfrac{G_2}{1+G_2H_{eq}}=\dfrac{G_2}{1+G_2H_2+G_1G_2H_1}`)}${bdZ(4)}
+ ${stp('Step 5. Combine the blocks in series')}${eq(T`\dfrac{C(s)}{R(s)}=(1+G_1)\cdot\dfrac{G_2}{1+G_2H_2+G_1G_2H_1}=\dfrac{G_2(1+G_1)}{1+G_2H_2+G_1G_2H_1}`)}${bdZ(5)}
+ ${mmRes(eq(BDANS[6]))}`}
 
 const UNITS={
  u1:{n:1,name:'Mathematical Modelling of Systems',sections:[
