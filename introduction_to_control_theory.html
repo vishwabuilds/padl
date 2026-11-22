@@ -1604,7 +1604,7 @@ const bdSum=(cx,cy,s)=>{const r=14,q=r*.7071;return '<circle cx="'+cx+'" cy="'+c
 const bdB=(x,y,n,sub,w)=>mmBox(x,y,w||70,44,n,sub);
 const bdIn=(y)=>mmT(6,y+6,'R','','start','(<tspan font-style="italic">s</tspan>)');
 const bdOut=(x,y)=>mmT(x,y+6,'C','','start','(<tspan font-style="italic">s</tspan>)');
-const bdQ=(n,txt,svg)=>'<div style="border:1px solid #000;margin:18px 0;background:#fff"><div style="background:#000;color:#fff;font-weight:700;padding:6px 18px">Question '+n+'</div><div style="padding:8px 18px 14px"><p style="margin:6px 0 2px">'+txt+'</p>'+svg+'</div></div>';
+const bdQ=(n,txt,svg)=>'<div style="border:1px solid #000;margin:18px 0;background:#fff"><div style="background:#000;color:#fff;font-weight:700;padding:6px 18px">Example '+n+'</div><div style="padding:8px 18px 14px"><p style="margin:6px 0 2px">'+txt+'</p>'+svg+'</div></div>';
 const bdTF=()=>m(T`\dfrac{C(s)}{R(s)}`);
 
 function bdQ1(){const L=bdLine,P='+',N='\u2212';
@@ -1661,6 +1661,83 @@ function bdQ5(){const L=bdLine,P='+',N='\u2212';
   L([[700,278],[750,278]],0)+bdDot(750,278)+mmT(759,271,'Y','1','start')+
   L([[750,278],[750,380],[670,380]],1)+bdB(595,358,'G','2',75)+L([[595,380],[476,380],[476,292]],1)+bdDot(551,380)+L([[551,380],[551,292]],1)))}
 
+/* ================= Signal Flow Graphs & Mason's Gain Formula ================= */
+function sfSh(a,b,d){const dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1;return[a[0]+dx/l*d,a[1]+dy/l*d]}
+function sfEdge(id,p0,c1,c2,p1){const s=sfSh(p0,c1,5),e=sfSh(p1,c2,5.5);
+ return '<path d="M'+s[0].toFixed(1)+','+s[1].toFixed(1)+' C'+c1[0]+','+c1[1]+' '+c2[0]+','+c2[1]+' '+e[0].toFixed(1)+','+e[1].toFixed(1)+'" fill="none" stroke="#000" stroke-width="1.6" marker-end="url(#'+id+')"/>'}
+function sfLine(id,a,b){return sfEdge(id,a,[a[0]+(b[0]-a[0])/3,a[1]+(b[1]-a[1])/3],[a[0]+2*(b[0]-a[0])/3,a[1]+2*(b[1]-a[1])/3],b)}
+/* arc between two nodes on one baseline; peak = y of the apex */
+function sfArc(id,a,b,peak){const cy=a[1]+(peak-a[1])/.75;return sfEdge(id,a,[a[0]+(b[0]-a[0])*.18,cy],[a[0]+(b[0]-a[0])*.82,cy],b)}
+const sfNode=(x,y)=>'<circle cx="'+x+'" cy="'+y+'" r="3.6" fill="#fff" stroke="#000" stroke-width="1.4"/>';
+const sfL=(x,y,t,sub,anc)=>mmT(x,y,t,sub||'',anc||'middle','',22);
+const sfNum=(x,y,t,anc)=>'<text x="'+x+'" y="'+y+'" text-anchor="'+(anc||'middle')+'" font-size="22" font-family=\''+mmF+'\' fill="#000">'+t+'</text>';
+const sfMk=id=>'<defs><marker id="'+id+'" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10L2.6,5z" fill="#000"/></marker></defs>';
+
+function sfFig1(){const id='sfa',y=185,X=[70,172,378,583,789],P=X.map(x=>[x,y]);
+ return mmSvg(900,340,'Signal flow graph with nodes R, x0, x1, x2 and C, branch gains G1 to G5, and feedback gains minus H1 and minus H2',
+  sfMk(id)+sfLine(id,P[0],P[1])+sfLine(id,P[1],P[2])+sfLine(id,P[2],P[3])+sfLine(id,P[3],P[4])+
+  sfArc(id,P[1],P[4],68)+sfArc(id,P[2],P[4],92)+sfArc(id,P[3],P[2],240)+sfArc(id,P[4],P[1],318)+
+  P.map(p=>sfNode(p[0],p[1])).join('')+
+  sfNum(121,174,'1')+sfL(275,174,'G',1)+sfL(480,174,'G',2)+sfL(686,174,'G',3)+sfL(480,54,'G',5)+sfL(545,118,'G',4)+sfL(480,266,'\u2212H',1)+sfL(480,334,'\u2212H',2)+
+  sfL(70,210,'R')+sfL(148,210,'x','0')+sfL(378,210,'x',1)+sfL(583,210,'x',2)+sfL(812,210,'C'))}
+function sfFig2(){const id='sfb',y=137,X=[80,244,409,574,737,901],P=X.map(x=>[x,y]);
+ return mmSvg(940,215,'Signal flow graph with nodes 1 to 6, forward gains G1 to G5, a bypass G6 from node 3 to node 5, and feedback gains H1, H2 and H3',
+  sfMk(id)+[0,1,2,3,4].map(i=>sfLine(id,P[i],P[i+1])).join('')+
+  sfArc(id,P[2],P[4],57)+sfArc(id,P[2],P[1],184)+sfArc(id,P[3],P[2],184)+sfArc(id,P[4],P[3],184)+
+  P.map(p=>sfNode(p[0],p[1])).join('')+
+  sfL(162,124,'G',1)+sfL(326,124,'G',2)+sfL(491,124,'G',3)+sfL(655,124,'G',4)+sfL(819,124,'G',5)+sfL(574,42,'G',6)+
+  sfL(326,208,'H',1)+sfL(491,208,'H',2)+sfL(655,208,'H',3)+
+  P.map((p,i)=>sfNum(p[0]-(i==0||i==5?0:13),p[1]+27,String(i+1))).join(''))}
+function sfFig3(){const id='sfc',y=80,X=[117,212,308,403,498,593,688,783],P=X.map(x=>[x,y]);
+ return mmSvg(760,200,'Signal flow graph with nodes 1 to 8, branch gains 1, G1 to G6, and feedback gains minus H1, minus H2 and minus H3',
+  '<g transform="translate(-70,0)">'+sfMk(id)+[0,1,2,3,4,5,6].map(i=>sfLine(id,P[i],P[i+1])).join('')+
+  sfArc(id,P[4],P[2],36)+sfArc(id,P[3],P[2],108)+sfArc(id,P[1],P[4],148)+sfArc(id,P[6],P[5],108)+
+  P.map(p=>sfNode(p[0],p[1])).join('')+
+  sfNum(165,68,'1')+sfL(260,68,'G',1)+sfL(355,68,'G',2)+sfL(450,68,'G',3)+sfL(545,68,'G',4)+sfL(640,68,'G',5)+sfNum(735,68,'1')+
+  sfL(403,22,'\u2212H',2)+sfL(350,132,'\u2212H',1)+sfL(350,168,'G',6)+sfL(640,130,'\u2212H',3)+
+  P.map((p,i)=>sfNum(p[0]-(i==0||i==7?0:13),p[1]+28,String(i+1))).join('')+'</g>')}
+
+const sfURL='https://www.youtube.com/watch?v=5BqqNbjDDTQ';
+function sfL0(){return `<p>A <b>signal flow graph</b> shows a system as nodes (signals) joined by directed branches (gains). Mason&rsquo;s gain formula gives the overall transfer function directly from the graph, without reducing it step by step:</p>
+ ${mmRes(eq(T`\text{TF}=\dfrac{C(s)}{R(s)}=\dfrac{1}{\Delta}\sum_{k=1}^{N}P_k\,\Delta_k`))}
+ <p>where ${m('N')} is the number of forward paths and:</p>
+ <ul>
+ <li>${m('P_k')} is the gain of the ${m('k')}-th <b>forward path</b>. A forward path runs from the input node to the output node, follows the direction of the arrows, and passes through each node at most once. Its gain is the product of the branch gains along it.</li>
+ <li>${m('\\Delta_k')} is the value of ${m('\\Delta')} with the gains of the branches on ${m('P_k')} set to zero. Every loop that touches ${m('P_k')} therefore drops out of ${m('\\Delta')}, and only loops with no node in common with ${m('P_k')} remain.</li>
+ <li>${m('\\Delta')} is the determinant of the graph:</li>
+ </ul>
+ ${eq(T`\Delta=1-\sum_i L_i+\sum_{i,j}L_iL_j-\sum_{i,j,k}L_iL_jL_k+\cdots`)}
+ <p>Here ${m('L_i')} is the gain of the ${m('i')}-th individual <b>loop</b>, a closed path that starts and ends at the same node and passes through no other node twice. Its gain is the product of the branch gains around it. In the sums, ${m('L_iL_j')} runs over every pair of loops that do not touch (share no node), ${m('L_iL_jL_k')} over every triple of mutually non-touching loops, and so on.</p>
+ <p style="margin:18px 0 8px"><b>Watch the video:</b> <i>Signal Flow Graphs and Mason&rsquo;s Gain Formula &ndash; Control Systems 1.5</i> (CircuitBread).</p>
+ <a href="${sfURL}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:10px;background:#D6336C;color:#fff;font-weight:700;font-size:17px;text-decoration:none;padding:12px 20px;border-radius:10px;border-bottom:3px solid #A8265A"><span aria-hidden="true">&#9654;</span>Watch the CircuitBread video</a>`}
+
+const sfEx=(n,b)=>mmEx(n,b).replace('[SSNCE, 2026]','[SSNCE, 2018]');
+function sfL1(){return `${sfEx(1,`${sfFig1()}<p>Using Mason&rsquo;s gain formula, determine the transfer function ${m(T`\dfrac{C(s)}{R(s)}`)} of the signal flow graph.</p>`)}
+ ${stp('Forward paths')}${eq(T`\begin{align}P_1&=x_0\to x_1\to x_2\to C&&=G_1G_2G_3\\P_2&=x_0\to x_1\to C&&=G_1G_4\\P_3&=x_0\to C&&=G_5\end{align}`)}
+ ${stp('Individual loops')}${eq(T`\begin{align}L_1&=x_1\to x_2\to x_1&&=-G_2H_1&&\text{(feedback }H_1\text{ around }G_2\text{)}\\L_2&=x_0\to x_1\to x_2\to C\to x_0&&=-G_1G_2G_3H_2&&(H_2\text{ closed through }P_1)\\L_3&=x_0\to x_1\to C\to x_0&&=-G_1G_4H_2&&(H_2\text{ closed through }P_2)\\L_4&=x_0\to C\to x_0&&=-G_5H_2&&(H_2\text{ closed through }P_3)\end{align}`)}
+ ${stp('Non-touching loops')}<p>Node sets: ${m('L_1\\{x_1,x_2\\}')}, ${m('L_2\\{x_0,x_1,x_2,C\\}')}, ${m('L_3\\{x_0,x_1,C\\}')}, ${m('L_4\\{x_0,C\\}')}.</p>
+ <p>Only ${m('L_1')} and ${m('L_4')} share no node. Hence</p>${eq(T`L_1L_4=(-G_2H_1)(-G_5H_2)=G_2G_5H_1H_2.`)}
+ ${stp('Determinant')}${eq(T`\Delta=1-(L_1+L_2+L_3+L_4)+L_1L_4=1+G_2H_1+(G_1G_2G_3+G_1G_4+G_5)H_2+G_2G_5H_1H_2.`)}
+ ${stp('Path determinants')}<ul><li>${m('P_1')} (nodes ${m('x_0,x_1,x_2,C')}) touches every loop: ${m('\\Delta_1=1')}.</li><li>${m('P_2')} (nodes ${m('x_0,x_1,C')}) touches ${m('L_1')} at ${m('x_1')} and the others at ${m('x_0')}: ${m('\\Delta_2=1')}.</li><li>${m('P_3')} (nodes ${m('x_0,C')}) does not touch ${m('L_1')}: ${m('\\Delta_3=1-L_1=1+G_2H_1')}.</li></ul>
+ ${stp('Transfer function')}${mmRes(eq(T`\dfrac{C(s)}{R(s)}=\dfrac{G_1G_2G_3+G_1G_4+G_5\,(1+G_2H_1)}{1+G_2H_1+(G_1G_2G_3+G_1G_4+G_5)H_2+G_2G_5H_1H_2}`))}`}
+
+function sfL2(){return `${sfEx(2,`${sfFig2()}<p>Using Mason&rsquo;s gain formula, determine the transfer function ${m(T`\dfrac{C(s)}{R(s)}`)} of the signal flow graph.</p>`)}
+ ${stp('Forward paths')}${eq(T`\begin{align}P_1&=1\to2\to3\to4\to5\to6&&=G_1G_2G_3G_4G_5\\P_2&=1\to2\to3\to5\to6&&=G_1G_2G_5G_6\end{align}`)}
+ ${stp('Individual loops')}${eq(T`\begin{align}L_1&=2\to3\to2&&=G_2H_1&&\{2,3\}\\L_2&=3\to4\to3&&=G_3H_2&&\{3,4\}\\L_3&=4\to5\to4&&=G_4H_3&&\{4,5\}\\L_4&=3\to5\to4\to3&&=G_6H_3H_2&&\{3,4,5\}\end{align}`)}
+ ${stp('Non-touching loops')}<p>Comparing the node sets, the only pair with no common node is ${m('L_1')} and ${m('L_3')}:</p>${eq(T`L_1L_3=G_2G_4H_1H_3.`)}<p>There are no triples.</p>
+ ${stp('Determinant')}${eq(T`\Delta=1-(G_2H_1+G_3H_2+G_4H_3+G_6H_2H_3)+G_2G_4H_1H_3.`)}
+ ${stp('Path determinants')}<ul><li>${m('P_1')} passes through nodes ${m('1,2,3,4,5,6')}, so all loops touch it: ${m('\\Delta_1=1')}.</li><li>${m('P_2')} passes through ${m('1,2,3,5,6')}. ${m('L_1')} touches at ${m('2,3')}; ${m('L_2')} at ${m('3')}; ${m('L_3')} at ${m('5')}; ${m('L_4')} at ${m('3,5')}. So ${m('\\Delta_2=1')}.</li></ul>
+ ${stp('Transfer function')}${mmRes(eq(T`\dfrac{C(s)}{R(s)}=\dfrac{G_1G_2G_3G_4G_5+G_1G_2G_5G_6}{1-G_2H_1-G_3H_2-G_4H_3-G_6H_2H_3+G_2G_4H_1H_3}`))}`}
+
+function sfL3(){return `${sfEx(3,`${sfFig3()}<p>Using Mason&rsquo;s gain formula, determine the transfer function ${m(T`\dfrac{C(s)}{R(s)}`)} of the signal flow graph.</p>`)}
+ ${stp('Forward paths')}${eq(T`\begin{align}P_1&=1\to2\to3\to4\to5\to6\to7\to8&&=G_1G_2G_3G_4G_5\\P_2&=1\to2\to5\to6\to7\to8&&=G_4G_5G_6\end{align}`)}
+ ${stp('Individual loops')}${eq(T`\begin{align}L_1&=3\to4\to3&&=-G_2H_1&&\{3,4\}\\L_2&=3\to4\to5\to3&&=-G_2G_3H_2&&\{3,4,5\}\\L_3&=6\to7\to6&&=-G_5H_3&&\{6,7\}\end{align}`)}
+ ${stp('Non-touching loops')}<p>${m('L_1')} and ${m('L_2')} share nodes ${m('3,4')} and therefore touch. ${m('L_3')} shares no node with either ${m('L_1')} or ${m('L_2')}:</p>${eq(T`L_1L_3=G_2G_5H_1H_3,\qquad L_2L_3=G_2G_3G_5H_2H_3.`)}<p>There are no triples, since ${m('L_1')} and ${m('L_2')} touch.</p>
+ ${stp('Determinant')}${eq(T`\begin{align}\Delta&=1-(L_1+L_2+L_3)+(L_1L_3+L_2L_3)\\&=1+G_2H_1+G_2G_3H_2+G_5H_3+G_2G_5H_1H_3+G_2G_3G_5H_2H_3.\end{align}`)}
+ <p>This factorises as ${m(T`\Delta=(1+G_2H_1+G_2G_3H_2)(1+G_5H_3)`)}, which is expected because the loops ${m('\\{3,4,5\\}')} and ${m('\\{6,7\\}')} are independent.</p>
+ ${stp('Path determinants')}<ul><li>${m('P_1')} passes through nodes ${m('2,\\dots,7')}, so all loops touch it: ${m('\\Delta_1=1')}.</li><li>${m('P_2')} passes through nodes ${m('2,5,6,7')}. ${m('L_2')} touches at node ${m('5')} and ${m('L_3')} at ${m('6,7')}. ${m('L_1\\{3,4\\}')} does not touch, so ${m('\\Delta_2=1-L_1=1+G_2H_1')}.</li></ul>
+ ${stp('Transfer function')}${mmRes(eq(T`\dfrac{C(s)}{R(s)}=\dfrac{G_1G_2G_3G_4G_5+G_4G_5G_6\,(1+G_2H_1)}{(1+G_2H_1+G_2G_3H_2)(1+G_5H_3)}`))}`}
+
 const UNITS={
  u1:{n:1,name:'Mathematical Modelling of Systems',sections:[
   {name:'Modelling of Mechanical Systems',topics:[
@@ -1668,7 +1745,9 @@ const UNITS={
    {t:'Example 3: Three-Mass System',h:mmL3},
    {t:'Example 4: Rotational System',h:mmL4}]},
   {name:'Block Diagram Reduction',topics:[
-   {t:'Question 1',h:bdQ1},{t:'Question 2',h:bdQ2},{t:'Question 3',h:bdQ3},{t:'Question 4',h:bdQ4},{t:'Question 5',h:bdQ5}]}]},
+   {t:'Example 1',h:bdQ1},{t:'Example 2',h:bdQ2},{t:'Example 3',h:bdQ3},{t:'Example 4',h:bdQ4},{t:'Example 5',h:bdQ5}]},
+  {name:"Signal Flow Graphs &amp; Mason\u2019s Gain Formula",topics:[
+   {t:"Mason\u2019s Gain Formula",h:sfL0},{t:'Example 1',h:sfL1},{t:'Example 2',h:sfL2},{t:'Example 3',h:sfL3}]}]},
  u2:{n:2,name:'Time-Domain Response Analysis',sections:[
   {name:'Analysis of First Order Systems',topics:[
    {t:'First-Order Formula Sheet',h:tdL1},
